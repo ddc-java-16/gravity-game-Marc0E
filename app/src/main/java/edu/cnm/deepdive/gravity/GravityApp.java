@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package edu.cnm.deepdive.appstarter;
+package edu.cnm.deepdive.gravity;
 
 import android.app.Application;
 import com.facebook.stetho.Stetho;
@@ -24,7 +24,7 @@ import com.facebook.stetho.Stetho;
  * {@code AndroidManifest.xml}, or it will not be loaded and used by the Android system.
  */
 
-public class AppStarterApplication extends Application {
+public class GravityApp extends Application {
 
   @Override
   public void onCreate() {

@@ -80,22 +80,55 @@ android {
 
 dependencies {
 
-    // .jar-based libraries included in project
 
     // Basic Android components
     implementation(libs.app.compat)
     implementation(libs.constraint.layout)
     implementation(libs.recycler.view)
 
-    // Lifecycle (LiveData and ViewModel) libraries
-    runtimeOnly(libs.lifecycle.viewmodel)
-    runtimeOnly(libs.lifecycle.livedata)
+    // Fragment & navigation framework libraries
+    implementation(libs.fragment)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 
-    // Preferences/settings components
-    implementation(libs.preference)
+    // Lifecycle (LiveData and ViewModel) libraries
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.livedata)
+
+
 
     // Material Design components
     implementation(libs.material)
+
+    // ReactiveX libraries
+    implementation(libs.rx.java)
+    implementation(libs.rx.android)
+
+    // Room annotation processor, runtime library, and ReactiveX integration
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    implementation(libs.room.rx.java)
+
+    // Gson (Google JSON parser) library
+    implementation(libs.gson)
+
+    // Google Sign-in library
+    implementation(libs.play.auth)
+
+    // Retrofit (REST client) with ReactiveX & Gson integration
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.adapter.rx.java)
+
+    // Picasso image retrieval library
+    implementation(libs.picasso)
+
+    // Hilt dependency-injection library & annotation processor
+    implementation(libs.hilt.android.core)
+    annotationProcessor(libs.hilt.compiler)
+
+    // OkHttp logging dependency
+    implementation(libs.logging.interceptor)
 
     // Stetho (inspection) dependency
     implementation(libs.stetho)
@@ -112,6 +145,9 @@ dependencies {
     androidTestImplementation(libs.junit.api)
     androidTestImplementation(libs.junit.params)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.hilt.android.testing)
+    androidTestAnnotationProcessor(libs.hilt.compiler)
+    androidTestAnnotationProcessor(libs.hilt.android.compiler)
 
     constraints {
         implementation(libs.kotlin.jdk7) {

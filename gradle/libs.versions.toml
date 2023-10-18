@@ -108,6 +108,7 @@ junit-android-runner = { group = "de.mannodermaus.junit5", name = "android-test-
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+room-common = { group = "androidx.room", name = "room-common", version = "2.5.2" }
 
 [plugins]
 

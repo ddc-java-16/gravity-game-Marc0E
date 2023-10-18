@@ -29,5 +29,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "android-app-starter-bare"
+rootProject.name = "android-app-gravity"
 include(":app")
