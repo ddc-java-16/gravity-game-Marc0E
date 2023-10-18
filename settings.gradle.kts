@@ -29,5 +29,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "android-app-gravity"
+rootProject.name = "gravity-game"
 include(":app")
