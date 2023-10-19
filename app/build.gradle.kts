@@ -18,6 +18,7 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
+
     alias(libs.plugins.schema.parser)
     alias(libs.plugins.junit)
 }
@@ -95,7 +96,8 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)
 
-
+    //Preferences/settings components
+    implementation(libs.preference)
 
     // Material Design components
     implementation(libs.material)
@@ -106,6 +108,7 @@ dependencies {
 
     // Room annotation processor, runtime library, and ReactiveX integration
     implementation(libs.room.runtime)
+    implementation(libs.preference)
     annotationProcessor(libs.room.compiler)
     implementation(libs.room.rx.java)
 
@@ -121,7 +124,7 @@ dependencies {
     implementation(libs.retrofit.adapter.rx.java)
 
     // Picasso image retrieval library
-    implementation(libs.picasso)
+    //implementation(libs.picasso)
 
     // Hilt dependency-injection library & annotation processor
     implementation(libs.hilt.android.core)

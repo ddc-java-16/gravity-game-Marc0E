@@ -14,6 +14,7 @@
  *  limitations under the License.
  */
 plugins {
+
     alias(libs.plugins.android.application).apply(false)
     alias(libs.plugins.schema.parser).apply(false)
     alias(libs.plugins.junit).apply(false)

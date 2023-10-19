@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.gravity.model.dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -8,7 +9,7 @@ import edu.cnm.deepdive.gravity.model.entity.Score;
 import edu.cnm.deepdive.gravity.model.pojo.UserScore;
 import io.reactivex.rxjava3.core.Single;
 import java.util.List;
-
+@Dao
 public interface ScoreDao {
 
   @Insert
