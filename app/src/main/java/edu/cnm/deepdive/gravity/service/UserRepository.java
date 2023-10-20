@@ -61,7 +61,6 @@ public Single<User> getCurrent(){return getOrCreate().subscribeOn(Schedulers.io(
                       user.setOauthKey(Objects.requireNonNull(account.getId()));
                       user.setDisplayName(Objects.requireNonNull(account.getDisplayName()));
                       user.setUserPhoto(Objects.requireNonNull(account.getPhotoUrl()).toString());
-                      //account.getPhotoUrl() to get photo
                       return user;
                     })
                     .flatMap(this::insert)
