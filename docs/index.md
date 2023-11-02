@@ -32,8 +32,7 @@ ensures an engaging and entertaining experience.
 
 * Kids trying to understand physics in a fun way. 
 
-  > As a kid that is trying to understand Physics I want to use the game to understand better the way an object is affected by the gravity in a more fun way. 
-
+  > As a kid that is trying to understand Physics I want to use the game to understand better the way an object is affected by the gravity in a more fun way.
 
 * People who like space movies.
 
