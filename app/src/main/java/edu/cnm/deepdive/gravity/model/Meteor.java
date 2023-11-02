@@ -1,6 +1,17 @@
 package edu.cnm.deepdive.gravity.model;
 
 public class Meteor {
+  private final GameField gameField;
+  private int x;
+  private int y;
+  private int xVelocity;
+  private int yVelocity;
+
+  public Meteor(GameField gameField) {
+    this.gameField = gameField;
+  }
+  //first constructor is gonna generate random position
+  //second constructor is gonna generate attributes
 
   public int changeGravity(){
     // TODO: 10/24/23 There will be two types of meteors one that damage you and other that will change

@@ -4,8 +4,8 @@ description: "Entity-relationship diagram and DDL."
 menu: UI
 order: 10
 wireframe:
-  image: img/wireframe.svg
-  pdf: pdf/wireframe.pdf
+  image: img/GravityUML.svg
+  pdf: pdf/GravityUML.pdf
 ---
 
 {% include ddc-abbreviations.md %}

@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.gravity.model;
 
 public class Enemy {
+
   public int position(){
     throw new UnsupportedOperationException();
   }

@@ -5,8 +5,8 @@ menu: Data Model
 order: 20
 ddl: sql/ddl.sql
 erd:
-  image: img/erd.svg
-  pdf: pdf/erd.pdf
+  image: img/GravityUML.svg
+  pdf: pdf/GravityUML.pdf
 ---
 
 {% include ddc-abbreviations.md %}
