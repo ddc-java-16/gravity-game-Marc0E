@@ -32,16 +32,16 @@ ensures an engaging and entertaining experience.
 
 * Kids trying to understand physics in a fun way. 
 
-> As a kid that is trying to understand Physics I want to use the game to understand better the way an object is affected by the gravity in a more fun way. 
+  > As a kid that is trying to understand Physics I want to use the game to understand better the way an object is affected by the gravity in a more fun way. 
 
 
 * People who like space movies.
 
-    > As someone who enjoys movies like Star Wars, I like to have an app that lets me control a spaceship, so I can pretend I'm fighting against the Imperials to have fun.
+  > As someone who enjoys movies like Star Wars, I like to have an app that lets me control a spaceship, so I can pretend I'm fighting against the Imperials to have fun.
 
 ## Functionality
 
-List (using a bullet list---or ordered list, if order is relevant) the key functional aspects that will be provided by the app---i.e. tell us what the user will be able to do using the app. This should not simply be a re-statement of the [summary](#summary), but should instead provide a more specific articulation of the functionality and user experience.
+[//]: # (List &#40;using a bullet list---or ordered list, if order is relevant&#41; the key functional aspects that will be provided by the app---i.e. tell us what the user will be able to do using the app. This should not simply be a re-statement of the [summary]&#40;#summary&#41;, but should instead provide a more specific articulation of the functionality and user experience.)
 * Create an account.
 * See higher scores.
 * Control a spaceship.
