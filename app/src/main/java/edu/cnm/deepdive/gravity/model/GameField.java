@@ -1,9 +1,37 @@
 package edu.cnm.deepdive.gravity.model;
 
+import java.util.List;
+
 public class GameField {
+  private final Ship ship;
+  private final Projectile projectile;
+  private final List<Meteor> meteors;
+  private final List<Enemy> enemies;
+
+  public GameField(Ship ship, Projectile projectile, List<Meteor> meteors, List<Enemy> enemies) {
+    this.ship = ship;
+    this.projectile = projectile;
+    this.meteors = meteors;
+    this.enemies = enemies;
+  }
+
+  public Ship getShip() {
+    return ship;
+  }
+
+  public Projectile getProjectile() {
+    return projectile;
+  }
+
+  public List<Meteor> getMeteors() {
+    return meteors;
+  }
+
+  public List<Enemy> getEnemies() {
+    return enemies;
+  }
 
   public void setGameField(){
-
 
   }
 

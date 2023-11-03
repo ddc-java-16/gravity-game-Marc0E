@@ -4,8 +4,15 @@ public class Meteor {
   private final GameField gameField;
   private int x;
   private int y;
-  private int xVelocity;
-  private int yVelocity;
+  private double velocity;
+  private double xVelocity;
+  private double yVelocity;
+  private double angle;
+  private double trajectory;
+  private double heightOfShip;
+  private double distance;
+  private double flyingTime;
+  private final double GRAVITY = 9.81;
 
   public Meteor(GameField gameField) {
     this.gameField = gameField;
@@ -26,6 +33,16 @@ public class Meteor {
   public int randomPosition(){ // Random or int ??
     // TODO: 10/24/23 Meteor will appear from the right side of the screen in a random position
     throw new UnsupportedOperationException();
+  }
+
+  public void trajectory(){
+    xVelocity = (Math.cos(velocity));
+    yVelocity = (Math.sin(velocity));
+    flyingTime = ((2*yVelocity) / GRAVITY);
+    //distance =
+    heightOfShip = gameField.getShip().position();
+    trajectory = heightOfShip;
+
   }
 
   public int position(){
