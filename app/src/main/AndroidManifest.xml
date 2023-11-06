@@ -33,6 +33,30 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="AllowBackup,DataExtractionRules">
+
+
+    <activity
+      android:name=".controller.LoginActivity"
+      android:exported="true">
+
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+
+    </activity>
+
+    <activity
+      android:name=".controller.MainActivity"
+      android:launchMode="singleTop"
+      android:screenOrientation="portrait"
+      tools:ignore="LockedOrientationActivity"/>
+
+    <activity
+      android:name=".controller.SettingsActivity"
+      android:parentActivityName=".controller.MainActivity"
+      android:label="@string/settings_label"/>
+
   </application>
 
 

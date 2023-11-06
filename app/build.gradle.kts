@@ -13,11 +13,13 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+import org.gradle.internal.impldep.bsh.commands.dir
 import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.hilt)
 
     alias(libs.plugins.schema.parser)
     alias(libs.plugins.junit)
@@ -82,6 +84,8 @@ android {
 dependencies {
 
 
+
+
     // Basic Android components
     implementation(libs.app.compat)
     implementation(libs.constraint.layout)
@@ -108,7 +112,6 @@ dependencies {
 
     // Room annotation processor, runtime library, and ReactiveX integration
     implementation(libs.room.runtime)
-    implementation(libs.preference)
     annotationProcessor(libs.room.compiler)
     implementation(libs.room.rx.java)
 
@@ -124,7 +127,7 @@ dependencies {
     implementation(libs.retrofit.adapter.rx.java)
 
     // Picasso image retrieval library
-    //implementation(libs.picasso)
+   // implementation(libs.picasso)
 
     // Hilt dependency-injection library & annotation processor
     implementation(libs.hilt.android.core)
@@ -153,11 +156,14 @@ dependencies {
     androidTestAnnotationProcessor(libs.hilt.android.compiler)
 
     constraints {
+        //noinspection ForeignDelegate
         implementation(libs.kotlin.jdk7) {
+            //noinspection GroovyAssignabilityCheck
             because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
         }
         //noinspection ForeignDelegate
         implementation(libs.kotlin.jdk8) {
+            //noinspection GroovyAssignabilityCheck
             because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
         }
     }

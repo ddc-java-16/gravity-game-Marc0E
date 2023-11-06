@@ -4,15 +4,17 @@ import java.util.List;
 
 public class GameField {
   private final Ship ship;
+  private Meteor meteor;
   private final Projectile projectile;
   private final List<Meteor> meteors;
   private final List<Enemy> enemies;
 
-  public GameField(Ship ship, Projectile projectile, List<Meteor> meteors, List<Enemy> enemies) {
+  public GameField(Ship ship, Projectile projectile, List<Meteor> meteors, List<Enemy> enemies, Meteor meteor) {
     this.ship = ship;
     this.projectile = projectile;
     this.meteors = meteors;
     this.enemies = enemies;
+    this.meteor = meteor;
   }
 
   public Ship getShip() {
@@ -29,6 +31,10 @@ public class GameField {
 
   public List<Enemy> getEnemies() {
     return enemies;
+  }
+
+  public Meteor getMeteor() {
+    return meteor;
   }
 
   public void setGameField(){

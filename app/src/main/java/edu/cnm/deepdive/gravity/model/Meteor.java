@@ -2,16 +2,8 @@ package edu.cnm.deepdive.gravity.model;
 
 public class Meteor {
   private final GameField gameField;
-  private double velocity;
-  private double xVelocity;
-  private double yVelocity;
-  private double positionX;
-  private double positionY;
-  private double angle;
-  private double shipPosition;
-  private double totalFlyingTime;
-  private double flyingTime;
-  private double GRAVITY = -9.81;
+  private double gravity;
+
 
   public Meteor(GameField gameField) {
     this.gameField = gameField;
@@ -34,19 +26,15 @@ public class Meteor {
     throw new UnsupportedOperationException();
   }
 
-  public void trajectory(){
-    shipPosition = gameField.getShip().position();
-    xVelocity = (velocity * Math.cos(angle));
-    yVelocity = (velocity * Math.sin(angle));
-    totalFlyingTime = -yVelocity - (Math.sqrt(Math.pow(yVelocity,2) - (4*shipPosition*0.5*GRAVITY))/GRAVITY);
-    positionX = xVelocity * flyingTime; // TODO: 11/2/23 Add a loop to increment the position.
-    positionY = (shipPosition + yVelocity) * flyingTime + (0.5 * GRAVITY * Math.pow(flyingTime,2));
-
-
-  }
-
   public int position(){
     throw new UnsupportedOperationException();
   }
 
+  public double getGravity() {
+    return gravity;
+  }
+
+  public void setGravity(double gravity) {
+    this.gravity = gravity;
+  }
 }
