@@ -1,40 +1,38 @@
 package edu.cnm.deepdive.gravity.model;
 
+import android.graphics.Rect;
+import java.util.Random;
+
 public class Meteor {
   private final GameField gameField;
+  private Rect meteor;
+  private Random rng;
   private double gravity;
+  private int xPosition;
+  private int yPosition;
 
 
-  public Meteor(GameField gameField) {
+
+  public Meteor(GameField gameField, int y) {
+    this.yPosition = y;
     this.gameField = gameField;
   }
-  //first constructor is gonna generate random position
-  //second constructor is gonna generate attributes
+  public boolean inside(Rect spaceShip){
+    return meteor.intersect(spaceShip);
 
-  public int changeGravity(){
-    // TODO: 10/24/23 There will be two types of meteors one that damage you and other that will change
-    //  gravity used for projectile motion.
-    throw new UnsupportedOperationException();
-  }
-  public boolean detonate(){
-    // TODO: 10/24/23 Based on position if meteor hits the ship it will do some damage.
-    throw new UnsupportedOperationException();
   }
 
-  public int randomPosition(){ // Random or int ??
-    // TODO: 10/24/23 Meteor will appear from the right side of the screen in a random position
-    throw new UnsupportedOperationException();
+  public boolean isInBounds(){
+    return xPosition >= 0;
   }
 
-  public int position(){
-    throw new UnsupportedOperationException();
+  public void velocity(){
+
   }
 
-  public double getGravity() {
-    return gravity;
+  public void updatePosition(){
+    xPosition++;
   }
 
-  public void setGravity(double gravity) {
-    this.gravity = gravity;
-  }
+
 }

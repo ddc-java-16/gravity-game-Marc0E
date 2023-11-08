@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2023 CNM Ingenuity, Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:padding="@dimen/half_dynamic_spacing"
+  tools:viewBindingIgnore="true"
+  tools:context=".controller.MainActivity">
+
+ <Button
+   android:id="@+id/play"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+  app:layout_constraintStart_toStartOf="parent"
+  app:layout_constraintEnd_toEndOf="parent"
+  app:layout_constraintBottom_toTopOf="@id/scores"
+  app:layout_constraintTop_toTopOf="parent"
+   android:text="@string/play"/>
+
+ <Button
+   android:id="@+id/scores"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   app:layout_constraintStart_toStartOf="parent"
+   app:layout_constraintEnd_toEndOf="parent"
+   app:layout_constraintBottom_toBottomOf="@id/settings"
+   app:layout_constraintTop_toBottomOf="@id/play"
+   android:text="@string/high_scores"/>
+
+ <Button
+   android:id="@+id/settings"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   app:layout_constraintStart_toStartOf="parent"
+   app:layout_constraintEnd_toEndOf="parent"
+   app:layout_constraintBottom_toTopOf="@id/exit"
+   app:layout_constraintTop_toBottomOf="@id/scores"
+   android:text="@string/settings"/>
+
+ <Button
+   android:id="@+id/exit"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   app:layout_constraintStart_toStartOf="parent"
+   app:layout_constraintEnd_toEndOf="parent"
+   app:layout_constraintBottom_toBottomOf="parent"
+   app:layout_constraintTop_toBottomOf="@id/settings"
+   android:text="@string/exit"/>
+
+ <androidx.fragment.app.FragmentContainerView
+   android:id="@+id/nav_host_fragment"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:name="androidx.navigation.fragment.NavHostFragment"
+   app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+   app:defaultNavHost="true"/>
+<!--   app:navGraph="@navigation/navigation_graph"/>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

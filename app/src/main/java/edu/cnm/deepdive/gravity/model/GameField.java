@@ -1,20 +1,30 @@
 package edu.cnm.deepdive.gravity.model;
 
+import android.graphics.Rect;
 import java.util.List;
 
 public class GameField {
+  private Rect gameField;
   private final Ship ship;
   private Meteor meteor;
+  private Enemy enemy;
+  private int level;
   private final Projectile projectile;
   private final List<Meteor> meteors;
   private final List<Enemy> enemies;
 
-  public GameField(Ship ship, Projectile projectile, List<Meteor> meteors, List<Enemy> enemies, Meteor meteor) {
+  public GameField(Ship ship, Projectile projectile, List<Meteor> meteors, List<Enemy> enemies, Meteor meteor, Enemy enemy) {
     this.ship = ship;
     this.projectile = projectile;
     this.meteors = meteors;
     this.enemies = enemies;
     this.meteor = meteor;
+    this.enemy = enemy;
+  }
+
+  public int changeGravity(){
+    // TODO: 10/24/23 If ship and meteor have the same position than gravity will change
+    throw new UnsupportedOperationException();
   }
 
   public Ship getShip() {
@@ -35,6 +45,14 @@ public class GameField {
 
   public Meteor getMeteor() {
     return meteor;
+  }
+
+  public Rect getGameField() {
+    return gameField;
+  }
+
+  public int getLevel() {
+    return level;
   }
 
   public void setGameField(){

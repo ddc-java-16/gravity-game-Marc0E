@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.gravity.model;
 
 import android.annotation.SuppressLint;
+import android.graphics.Rect;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.annotations.Expose;
@@ -10,6 +11,7 @@ public class Projectile {
 
   private final GameField gameField;
   //private final Meteor meteor;
+  private Rect projectile;
   private double velocity;
   private double xVelocity;
   private double yVelocity;
@@ -34,37 +36,48 @@ public class Projectile {
     this.gameField = gameField;
     //this.meteor = meteor;
   }
+  
+  public boolean canMove(Rect enemy, int top, int right, int bottom){
+    return !projectile.intersect(enemy) || projectile.intersects(0,top, right,bottom); // TODO: 11/8/23 Get top, right, bottom from screen.
+  }
 
+  public boolean detonate(Rect enem){
+    return projectile.intersect(enem);
+  }
+  
+  public int fire(){
+    if (gameField.getShip().canFire(projectile)) {
+      
+    }else {
+      
+    }
+    return 0; // FIXME: 11/8/23  
+  }
+  public int position(Rect project){
+    return project.height();
+  }
 
-  public void trajectory(){
+  public void computeTrajectory(Rect ship){
     shipPosition = gameField.getShip().position();
     xVelocity = (velocity * Math.cos(angle));
     yVelocity = (velocity * Math.sin(angle));
-    gravity = gameField.getMeteor().getGravity();
+    //gravity = gameField.getMeteor().getGravity();
     totalFlyingTime = -yVelocity - (Math.sqrt(Math.pow(yVelocity,2) - (4*shipPosition*0.5*gravity))/gravity);
     positionX = xVelocity * flyingTime; // TODO: 11/2/23 Add a loop to increment the position.
     positionY = (shipPosition + yVelocity) * flyingTime + (0.5 * gravity * Math.pow(flyingTime,2));
   }
   
-  public boolean canMove(){
-    // TODO: 10/24/23 If projectile in motion hits the frame of the screen
-    //  I don't know if I should do something or not. 
-    throw new UnsupportedOperationException();
-  }
-
-  public boolean detonate(){
-    throw new UnsupportedOperationException();
-  }
   
-  public int fire(){
-    // TODO: 10/24/23 Projectile needs to move using the formula of projectile motion.   
-    throw new UnsupportedOperationException();
-  }
-  public int position(){
-    // TODO: 10/24/23 Keep track of the motion of projectile to know if it hits something.
-    //  I dont know if I should do this in fire method or if I need this method.
-    throw new UnsupportedOperationException();
-  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   @Override
   public boolean equals(@Nullable Object obj) {
     boolean equivalent;

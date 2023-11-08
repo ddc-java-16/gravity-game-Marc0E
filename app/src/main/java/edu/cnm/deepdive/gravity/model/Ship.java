@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.gravity.model;
 
 import android.annotation.SuppressLint;
+import android.graphics.Rect;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.annotations.Expose;
@@ -17,19 +18,30 @@ public class Ship {
   private boolean fly;
   private static final String TO_STRING_FORMAT = "%1$s[key=%2$s, name=%3$s, fly=%4$s]";
 
+  private Rect ship;
+  private GameField gameField;
+
+
   public boolean canMove(){
-    // TODO: 10/24/23 Delimit distance of movement up and down
-   throw new UnsupportedOperationException();
+    return ship.bottom >= gameField.getGameField().bottom && ship.height() <= gameField.getGameField().top; // FIXME: 11/8/23 Maybe I'll need to use left and right instead of bottom and top.
   }
 
-  public int position(){
-    throw new UnsupportedOperationException();
+  public int position() {
+    return ship.height();
   }
 
-  public void fire(){
-    // TODO: 10/24/23 This method should call Projectile method.
-
+  public boolean canFire(Rect project){
+    return project.isEmpty(); // FIXME: 11/8/23 What would be the best way to determine if ship can fire another projectile or not.
   }
+
+
+
+
+
+
+
+
+
 
   @Override
   public boolean equals(@Nullable Object obj) {
