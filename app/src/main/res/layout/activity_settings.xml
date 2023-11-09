@@ -19,4 +19,6 @@
   android:id="@+id/settings_fragment_container"
   android:name="edu.cnm.deepdive.gravity.controller.SettingsActivity$SettingsFragment"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"/>
+  android:layout_height="match_parent">
+
+</androidx.fragment.app.FragmentContainerView>

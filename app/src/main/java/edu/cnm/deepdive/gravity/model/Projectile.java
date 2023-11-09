@@ -9,19 +9,13 @@ import java.util.Objects;
 
 public class Projectile {
 
-  private final GameField gameField;
-  //private final Meteor meteor;
-  private Rect projectile;
-  private double velocity;
-  private double xVelocity;
-  private double yVelocity;
-  private double positionX;
-  private double positionY;
-  private double angle;
-  private double shipPosition;
-  private double totalFlyingTime;
+  private GameField gameField;
+  private Rect projectileBox;
   private double flyingTime;
-  private double gravity;
+  int shipPosition;
+  double xVelocity;
+  double yVelocity;
+  double gravity;
 
 
   @Expose(deserialize = true, serialize = false)
@@ -32,24 +26,29 @@ public class Projectile {
   private boolean move;
   private static final String TO_STRING_FORMAT = "%1$s[key=%2$s, name=%3$s, move=%4$s]";
 
-  public Projectile(GameField gameField, Ship ship, Meteor meteor) {
-    this.gameField = gameField;
-    //this.meteor = meteor;
+  public Projectile(int shipPosition, double xVelocity, double  yVelocity, double gravity) {
+    this.shipPosition = shipPosition;
+    this.xVelocity = xVelocity;
+    this.yVelocity = yVelocity;
+    this.gravity = gravity;
+
   }
   
-  public boolean canMove(Rect enemy, int top, int right, int bottom){
-    return !projectile.intersect(enemy) || projectile.intersects(0,top, right,bottom); // TODO: 11/8/23 Get top, right, bottom from screen.
+  public boolean canMove(Rect enemy, Rect gameField){
+    return !projectileBox.intersect(enemy) || projectileBox.intersect(gameField); // FIXME: 11/9/23 Check if have right logic.
   }
 
-  public boolean detonate(Rect enem){
-    return projectile.intersect(enem);
+  public boolean detonate(Rect enemy){
+    return projectileBox.intersect(enemy);
   }
   
   public int fire(){
-    if (gameField.getShip().canFire(projectile)) {
-      
-    }else {
-      
+    if (gameField.getShip().canFire(projectileBox)) {
+      double positionX =
+          xVelocity * flyingTime; // TODO: 11/2/23 Add a loop to increment the position.
+      double positionY =
+          (shipPosition + yVelocity) * flyingTime + (0.5 * gravity * Math.pow(flyingTime, 2));
+      projectileBox.inset((int) positionX, (int) positionY); // FIXME: 11/9/23 Check if cast is the  best option for this.
     }
     return 0; // FIXME: 11/8/23  
   }
@@ -57,15 +56,7 @@ public class Projectile {
     return project.height();
   }
 
-  public void computeTrajectory(Rect ship){
-    shipPosition = gameField.getShip().position();
-    xVelocity = (velocity * Math.cos(angle));
-    yVelocity = (velocity * Math.sin(angle));
-    //gravity = gameField.getMeteor().getGravity();
-    totalFlyingTime = -yVelocity - (Math.sqrt(Math.pow(yVelocity,2) - (4*shipPosition*0.5*gravity))/gravity);
-    positionX = xVelocity * flyingTime; // TODO: 11/2/23 Add a loop to increment the position.
-    positionY = (shipPosition + yVelocity) * flyingTime + (0.5 * gravity * Math.pow(flyingTime,2));
-  }
+
   
   
   

@@ -5,20 +5,33 @@ import java.security.SecureRandom;
 
 public class Enemy {
 
-  private Rect enemy;
+  private Rect enemyBox;
+  private int yPosition;
   private SecureRandom rng;
 
 
   public Enemy() {
     int left = 0, right = 0, top = 0, bottom = 0; // FIXME: 11/8/23 Get random values.
-    this.enemy = new Rect(left, top, right, bottom);
+    this.enemyBox = new Rect(left, top, right, bottom);
   }
 
-  public int position(){
+  public boolean inside(Rect enemy){
+    return enemyBox.intersect(enemy);
+  }
+  public Rect position(){
     throw new UnsupportedOperationException(); // FIXME: 11/8/23 Do I need more than Y position?
   }
 
   public void move(){ // TODO: 10/24/23 Not sure if it'll move or not.
 
   }
+
+  public Rect getEnemyBox() {
+    return enemyBox;
+  }
+
+  public void setyPosition(int yPosition) {
+    this.yPosition = yPosition;
+  }
+
 }

@@ -1,26 +1,24 @@
 package edu.cnm.deepdive.gravity.model;
 
 import android.graphics.Rect;
+import java.security.SecureRandom;
 import java.util.List;
 
 public class GameField {
-  private Rect gameField;
-  private final Ship ship;
+  private Rect boundingBox;
+  private  Ship ship;
   private Meteor meteor;
   private Enemy enemy;
+  private SecureRandom rng;
   private int level;
-  private final Projectile projectile;
-  private final List<Meteor> meteors;
-  private final List<Enemy> enemies;
+  private int counter;
+  private double velocity;
+  private double gravity;
+  private int angle;
+  private Projectile projectile;
+  private  List<Meteor> meteors;
+  private  List<Enemy> enemies;
 
-  public GameField(Ship ship, Projectile projectile, List<Meteor> meteors, List<Enemy> enemies, Meteor meteor, Enemy enemy) {
-    this.ship = ship;
-    this.projectile = projectile;
-    this.meteors = meteors;
-    this.enemies = enemies;
-    this.meteor = meteor;
-    this.enemy = enemy;
-  }
 
   public int changeGravity(){
     // TODO: 10/24/23 If ship and meteor have the same position than gravity will change
@@ -31,33 +29,68 @@ public class GameField {
     return ship;
   }
 
-  public Projectile getProjectile() {
-    return projectile;
-  }
-
-  public List<Meteor> getMeteors() {
-    return meteors;
-  }
-
-  public List<Enemy> getEnemies() {
-    return enemies;
-  }
-
-  public Meteor getMeteor() {
-    return meteor;
-  }
-
-  public Rect getGameField() {
-    return gameField;
+  public Rect getBoundingBox() {
+    return boundingBox;
   }
 
   public int getLevel() {
     return level;
   }
 
-  public void setGameField(){
-
+  public void shipMoveUp(){
+     ship.moveUp();
   }
+
+  public void shipMoveDown(){
+      ship.moveDown();
+  }
+
+  public void shipFire(){
+    ship.setVelocity(velocity); // FIXME: 11/9/23 Input from user.
+    ship.setAngle(angle);       // FIXME: 11/9/23 Input from user.
+    ship.setGravity(gravity);   // FIXME: 11/9/23 This shouldn't be here.
+    projectile = ship.fire();
+  }
+
+  public void addMeteor(){
+    Meteor meteor = new Meteor();
+    boolean intersection;
+    do {
+      intersection = false;
+      meteor.setyPosition(rng.nextInt()); // FIXME: 11/9/23 How many meteors I'll create on each level?
+      for (Meteor m : meteors) {
+        if (m.inside(meteor.getMeteorBox())) {
+          intersection = true;
+          break;
+        }
+      }
+    } while (intersection);
+    meteors.add(meteor);
+  }
+
+  public void addEnemies(){
+    Enemy enemy = new Enemy();
+    boolean intersection;
+    do {
+      intersection = false;
+      enemy.setyPosition(rng.nextInt()); // FIXME: 11/9/23 How many enemies I'll create on each level?
+      for (Enemy nmy : enemies) {
+        if (nmy.inside(enemy.getEnemyBox())) {
+          intersection = true;
+          break;
+        }
+      }
+    } while (intersection);
+    enemies.add(enemy);
+  }
+
+  public void countObjectDestroyed(){
+    // FIXME: 11/9/23 Do I need a loop to check all possible enemies?
+    if(projectile.detonate(enemy.position())){
+      counter++;
+    }
+  }
+
 
   public void obstacle(){
     // TODO: 10/24/23 Field will display some obstacles to make more difficult to hit the enemies.
@@ -66,9 +99,5 @@ public class GameField {
     //  need 2 constructors one that's gonna do meteor(field field),
     //  meteor (field field, int x, int y), every tick im gonna need to refresh everything.
     //  Create vector class for position and velocity.
-  }
-
-  public void countObjectDestroyed(){
-
   }
 }

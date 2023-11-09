@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/navigation_graph"
+  app:startDestination="@+id/game_fragment">
+
+<!--  <fragment-->
+<!--    android:id="@+id/game_fragment"-->
+<!--    android:name="edu.cnm.deepdive.gravity.controller.GameFragment"-->
+<!--    android:label="Gravity Falls"-->
+<!--    tools:layout="@layout/activity_main">-->
+<!--    <action-->
+<!--      android:id="@+id/navigate_to_game"-->
+<!--      app:destination="@id/game_fragment">-->
+
+<!--      <argument-->
+<!--        android:name="menu"-->
+<!--        app:argType="string"/>-->
+<!--    </action>-->
+<!--  </fragment>-->
+
+<!--  <fragment-->
+<!--    android:id=""-->
+
+</navigation>
