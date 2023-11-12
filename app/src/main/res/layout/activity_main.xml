@@ -20,6 +20,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:background="@drawable/background"
   android:padding="@dimen/half_dynamic_spacing"
   tools:viewBindingIgnore="true"
   tools:context=".controller.MainActivity">
@@ -28,11 +29,15 @@
    android:id="@+id/play"
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
-  app:layout_constraintStart_toStartOf="parent"
-  app:layout_constraintEnd_toEndOf="parent"
-  app:layout_constraintBottom_toTopOf="@id/scores"
-  app:layout_constraintTop_toTopOf="parent"
-   android:text="@string/play"/>
+   android:backgroundTint="@android:color/transparent"
+   android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+   style="@style/CustomFont"
+   android:text="@string/play"
+   android:textColor="@android:color/background_light"
+   app:layout_constraintBottom_toTopOf="@id/scores"
+   app:layout_constraintEnd_toEndOf="parent"
+   app:layout_constraintStart_toStartOf="parent"
+   app:layout_constraintTop_toTopOf="parent"/>
 
  <Button
    android:id="@+id/scores"
@@ -42,6 +47,10 @@
    app:layout_constraintEnd_toEndOf="parent"
    app:layout_constraintBottom_toBottomOf="@id/settings"
    app:layout_constraintTop_toBottomOf="@id/play"
+   android:backgroundTint="@android:color/transparent"
+   android:textColor="@android:color/background_light"
+   android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+   style="@style/CustomFont"
    android:text="@string/high_scores"/>
 
  <Button
@@ -52,6 +61,10 @@
    app:layout_constraintEnd_toEndOf="parent"
    app:layout_constraintBottom_toTopOf="@id/exit"
    app:layout_constraintTop_toBottomOf="@id/scores"
+   android:backgroundTint="@android:color/transparent"
+   android:textColor="@android:color/background_light"
+   android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+   style="@style/CustomFont"
    android:text="@string/settings"/>
 
  <Button
@@ -62,14 +75,18 @@
    app:layout_constraintEnd_toEndOf="parent"
    app:layout_constraintBottom_toBottomOf="parent"
    app:layout_constraintTop_toBottomOf="@id/settings"
+   android:backgroundTint="@android:color/transparent"
+   android:textColor="@android:color/background_light"
+   android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+   style="@style/CustomFont"
    android:text="@string/exit"/>
 
- <androidx.fragment.app.FragmentContainerView
-   android:id="@+id/nav_host_fragment"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   android:name="androidx.navigation.fragment.NavHostFragment"
-   app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-   app:defaultNavHost="true"/>
+<!-- <androidx.fragment.app.FragmentContainerView-->
+<!--   android:id="@+id/nav_host_fragment"-->
+<!--   android:layout_width="match_parent"-->
+<!--   android:layout_height="match_parent"-->
+<!--   android:name="androidx.navigation.fragment.NavHostFragment"-->
+<!--   app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"-->
+<!--   app:defaultNavHost="true"/>-->
 <!--   app:navGraph="@navigation/navigation_graph"/>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

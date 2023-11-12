@@ -23,4 +23,8 @@
     <item name="colorAccent">@color/accent_color</item>
   </style>
 
+  <style name="CustomFont">
+    <item name="android:fontFamily">@font/font_family</item>
+  </style>
+
 </resources>

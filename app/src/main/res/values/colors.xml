@@ -16,12 +16,12 @@
 -->
 <resources>
 
-  <color name="primary_color">#FF6200EE</color>
-  <color name="primary_color_dark">#FF3700B3</color>
-  <color name="accent_color">#FF03DAC5</color>
+  <color name="primary_color">#5E2DC2</color>
+  <color name="primary_color_dark">#451F87</color>
+  <color name="accent_color">#9B59B6</color>
 
   <color name="save">@color/primary_color_dark</color>
-  <color name="cancel">#FFFF0000</color>
-  <color name="disabled">#60000000</color>
+  <color name="cancel">#E74C3C</color>
+  <color name="disabled">#808080</color>
 
 </resources>
