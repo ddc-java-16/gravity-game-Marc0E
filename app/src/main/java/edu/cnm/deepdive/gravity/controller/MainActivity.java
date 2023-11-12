@@ -50,7 +50,10 @@ import edu.cnm.deepdive.gravity.viewmodel.PreferencesViewModel;
 public class MainActivity extends AppCompatActivity  {
 
   private LoginViewModel loginViewModel;
-
+  Button playButton;
+  Button settingsButton;
+  Button scoresButton;
+  Button exitButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,30 @@ public class MainActivity extends AppCompatActivity  {
     setContentView(R.layout.activity_main);
     setupNavigation();
     setupViewModels();
+
+    playButton = findViewById(R.id.play);
+    playButton.setOnClickListener((v) -> {
+      Intent intent = new Intent(this, GameActivity.class);
+      startActivity(intent);
+    });
+
+    settingsButton = findViewById(R.id.settings);
+    settingsButton.setOnClickListener((v) -> {
+      Intent intent = new Intent(this, SettingsActivity.class);
+      startActivity(intent);
+    });
+
+    scoresButton = findViewById(R.id.scores);
+    scoresButton.setOnClickListener((v) -> {
+      Intent intent = new Intent(this, ScoresActivity.class);
+      startActivity(intent);
+
+    });
+
+    exitButton = findViewById(R.id.exit);
+    exitButton.setOnClickListener((v) -> {
+
+    });
   }
 
   @Override
@@ -106,7 +133,6 @@ public class MainActivity extends AppCompatActivity  {
         .observe(this, this::handleAccount);
     //NavHostFragment navHostFragment =
     //    (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-
   }
 
   private void handleAccount(GoogleSignInAccount account) {

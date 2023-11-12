@@ -19,6 +19,10 @@ public class GameField {
   private  List<Meteor> meteors;
   private  List<Enemy> enemies;
 
+  public GameField() {
+    this.level = 0;
+    this.counter = 0;
+  }
 
   public int changeGravity(){
     // TODO: 10/24/23 If ship and meteor have the same position than gravity will change
@@ -36,6 +40,8 @@ public class GameField {
   public int getLevel() {
     return level;
   }
+
+  public int getCounter() {return counter;}
 
   public void shipMoveUp(){
      ship.moveUp();
