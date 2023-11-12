@@ -15,20 +15,20 @@
  */
 package edu.cnm.deepdive.gravity.controller;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.gravity.R;
+import edu.cnm.deepdive.gravity.model.entity.Score;
 import edu.cnm.deepdive.gravity.viewmodel.LoginViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.PreferencesViewModel;
 

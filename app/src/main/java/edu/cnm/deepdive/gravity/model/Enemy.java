@@ -11,7 +11,7 @@ public class Enemy {
 
 
   public Enemy() {
-    int left = 0, right = 0, top = 0, bottom = 0; // FIXME: 11/8/23 Get random values.
+    int left = 0, right = 0, top = 0, bottom = 0; // FIXME: 11/8/23 Replace top with yPosition.
     this.enemyBox = new Rect(left, top, right, bottom);
   }
 
