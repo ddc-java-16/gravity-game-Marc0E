@@ -9,33 +9,46 @@ import java.util.Objects;
 
 public class Projectile {
 
+  private static final int  PROJECTILE_SIZE = 10;
   private GameField gameField;
   private Rect projectileBox;
   private double flyingTime;
+  private int positionX;
+  private int positionY;
   int shipPosition;
   double xVelocity;
   double yVelocity;
   double gravity;
 
-
-  @Expose(deserialize = true, serialize = false)
   private final String key = null;
-  @Expose
   private String name;
-  @Expose
   private boolean move;
   private static final String TO_STRING_FORMAT = "%1$s[key=%2$s, name=%3$s, move=%4$s]";
 
-  public Projectile(int shipPosition, double xVelocity, double  yVelocity, double gravity) {
+  public int getPositionX() {
+    return positionX;
+  }
+
+  public int getPositionY() {
+    return positionY;
+  }
+
+  public Projectile(int shipPosition, double xVelocity, double  yVelocity, double gravity, GameField gameField) {
+    // TODO: 11/13/23 xposition, yposition, gameFiled, xvelocity and yvelocity.
     this.shipPosition = shipPosition;
     this.xVelocity = xVelocity;
     this.yVelocity = yVelocity;
     this.gravity = gravity;
+    this.gameField = gameField;
 
   }
+  private void computeProjectileBox() {
+    projectileBox = new Rect(positionX - PROJECTILE_SIZE/2, positionY - PROJECTILE_SIZE/2, positionX+PROJECTILE_SIZE/2, positionY+PROJECTILE_SIZE/2);
+  }
   
-  public boolean canMove(Rect enemy, Rect gameField){
-    return !projectileBox.intersect(enemy) || projectileBox.intersect(gameField); // FIXME: 11/9/23 Check if have right logic.
+
+  public boolean intersects(Rect other){
+    return projectileBox.intersect(other);
   }
 
   public boolean detonate(Rect enemy){
@@ -52,8 +65,10 @@ public class Projectile {
     }
     return 0; // FIXME: 11/8/23  
   }
-  public int position(Rect project){
-    return project.height();
+  public void updatePosition(){
+    positionX += xVelocity;
+    positionY += yVelocity;
+    yVelocity += gameField.getGravity();
   }
 
 

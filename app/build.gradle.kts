@@ -85,7 +85,6 @@ dependencies {
 
 
 
-
     // Basic Android components
     implementation(libs.app.compat)
     implementation(libs.constraint.layout)

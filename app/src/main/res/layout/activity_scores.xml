@@ -2,24 +2,30 @@
 <androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:name="edu.cnm.deepdive.gravity.controller.ScoresActivity$ScoresFragment"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/scores_fragment_container"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  tools:context=".controller.ScoresActivity">
 
-<!--<androidx.fragment.app.FragmentContainerView-->
-<!--  android:layout_width="0dp"-->
-<!--  android:layout_height="0dp"-->
-<!--  android:name="edu.cnm.deepdive.gravity.controller.ScoresActivity$ScoresFragment"-->
-<!--  app:layout_constraintEnd_toStartOf="parent"-->
-<!--  app:layout_constraintEnd_toEndOf="parent"-->
-<!--  app:layout_constraintTop_toTopOf="parent"-->
-<!--  app:layout_constraintBottom_toBottomOf="parent"-->
-<!--  />-->
+  <include
+    layout="@layout/header_user_score"
+    android:id="@+id/header"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
 
-  <androidx.fragment.app.FragmentContainerView
-    android:id="@+id/scores_fragment_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/scores"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintTop_toBottomOf="@id/header"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    tools:listitem="@layout/item_user_score"/>
 
 
 

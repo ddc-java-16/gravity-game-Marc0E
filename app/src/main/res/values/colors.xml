@@ -24,4 +24,6 @@
   <color name="cancel">#E74C3C</color>
   <color name="disabled">#808080</color>
 
+  <color name="text_color">#FFFFFF</color>
+
 </resources>

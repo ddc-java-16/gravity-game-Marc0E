@@ -4,7 +4,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/navigation_graph"
-  app:startDestination="@+id/game_fragment">
+  app:startDestination="@+id/fragment_score">
 
 <!--  <fragment-->
 <!--    android:id="@+id/game_fragment"-->
@@ -23,5 +23,9 @@
 
 <!--  <fragment-->
 <!--    android:id=""-->
+  <fragment
+    android:id="@+id/fragment_score"
+    android:name="edu.cnm.deepdive.gravity.controller.ScoresActivity$ScoresFragment"
+    tools:layout="@layout/fragment_scores"/>
 
 </navigation>

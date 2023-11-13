@@ -6,13 +6,16 @@ import java.security.SecureRandom;
 public class Enemy {
 
   private Rect enemyBox;
+  private static final int ENEMY_SIZE = 40;
+  private GameField gameField;
   private int yPosition;
   private SecureRandom rng;
 
 
-  public Enemy() {
-    int left = 0, right = 0, top = 0, bottom = 0; // FIXME: 11/8/23 Replace top with yPosition.
-    this.enemyBox = new Rect(left, top, right, bottom);
+  public Enemy(GameField gameField, int positionY, int positionX) {
+    this.gameField = gameField;
+    // FIXME: 11/13/23 Check logic.
+    this.enemyBox = new Rect(positionX, positionY, positionX+ENEMY_SIZE, positionY - ENEMY_SIZE);
   }
 
   public boolean inside(Rect enemy){
@@ -23,7 +26,6 @@ public class Enemy {
   }
 
   public void move(){ // TODO: 10/24/23 Not sure if it'll move or not.
-
   }
 
   public Rect getEnemyBox() {

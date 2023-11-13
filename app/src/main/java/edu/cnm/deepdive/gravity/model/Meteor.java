@@ -6,12 +6,20 @@ import java.util.Random;
 
 public class Meteor {
   private Rect meteorBox;
+  private final int METEOR_SIZE = 40;
   private SecureRandom rng;
+  GameField gameField;
   private double gravity;
   private int xPosition;
   private int yPosition;
 
 
+
+  public Meteor(GameField gameField, int positionX, int positionY){
+    this.gameField = gameField;
+    this.meteorBox = new Rect(positionX, positionY, positionX + METEOR_SIZE, positionY - METEOR_SIZE);
+
+  }
 
   public boolean inside(Rect meteor){
     return meteorBox.intersect(meteor);

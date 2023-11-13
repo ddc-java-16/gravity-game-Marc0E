@@ -9,42 +9,51 @@ import java.util.Objects;
 
 public class Ship {
 
-  @Expose(deserialize = true, serialize = false)
   private final String key = null;
-  @Expose
+  private int xPosition;
+  private int yPosition;
   private String name;
-  @Expose
   private boolean fly;
   private static final String TO_STRING_FORMAT = "%1$s[key=%2$s, name=%3$s, fly=%4$s]";
-
+  private static final int SHIP_SIZE = 40;
   private Rect shipBox;
   private GameField gameField;
   private Projectile projectile;
   private double xVelocity;
   private double yVelocity;
   private double velocity;
-  private double positionX;
-  private double positionY;
+  private int positionX;
+  private int positionY;
   private double angle;
   private double shipPosition;
   private double totalFlyingTime;
   private double flyingTime;
   private double gravity;
 
-  public Ship(Rect ship) {
+  public Ship(Rect ship, GameField gameFiedl, int y, int x) {
     // FIXME: 11/9/23 Check if this is correct
-    ship = new Rect(0, gameField.getBoundingBox().top/2,0,0);
-    this.shipBox = ship;
+    //ship = new Rect(0, gameField.getBoundingBox().top/2,0,0);
+    this.gameField = gameFiedl;
+    positionX = x;
+    positionY = y;
+    computeShipBox();
+    this.shipBox = ship; // FIXME: 11/13/23 Do I need this?
+  }
+
+  private void computeShipBox() {
+    shipBox = new Rect(positionX - SHIP_SIZE/2, positionY - SHIP_SIZE/2, positionX+SHIP_SIZE/2, positionY+SHIP_SIZE/2);
   }
 
   public void moveUp(){
-    if(shipBox.bottom >= gameField.getBoundingBox().bottom && shipBox.height() <= gameField.getBoundingBox().top) { // FIXME: 11/8/23 Maybe I'll need to use left and right instead of bottom and top.
-      shipBox.top = shipBox.top + 1;
+    if(positionY - 1 - SHIP_SIZE/2 >= gameField.getBoundingBox().top){
+      yPosition--;
+      computeShipBox();
     }
   }
   public void moveDown(){
-    if(shipBox.bottom >= gameField.getBoundingBox().bottom && shipBox.height() <= gameField.getBoundingBox().top) {
-      shipBox.bottom = shipBox.bottom - 1;
+    if((positionY + 1 - SHIP_SIZE/2 < gameField.getBoundingBox().bottom)) {
+      yPosition++;
+      computeShipBox();
     }
   }
 
@@ -53,13 +62,14 @@ public class Ship {
 //   return shipBox.bottom >= gameField.getBoundingBox().bottom && shipBox.height() <= gameField.getBoundingBox().top; // FIXME: 11/8/23 Maybe I'll need to use left and right instead of bottom and top.
 //  }
 
-  public int position() {
-    return shipBox.height();
+  public boolean intersects(Rect intersect) {
+    return shipBox.intersect(intersect);
   }
 
   public Projectile fire(){
+
     computeTrajectory(velocity);
-    Projectile projectile = new Projectile(shipBox.height(),xVelocity, yVelocity, gravity);
+    Projectile projectile = new Projectile(shipBox.height(),xVelocity, yVelocity, gravity, gameField);
     return projectile;
     //projectile.fire(shipBox.height(),xVelocity, yVelocity, gravity);
   }
