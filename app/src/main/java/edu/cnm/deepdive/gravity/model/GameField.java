@@ -108,7 +108,7 @@ public class GameField {
     boolean intersection;
     Meteor meteor = new Meteor(this,
         boundingBox.right - 1,
-        boundingBox.top + rng.nextInt(boundingBox.height()));
+        boundingBox.top + rng.nextInt(boundingBox.height())); // FIXME: 11/13/23 I think it should be boundingBox.bottom.
     do {
       intersection = false;
 //      meteor.setyPosition(

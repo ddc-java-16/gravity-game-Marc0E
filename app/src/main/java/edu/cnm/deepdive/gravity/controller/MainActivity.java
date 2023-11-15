@@ -31,6 +31,7 @@ import edu.cnm.deepdive.gravity.R;
 import edu.cnm.deepdive.gravity.model.entity.Score;
 import edu.cnm.deepdive.gravity.viewmodel.LoginViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.PreferencesViewModel;
+import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
 
 /**
  * Serves as a basic container activity&mdash;that is, it presents no UI elements of its own (apart
@@ -50,6 +51,7 @@ import edu.cnm.deepdive.gravity.viewmodel.PreferencesViewModel;
 public class MainActivity extends AppCompatActivity  {
 
   private LoginViewModel loginViewModel;
+  private UserViewModel userViewModel;
   Button playButton;
   Button settingsButton;
   Button scoresButton;

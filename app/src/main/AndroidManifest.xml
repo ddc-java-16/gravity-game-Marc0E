@@ -14,9 +14,9 @@
     <activity
       android:exported="false"
       android:name=".controller.ScoresActivity"/>
-    <activity
-      android:exported="false"
-      android:name=".activity_hight_scores"/>
+<!--    <activity-->
+<!--      android:exported="false"-->
+<!--      android:name=".activity_hight_scores"/>-->
     <activity
       android:exported="false"
       android:screenOrientation="landscape"

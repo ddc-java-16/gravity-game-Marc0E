@@ -5,8 +5,17 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@drawable/play_background1"
+  android:background="@color/primary_color_dark"
   tools:context=".controller.GameActivity">
+<!--  android:background="@drawable/play_background1"-->
+
+  <Button
+    android:id="@+id/move_up"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:text="Up"/>
 
   <TextView
     android:id="@+id/counter_text"
