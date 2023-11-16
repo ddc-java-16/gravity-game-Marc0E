@@ -8,6 +8,12 @@ import java.util.ListIterator;
 
 public class GameField {
 
+  private static final int ENEMY_LEVEL_MULTIPLIER = 3;
+  private static final double TIMING_OFFSET = 0.8;
+  private static final double TIMING_LEVEL_MULTIPLIER = 0.007;
+  private static final double BASED_METEOR_PROBABILITY = 0.01;
+
+  private double secondsPerTick;
   private Rect boundingBox;
   private Ship ship;
   private Meteor meteor;
@@ -18,6 +24,7 @@ public class GameField {
   private double velocity;
   private double gravity;
   private int angle;
+  private int levelEnemiesRemoved;
   private Projectile projectile;
   private List<Meteor> meteors;
   private List<Enemy> enemies;
@@ -25,7 +32,7 @@ public class GameField {
   private List<Meteor> meteorDestroyed;
 
   public GameField() {
-    this.level = 1;
+    this.level = 0;
     this.counter = 0;
     enemiesDestroyed = new LinkedList<>();
     meteorDestroyed = new LinkedList<>();
@@ -59,12 +66,20 @@ public class GameField {
     return gravity;
   }
 
-  public void shipMoveUp() {
-    ship.moveUp();
+  public double getSecondsPerTick() {
+    return secondsPerTick;
   }
 
-  public void shipMoveDown() {
-    ship.moveDown();
+  public void start(int level){
+    //level = 1;
+    this.level = level;
+    computeTiming();
+    for (int i = 0; i < 3 * level; i++) {
+      addEnemies();
+    }
+    addShip();
+
+    addMeteor();
   }
 
   public void shipFire() {
@@ -77,6 +92,18 @@ public class GameField {
   public void update() {
     meteorDestroyed.clear();
     enemiesDestroyed.clear();
+    for (ListIterator<Meteor> iterator = meteors.listIterator(); iterator.hasNext(); ) {
+      Meteor meteor = iterator.next();
+      // TODO: 11/13/23 Meteors update position
+      if (ship.intersects(meteor.getMeteorBox())) {
+        // TODO: 11/13/23 damage the ship/ change gravity.
+        meteorDestroyed.add(meteor);
+        iterator.remove();
+      }
+    }
+    if(rng.nextDouble() < BASED_METEOR_PROBABILITY * level){
+      addMeteor();
+    }
     if (projectile != null) {
       projectile.updatePosition();
 
@@ -88,27 +115,38 @@ public class GameField {
           Enemy enemy = iterator.next();
           if (projectile.intersects(enemy.getEnemyBox())) {
             enemiesDestroyed.add(enemy);
+            projectile = null;
             iterator.remove();
+            break;
           }
+        }
+        if(enemies.isEmpty()){
+          start(level+1);
         }
       }
     }
-    for (ListIterator<Meteor> iterator = meteors.listIterator(); iterator.hasNext();) {
-      Meteor meteor = iterator.next();
-      // TODO: 11/13/23 Meteors update position
-      if (ship.intersects(meteor.getMeteorBox())) {
-        // TODO: 11/13/23 damage the ship/ change gravity.
-        meteorDestroyed.add(meteor);
-        iterator.remove();
-      }
-    }
+  }
+
+  public void addShip(){
+    // FIXME: 11/16/23 How to know the X position of the ship, change new Rect().
+    Ship ship = new Ship(new Rect(), this, boundingBox.height()/2, boundingBox.right+30);
+
+  }
+
+  public void shipMoveUp() {
+    ship.moveUp();
+  }
+
+  public void shipMoveDown() {
+    ship.moveDown();
   }
 
   public void addMeteor() {
     boolean intersection;
     Meteor meteor = new Meteor(this,
         boundingBox.right - 1,
-        boundingBox.top + rng.nextInt(boundingBox.height())); // FIXME: 11/13/23 I think it should be boundingBox.bottom.
+        boundingBox.top + rng.nextInt(
+            boundingBox.height())); // FIXME: 11/13/23 I think it should be boundingBox.bottom.
     do {
       intersection = false;
 //      meteor.setyPosition(
@@ -133,7 +171,8 @@ public class GameField {
 //      enemy.setyPosition(
 //          rng.nextInt());
 // FIXME: 11/9/23 How many enemies I'll create on each level?, max rng number?
-          Enemy enemy = new Enemy(this, rng.nextInt(boundingBox.height() + 1), rng.nextInt((boundingBox.width()/2) + 1));
+      Enemy enemy = new Enemy(this, boundingBox.top + rng.nextInt(boundingBox.height()),
+          boundingBox.left + boundingBox.width()/2 + rng.nextInt((boundingBox.width() / 2)));
       for (Enemy nmy : enemies) {
         if (nmy.inside(enemy.getEnemyBox())) {
           intersection = true;
@@ -148,7 +187,27 @@ public class GameField {
     // FIXME: 11/9/23 Do I need a loop to check all possible enemies?
     if (projectile.detonate(enemy.position())) {
       counter++;
+      // FIXME: 11/16/23 when do I check update level.
     }
+  }
+
+  private void updateLevel(int enemiesRemoved) {
+    levelEnemiesRemoved += enemiesRemoved;
+    if (levelEnemiesRemoved >= ENEMY_LEVEL_MULTIPLIER * level) {
+      level++;
+      computeTiming();
+      levelEnemiesRemoved = 0;
+    }
+  }
+
+  public boolean isGameOver(){
+    return level>0 && ship == null;
+  }
+
+
+  // FIXME: 11/16/23
+  public boolean projectileOutOfBounds() {
+    return true;
   }
 
 
@@ -164,5 +223,9 @@ public class GameField {
   private void initialize(int level) {
     // TODO: 11/13/23 create a new ship, create repopulate the list of enemies with the number of enemies depending on level.
     // TODO: 11/13/23 clear the list of meteors,
+  }
+
+  private void computeTiming() {
+    secondsPerTick = Math.pow(TIMING_OFFSET - (level - 1) * TIMING_LEVEL_MULTIPLIER, level - 1);
   }
 }

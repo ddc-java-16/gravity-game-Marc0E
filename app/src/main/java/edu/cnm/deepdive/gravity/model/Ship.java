@@ -30,10 +30,10 @@ public class Ship {
   private double flyingTime;
   private double gravity;
 
-  public Ship(Rect ship, GameField gameFiedl, int y, int x) {
+  public Ship(Rect ship, GameField gameField, int y, int x) {
     // FIXME: 11/9/23 Check if this is correct
     //ship = new Rect(0, gameField.getBoundingBox().top/2,0,0);
-    this.gameField = gameFiedl;
+    this.gameField = gameField;
     positionX = x;
     positionY = y;
     computeShipBox();

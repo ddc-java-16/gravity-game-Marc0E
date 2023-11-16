@@ -1,7 +1,13 @@
 package edu.cnm.deepdive.gravity.controller;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Point;
+import android.os.Build;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +17,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.gravity.R;
 import edu.cnm.deepdive.gravity.databinding.ActivityGameBinding;
 import edu.cnm.deepdive.gravity.model.GameField;
@@ -20,6 +27,7 @@ import edu.cnm.deepdive.gravity.viewmodel.ScoreViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@AndroidEntryPoint
 public class GameActivity extends AppCompatActivity {
 
   GameField gameField;
@@ -28,8 +36,9 @@ public class GameActivity extends AppCompatActivity {
   TextView levelView;
   TextView counterView;
   Button moveUp;
+  int Measuredwidth = 0;
+  int Measuredheight = 0;
   GameFieldViewModel gameFieldViewModel;
-  int sum=0;
   private ActivityGameBinding binding;
   private UserViewModel userViewModel;
   private ScoreViewModel scoreViewModel;
@@ -57,28 +66,26 @@ public class GameActivity extends AppCompatActivity {
     counterView = findViewById(R.id.counter);
     counterView.setText(String.valueOf(gameField.getCounter()));
 
-    gameFieldViewModel.top.observe(this, new Observer<Integer>() {
-      @Override
-      public void onChanged(Integer integer) {
-        moveUp.setText(String.valueOf(gameFieldViewModel.top.getValue()));
-      }
-    });
-    //imageViewPhoto.setImageURI();
-    moveUp =  findViewById(R.id.move_up);
-    imageViewShip=findViewById(R.id.ship);
-    AtomicInteger p = new AtomicInteger(imageViewShip.getTop());
-    moveUp.setOnClickListener((v) ->{
-      gameFieldViewModel.increment();
-      //sum = sum + gameFieldViewModel.getTop();
-      //moveUp.setText(String.valueOf(gameFieldViewModel.top()));
-      //imageViewShip.setTop(sum);
-        });
-    moveUp.setOnClickListener((v) ->{
-     // moveUp.setText(String.valueOf(p.getAndIncrement()));
-      //imageViewShip.setTop(imageViewPhoto.getTop() + 1);
-    });
+    getScreenSize();
+    moveUp = findViewById(R.id.move_up);
+    moveUp.setOnClickListener((view) -> gameFieldViewModel.run());
 
   }
+
+  private void getScreenSize() {
+    Point size = new Point();
+    WindowManager w = getWindowManager();
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)    {
+      w.getDefaultDisplay().getSize(size);
+      Measuredwidth = size.x;
+      Measuredheight = size.y;
+    }else{
+      Display d = w.getDefaultDisplay();
+      Measuredwidth = d.getWidth();
+      Measuredheight = d.getHeight();
+    }
+  }
+
 
   private void setupUserViewModel(FragmentActivity activity, LifecycleOwner owner) {
     userViewModel = new ViewModelProvider(activity)
@@ -93,4 +100,5 @@ public class GameActivity extends AppCompatActivity {
         .get(ScoreViewModel.class);
     // TODO: 10/26/23 Observe scoreId or Score from view model.
   }
+
 }

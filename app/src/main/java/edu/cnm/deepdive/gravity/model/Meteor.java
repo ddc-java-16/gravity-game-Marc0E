@@ -33,8 +33,8 @@ public class Meteor {
 
   }
 
-  public void updatePosition(){
-    xPosition++;
+  public void updatePosition(int increment){
+    xPosition-= increment;
   }
 
   public int getyPosition() {

@@ -1,14 +1,78 @@
 package edu.cnm.deepdive.gravity.service;
 
+import android.content.Context;
+import androidx.lifecycle.MutableLiveData;
+import dagger.hilt.android.qualifiers.ApplicationContext;
+import edu.cnm.deepdive.gravity.model.GameField;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.rxjava3.subjects.Subject;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class PlayingFieldRepository {
 
+  private GameField gameField;
+  private final Scheduler moveShip;
+  private final Scheduler moveMeteors;
+  private final Scheduler projectile;
+  private final Scheduler refresh;
+
+  private Subject<Boolean> ticker;
+
+  @Inject
+  public PlayingFieldRepository(@ApplicationContext Context context) {
+    moveShip = Schedulers.single();
+    moveMeteors = Schedulers.single();
+    projectile = Schedulers.single();
+    refresh = Schedulers.single();
+
+
+  }
+
+  public Observable<Boolean> run(){
+    clearTicker();
+    if(gameField.getLevel() == 0){
+      gameField.start(1);
+    } // TODO: 11/16/23 Check to see if the game has ended.
+    ticker = BehaviorSubject.createDefault(true);
+    return ticker
+        .filter(Boolean.TRUE::equals)
+        .delay(100, TimeUnit.MILLISECONDS)
+        .observeOn(refresh)
+        .map(this::tick);
+  }
+
+
+  private boolean tick(boolean running){
+    boolean result;
+    gameField.update();
+
+    if (gameField.isGameOver()) {
+      ticker.onComplete();
+      result = false;
+    } else {
+      ticker.onNext(true);
+      result = true;
+    }
+    return result;
+  }
+
+  public void pause(){
+    clearTicker();
+  }
+
   public void create() {
+    gameField = new GameField();
 
   }
 
-  public void start() {
-
-  }
 
   public void stop() {
 
@@ -23,8 +87,9 @@ public class PlayingFieldRepository {
 
   }
 
+
   public void updateProjectile() {
-    // TODO: 11/1/23 Based on the force and angle selected the projectile will move.
+    // TODO: 11/1/23 Based on the velocity and angle selected the projectile will move.
 
   }
 
@@ -50,6 +115,17 @@ public class PlayingFieldRepository {
 
   public void shipIntersection(){
 
+  }
+
+  public GameField getGameField() {
+    return gameField;
+  }
+
+  private void clearTicker(){
+    if (ticker != null && ! ticker.hasComplete()){
+      ticker.onComplete();
+    }
+    ticker = null;
   }
 
 
