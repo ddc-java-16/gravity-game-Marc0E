@@ -7,7 +7,11 @@ import android.os.Build;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,22 +57,40 @@ public class GameActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_game);
+    binding = ActivityGameBinding.inflate(getLayoutInflater());
+    setContentView(binding.getRoot());
     gameFieldViewModel = new ViewModelProvider(this).get(GameFieldViewModel.class);
     Log.i("GameActivity", "Initialized");
+    gameFieldViewModel
+        .getGameField()
+        .observe(this, (field) -> {
+          gameField = field;
+          binding.level.setText(String.valueOf(gameField.getLevel()));
+          binding.counter.setText(String.valueOf(gameField.getCounter()));
+          binding.play.setOnClickListener((view) -> gameFieldViewModel.run());
+          binding.pause.setOnClickListener((view) -> gameFieldViewModel.paused());
+        });
 
-    gameField = new GameField();
-
-    levelView = findViewById(R.id.level);
-    //levelView = binding.level;
-    levelView.setText(String.valueOf(gameField.getLevel()));
-
-    counterView = findViewById(R.id.counter);
-    counterView.setText(String.valueOf(gameField.getCounter()));
 
     getScreenSize();
-    moveUp = findViewById(R.id.move_up);
-    moveUp.setOnClickListener((view) -> gameFieldViewModel.run());
+    //moveUp = findViewById(R.id.move_up);
+    //moveUp.setOnClickListener((view) -> gameFieldViewModel.run());
+    binding.gravity.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
+        getResources().getStringArray(R.array.gravity_array)));
+    binding.gravity.setOnItemSelectedListener(new OnItemSelectedListener() {
+      @Override
+      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String value = binding.gravity.getOnItemSelectedListener().toString();
+        System.out.println(value);
+
+
+      }
+
+      @Override
+      public void onNothingSelected(AdapterView<?> parent) {
+
+      }
+    });
 
   }
 

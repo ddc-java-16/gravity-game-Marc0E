@@ -5,6 +5,7 @@ import java.security.SecureRandom;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Random;
 
 public class GameField {
 
@@ -18,7 +19,7 @@ public class GameField {
   private Ship ship;
   private Meteor meteor;
   private Enemy enemy;
-  private SecureRandom rng;
+  private Random rng;
   private int level;
   private int counter;
   private double velocity;
@@ -31,13 +32,15 @@ public class GameField {
   private List<Enemy> enemiesDestroyed;
   private List<Meteor> meteorDestroyed;
 
-  public GameField() {
+  public GameField(int x, int y) {
     this.level = 0;
     this.counter = 0;
     enemiesDestroyed = new LinkedList<>();
     meteorDestroyed = new LinkedList<>();
     meteors = new LinkedList<>();
     enemies = new LinkedList<>();
+    boundingBox = new Rect(0, 0, y, x);
+    rng = new Random();
     //score
   }
 
@@ -129,7 +132,7 @@ public class GameField {
 
   public void addShip(){
     // FIXME: 11/16/23 How to know the X position of the ship, change new Rect().
-    Ship ship = new Ship(new Rect(), this, boundingBox.height()/2, boundingBox.right+30);
+     ship = new Ship(new Rect(), this, boundingBox.height()/2, boundingBox.right+30);
 
   }
 
@@ -166,12 +169,15 @@ public class GameField {
 
   public void addEnemies() {
     boolean intersection;
+    Enemy enemy;
     do {
       intersection = false;
 //      enemy.setyPosition(
 //          rng.nextInt());
+      int h = boundingBox.height();
+      int w = boundingBox.width();
 // FIXME: 11/9/23 How many enemies I'll create on each level?, max rng number?
-      Enemy enemy = new Enemy(this, boundingBox.top + rng.nextInt(boundingBox.height()),
+      enemy = new Enemy(this, boundingBox.top + rng.nextInt(boundingBox.height()),
           boundingBox.left + boundingBox.width()/2 + rng.nextInt((boundingBox.width() / 2)));
       for (Enemy nmy : enemies) {
         if (nmy.inside(enemy.getEnemyBox())) {

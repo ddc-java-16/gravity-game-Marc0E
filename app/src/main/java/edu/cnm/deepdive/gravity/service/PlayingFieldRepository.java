@@ -43,6 +43,7 @@ public class PlayingFieldRepository {
     } // TODO: 11/16/23 Check to see if the game has ended.
     ticker = BehaviorSubject.createDefault(true);
     return ticker
+        .doAfterTerminate(() -> ticker = null)
         .filter(Boolean.TRUE::equals)
         .delay(100, TimeUnit.MILLISECONDS)
         .observeOn(refresh)
@@ -53,12 +54,13 @@ public class PlayingFieldRepository {
   private boolean tick(boolean running){
     boolean result;
     gameField.update();
-
     if (gameField.isGameOver()) {
       ticker.onComplete();
       result = false;
-    } else {
+    } else if(ticker != null && !ticker.hasComplete()) {
       ticker.onNext(true);
+      result = true;
+    } else {
       result = true;
     }
     return result;
@@ -69,7 +71,7 @@ public class PlayingFieldRepository {
   }
 
   public void create() {
-    gameField = new GameField();
+    gameField = new GameField(500, 300);
 
   }
 
@@ -125,7 +127,6 @@ public class PlayingFieldRepository {
     if (ticker != null && ! ticker.hasComplete()){
       ticker.onComplete();
     }
-    ticker = null;
   }
 
 
