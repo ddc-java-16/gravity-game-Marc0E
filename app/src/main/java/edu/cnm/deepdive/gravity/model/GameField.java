@@ -93,6 +93,8 @@ public class GameField {
   }
 
   public void update() {
+
+    System.out.println(gravity); // FIXME: 11/17/23 Test for gravity changes.
     meteorDestroyed.clear();
     enemiesDestroyed.clear();
     for (ListIterator<Meteor> iterator = meteors.listIterator(); iterator.hasNext(); ) {
@@ -233,5 +235,9 @@ public class GameField {
 
   private void computeTiming() {
     secondsPerTick = Math.pow(TIMING_OFFSET - (level - 1) * TIMING_LEVEL_MULTIPLIER, level - 1);
+  }
+
+  public void setGravity(double gravity) {
+    this.gravity = gravity;
   }
 }

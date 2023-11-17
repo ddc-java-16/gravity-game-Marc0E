@@ -23,6 +23,7 @@
     android:id="@+id/pause"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_dynamic_spacing"
     android:background="@drawable/ic_pause"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
@@ -90,6 +91,7 @@
     android:textColor="@color/text_color"
     android:tooltipText="Counter"
     android:fontFamily="@font/font_family"
+    android:layout_margin="@dimen/half_dynamic_spacing"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toStartOf="@id/counter"
     android:text="Enemies: "/>
@@ -102,6 +104,7 @@
     android:textColor="@color/text_color"
     android:tooltipText="Counter"
     android:fontFamily="@font/font_family"
+    android:layout_margin="@dimen/half_dynamic_spacing"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toStartOf="@id/level_text"
     tools:text="5"/>
@@ -111,8 +114,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/text_color"
-    android:text="Level: "
+    android:text="@string/level"
     android:fontFamily="@font/font_family"
+    android:layout_margin="@dimen/half_dynamic_spacing"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toStartOf="@id/level"
     />
@@ -123,6 +127,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/text_color"
+    android:layout_margin="@dimen/half_dynamic_spacing"
     android:layout_marginEnd="20dp"
     android:tooltipText="Counter"
     android:fontFamily="@font/font_family"
@@ -138,7 +143,7 @@
     app:layout_constraintStart_toStartOf="@id/angle"
     android:fontFamily="@font/font_family"
     android:textColor="@color/text_color"
-    android:text="@string/angle"
+    android:text="@string/angle"/>
 
   <com.google.android.material.slider.Slider
     android:id="@+id/angle"
@@ -150,6 +155,7 @@
     app:tickColor="@color/text_color"
     app:trackColor="@color/primary_color"
     app:thumbColor="@color/text_color"
+    android:layout_margin="@dimen/half_dynamic_spacing"
     android:valueFrom="0"
     android:stepSize="1.0"
     android:valueTo="90"
@@ -163,7 +169,7 @@
     app:layout_constraintStart_toStartOf="@id/velocity"
     android:fontFamily="@font/font_family"
     android:textColor="@color/text_color"
-    android:text="@string/velocity"
+    android:text="@string/velocity"/>
 
   <com.google.android.material.slider.Slider
     android:id="@+id/velocity"
@@ -175,6 +181,7 @@
     app:tickColor="@color/text_color"
     app:trackColor="@color/primary_color"
     app:thumbColor="@color/text_color"
+    android:layout_margin="@dimen/half_dynamic_spacing"
     android:valueFrom="0"
     android:stepSize="1.0"
     android:valueTo="90"

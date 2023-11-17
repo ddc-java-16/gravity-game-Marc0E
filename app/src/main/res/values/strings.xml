@@ -50,17 +50,20 @@
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="velocity">Velocity:</string>
   <string name="angle">Angle:</string>
+  <string name="level">Level:</string>
 
 
   <string-array name="gravity_array">
+    <item>"Moon"</item>
     <item>"Mercury"</item>
-    <item>"Venus"</item>
-    <item>"Earth"</item>
     <item>"Mars"</item>
-    <item>"Jupiter"</item>
-    <item>"Saturn"</item>
     <item>"Uranus"</item>
+    <item>"Venus"</item>
+    <item>"Saturn"</item>
+    <item>"Earth"</item>
     <item>"Neptune"</item>
+    <item>"Jupiter"</item>
+    <item>"Sun"</item>
   </string-array>
 
 </resources>

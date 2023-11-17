@@ -22,6 +22,7 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
   private final MutableLiveData<GameField> gameField;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
+  private double gravity;
 
   @Inject
    GameFieldViewModel(@ApplicationContext Context context, PlayingFieldRepository playingFieldRepository) {
@@ -82,4 +83,7 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
     this.throwable.postValue(throwable);
   }
 
+  public void setGravity(double gravity) {
+    playingFieldRepository.setGravity(gravity);
+  }
 }

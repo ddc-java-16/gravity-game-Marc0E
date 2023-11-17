@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -80,15 +81,45 @@ public class GameActivity extends AppCompatActivity {
     binding.gravity.setOnItemSelectedListener(new OnItemSelectedListener() {
       @Override
       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String value = binding.gravity.getOnItemSelectedListener().toString();
+        String value = binding.gravity.getSelectedItem().toString();
         System.out.println(value);
-
-
+        switch (value) {
+          case "Moon":
+            gameFieldViewModel.setGravity(1.6);
+            break;
+          case "Mercury":
+            gameFieldViewModel.setGravity(3.7);
+            break;
+          case "Mars":
+            gameFieldViewModel.setGravity(3.7);
+            break;
+          case "Uranus":
+            gameFieldViewModel.setGravity(8.7);
+            break;
+          case "Venus":
+            gameFieldViewModel.setGravity(8.9);
+            break;
+          case "Saturn":
+            gameFieldViewModel.setGravity(9);
+            break;
+          case "Earth":
+            gameFieldViewModel.setGravity(9.8);
+            break;
+          case "Neptune":
+            gameFieldViewModel.setGravity(11);
+            break;
+          case "Jupiter":
+            gameFieldViewModel.setGravity(23.1);
+            break;
+          case "Sun":
+            gameFieldViewModel.setGravity(274);
+            break;
+        }
       }
 
       @Override
       public void onNothingSelected(AdapterView<?> parent) {
-
+        gameFieldViewModel.setGravity(9.8);
       }
     });
 

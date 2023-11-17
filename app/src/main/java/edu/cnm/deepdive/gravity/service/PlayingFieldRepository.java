@@ -23,7 +23,6 @@ public class PlayingFieldRepository {
   private final Scheduler moveMeteors;
   private final Scheduler projectile;
   private final Scheduler refresh;
-
   private Subject<Boolean> ticker;
 
   @Inject
@@ -75,10 +74,23 @@ public class PlayingFieldRepository {
 
   }
 
-
-  public void stop() {
-
+  public GameField getGameField() {
+    return gameField;
   }
+
+  private void clearTicker(){
+    if (ticker != null && ! ticker.hasComplete()){
+      ticker.onComplete();
+    }
+  }
+
+  public void setGravity(double gravity){
+    gameField.setGravity(gravity);
+  }
+
+//  public void stop() {
+//
+//  }
 
   public void timekeeper() {
     // TODO: 11/1/23 Timer in charge of movement of objects.
@@ -117,16 +129,6 @@ public class PlayingFieldRepository {
 
   public void shipIntersection(){
 
-  }
-
-  public GameField getGameField() {
-    return gameField;
-  }
-
-  private void clearTicker(){
-    if (ticker != null && ! ticker.hasComplete()){
-      ticker.onComplete();
-    }
   }
 
 
