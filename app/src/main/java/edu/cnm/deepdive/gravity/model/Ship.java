@@ -2,6 +2,7 @@ package edu.cnm.deepdive.gravity.model;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.annotations.Expose;
@@ -30,29 +31,29 @@ public class Ship {
   private double flyingTime;
   private double gravity;
 
-  public Ship(Rect ship, GameField gameField, int y, int x) {
+  public Ship(GameField gameField, int y, int x) {
     // FIXME: 11/9/23 Check if this is correct
     //ship = new Rect(0, gameField.getBoundingBox().top/2,0,0);
     this.gameField = gameField;
     positionX = x;
     positionY = y;
     computeShipBox();
-    this.shipBox = ship; // FIXME: 11/13/23 Do I need this?
   }
 
   private void computeShipBox() {
     shipBox = new Rect(positionX - SHIP_SIZE/2, positionY - SHIP_SIZE/2, positionX+SHIP_SIZE/2, positionY+SHIP_SIZE/2);
+    Log.d(getClass().getSimpleName(), shipBox.toString());
   }
 
   public void moveUp(){
     if(positionY - 1 - SHIP_SIZE/2 >= gameField.getBoundingBox().top){
-      yPosition--;
+      positionY--;
       computeShipBox();
     }
   }
   public void moveDown(){
     if((positionY + 1 - SHIP_SIZE/2 < gameField.getBoundingBox().bottom)) {
-      yPosition++;
+      positionY++;
       computeShipBox();
     }
   }
@@ -69,13 +70,15 @@ public class Ship {
   public Projectile fire(){
 
     computeTrajectory(velocity);
-    Projectile projectile = new Projectile(shipBox.height(),xVelocity, yVelocity, gravity, gameField);
+    // FIXME: 11/18/23 Pass x and y of ship
+    Projectile projectile = new Projectile(xVelocity, yVelocity, gravity, gameField);
+    projectile.fire();
     return projectile;
     //projectile.fire(shipBox.height(),xVelocity, yVelocity, gravity);
   }
 
   public boolean canFire(Rect project){
-    return project.isEmpty(); // FIXME: 11/8/23 What would be the best way to determine if ship can fire another projectile or not.
+    return !project.isEmpty(); // FIXME: 11/8/23 What would be the best way to determine if ship can fire another projectile or not.
   }
 
 
@@ -107,12 +110,23 @@ public class Ship {
     this.gravity = gravity;
   }
 
+  public int getPositionX() {
+    return positionX;
+  }
 
+  public int getPositionY() {
+    return positionY;
+  }
 
+  public void setPositionY(int positionY) {
+    this.positionY = positionY;
+    computeShipBox();
+  }
 
-
-
-
+  public void setPositionX(int positionX) {
+    this.positionX = positionX;
+    computeShipBox();
+  }
 
 
 

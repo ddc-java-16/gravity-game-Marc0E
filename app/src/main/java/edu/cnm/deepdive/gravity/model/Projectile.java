@@ -2,6 +2,7 @@ package edu.cnm.deepdive.gravity.model;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.annotations.Expose;
@@ -33,17 +34,20 @@ public class Projectile {
     return positionY;
   }
 
-  public Projectile(int shipPosition, double xVelocity, double  yVelocity, double gravity, GameField gameField) {
+  public Projectile(double xVelocity, double  yVelocity, double gravity, GameField gameField) {
     // TODO: 11/13/23 xposition, yposition, gameFiled, xvelocity and yvelocity.
-    this.shipPosition = shipPosition;
     this.xVelocity = xVelocity;
     this.yVelocity = yVelocity;
     this.gravity = gravity;
     this.gameField = gameField;
+    positionX = gameField.getShip().getPositionX();
+    positionY = gameField.getShip().getPositionY();
+    computeProjectileBox();
 
   }
   private void computeProjectileBox() {
     projectileBox = new Rect(positionX - PROJECTILE_SIZE/2, positionY - PROJECTILE_SIZE/2, positionX+PROJECTILE_SIZE/2, positionY+PROJECTILE_SIZE/2);
+    Log.d(getClass().getSimpleName(), projectileBox.toString());
   }
   
 
@@ -55,20 +59,22 @@ public class Projectile {
     return projectileBox.intersect(enemy);
   }
   
-  public int fire(){
+  public void fire(){
     if (gameField.getShip().canFire(projectileBox)) {
+      shipPosition = gameField.getShip().getPositionY();
       double positionX =
           xVelocity * flyingTime; // TODO: 11/2/23 Add a loop to increment the position.
       double positionY =
           (shipPosition + yVelocity) * flyingTime + (0.5 * gravity * Math.pow(flyingTime, 2));
       projectileBox.inset((int) positionX, (int) positionY); // FIXME: 11/9/23 Check if cast is the  best option for this.
+      updatePosition();
     }
-    return 0; // FIXME: 11/8/23  
   }
   public void updatePosition(){
     positionX += xVelocity;
     positionY += yVelocity;
     yVelocity += gameField.getGravity();
+    computeProjectileBox();
   }
 
 

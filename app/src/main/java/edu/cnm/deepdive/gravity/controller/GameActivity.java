@@ -68,14 +68,17 @@ public class GameActivity extends AppCompatActivity {
           gameField = field;
           binding.level.setText(String.valueOf(gameField.getLevel()));
           binding.counter.setText(String.valueOf(gameField.getCounter()));
-          binding.play.setOnClickListener((view) -> gameFieldViewModel.run());
-          binding.pause.setOnClickListener((view) -> gameFieldViewModel.paused());
+          // TODO: 11/18/23 Pass updated gamefield to a view to render, create a subclass of view that's gonna render.
         });
+    binding.play.setOnClickListener((view) -> gameFieldViewModel.run());
+    binding.pause.setOnClickListener((view) -> gameFieldViewModel.paused());
+    binding.moveUp.setOnClickListener((view) -> gameFieldViewModel.shipMoveUp());
+    binding.moveDown.setOnClickListener((view) -> gameFieldViewModel.shipMoveDown());
+    binding.shoot.setOnClickListener((view) -> gameFieldViewModel.shoot());
+     
 
+    //getScreenSize();
 
-    getScreenSize();
-    //moveUp = findViewById(R.id.move_up);
-    //moveUp.setOnClickListener((view) -> gameFieldViewModel.run());
     binding.gravity.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
         getResources().getStringArray(R.array.gravity_array)));
     binding.gravity.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -87,10 +90,7 @@ public class GameActivity extends AppCompatActivity {
           case "Moon":
             gameFieldViewModel.setGravity(1.6);
             break;
-          case "Mercury":
-            gameFieldViewModel.setGravity(3.7);
-            break;
-          case "Mars":
+          case "Mercury", "Mars":
             gameFieldViewModel.setGravity(3.7);
             break;
           case "Uranus":
@@ -115,6 +115,7 @@ public class GameActivity extends AppCompatActivity {
             gameFieldViewModel.setGravity(274);
             break;
         }
+
       }
 
       @Override

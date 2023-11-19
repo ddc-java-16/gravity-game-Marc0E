@@ -35,6 +35,7 @@ public class GameField {
   public GameField(int x, int y) {
     this.level = 0;
     this.counter = 0;
+    ship = new Ship(this, 40, 40);
     enemiesDestroyed = new LinkedList<>();
     meteorDestroyed = new LinkedList<>();
     meteors = new LinkedList<>();
@@ -134,7 +135,7 @@ public class GameField {
 
   public void addShip(){
     // FIXME: 11/16/23 How to know the X position of the ship, change new Rect().
-     ship = new Ship(new Rect(), this, boundingBox.height()/2, boundingBox.right+30);
+     ship = new Ship(this, boundingBox.height()/2, boundingBox.right+30);
 
   }
 
@@ -144,6 +145,12 @@ public class GameField {
 
   public void shipMoveDown() {
     ship.moveDown();
+  }
+
+  public void shoot(){
+    ship.setAngle(45);
+    ship.setVelocity(40); // FIXME: 11/18/23 Get velocity from input.
+    ship.fire();
   }
 
   public void addMeteor() {

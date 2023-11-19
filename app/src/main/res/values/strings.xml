@@ -51,6 +51,7 @@
   <string name="velocity">Velocity:</string>
   <string name="angle">Angle:</string>
   <string name="level">Level:</string>
+  <string name="enemies">Enemies:</string>
 
 
   <string-array name="gravity_array">

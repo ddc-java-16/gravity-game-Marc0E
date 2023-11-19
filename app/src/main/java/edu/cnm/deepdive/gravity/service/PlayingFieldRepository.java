@@ -1,9 +1,11 @@
 package edu.cnm.deepdive.gravity.service;
 
 import android.content.Context;
+import android.graphics.Rect;
 import androidx.lifecycle.MutableLiveData;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import edu.cnm.deepdive.gravity.model.GameField;
+import edu.cnm.deepdive.gravity.model.Ship;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
@@ -19,6 +21,7 @@ import javax.inject.Singleton;
 public class PlayingFieldRepository {
 
   private GameField gameField;
+  private Ship ship;
   private final Scheduler moveShip;
   private final Scheduler moveMeteors;
   private final Scheduler projectile;
@@ -71,6 +74,7 @@ public class PlayingFieldRepository {
 
   public void create() {
     gameField = new GameField(500, 300);
+    // TODO: 11/18/23 Create ship.
 
   }
 
@@ -86,6 +90,16 @@ public class PlayingFieldRepository {
 
   public void setGravity(double gravity){
     gameField.setGravity(gravity);
+  }
+
+  public void shipMoveUp(){
+    gameField.shipMoveUp();
+  }
+  public void shipMoveDown(){
+    gameField.shipMoveDown();
+  }
+  public void shoot(){
+    gameField.shoot();
   }
 
 //  public void stop() {

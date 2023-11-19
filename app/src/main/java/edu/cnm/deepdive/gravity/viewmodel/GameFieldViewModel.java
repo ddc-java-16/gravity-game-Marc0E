@@ -86,4 +86,16 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
   public void setGravity(double gravity) {
     playingFieldRepository.setGravity(gravity);
   }
+
+  public void shipMoveUp(){
+    playingFieldRepository.shipMoveUp();
+  }
+
+  public void shipMoveDown(){
+    playingFieldRepository.shipMoveDown();
+  }
+
+  public void shoot(){
+    playingFieldRepository.shoot();
+  }
 }

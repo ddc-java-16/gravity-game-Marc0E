@@ -15,12 +15,16 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/half_dynamic_spacing"
+    android:minWidth="40dp"
+    android:minHeight="40dp"
     android:background="@drawable/ic_play"
     app:layout_constraintEnd_toStartOf="@id/pause"
     app:layout_constraintTop_toTopOf="parent"/>
 
   <ImageButton
     android:id="@+id/pause"
+    android:minWidth="40dp"
+    android:minHeight="40dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/half_dynamic_spacing"
@@ -60,10 +64,10 @@
     android:layout_width="40dp"
     android:layout_height="40dp"
     android:id="@+id/profile_photo"
-    app:layout_constraintTop_toTopOf="parent"
     android:layout_marginEnd="20dp"
     android:background="@android:drawable/ic_menu_gallery"
-    app:layout_constraintEnd_toStartOf="@id/counter_text"/>
+    app:layout_constraintEnd_toStartOf="@id/counter_text"
+    app:layout_constraintTop_toTopOf="@id/play"/>
 
   <ImageView
     android:layout_width="100dp"
@@ -90,11 +94,11 @@
     android:layout_height="wrap_content"
     android:textColor="@color/text_color"
     android:tooltipText="Counter"
-    android:fontFamily="@font/font_family"
+    android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
-    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="@id/play"
     app:layout_constraintEnd_toStartOf="@id/counter"
-    android:text="Enemies: "/>
+    android:text="@string/enemies"/>
 
   <TextView
     android:id="@+id/counter"
@@ -103,10 +107,10 @@
     android:layout_marginEnd="20dp"
     android:textColor="@color/text_color"
     android:tooltipText="Counter"
-    android:fontFamily="@font/font_family"
+    android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
-    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toStartOf="@id/level_text"
+    app:layout_constraintBottom_toBottomOf="@id/play"
     tools:text="5"/>
 
   <TextView
@@ -115,11 +119,10 @@
     android:layout_height="wrap_content"
     android:textColor="@color/text_color"
     android:text="@string/level"
-    android:fontFamily="@font/font_family"
+    android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/level"
-    />
+    app:layout_constraintBottom_toBottomOf="@id/play"
+    app:layout_constraintEnd_toStartOf="@id/level"/>
 
 
   <TextView
@@ -130,10 +133,37 @@
     android:layout_margin="@dimen/half_dynamic_spacing"
     android:layout_marginEnd="20dp"
     android:tooltipText="Counter"
-    android:fontFamily="@font/font_family"
-    app:layout_constraintTop_toTopOf="parent"
+    android:fontFamily="@font/sports"
     app:layout_constraintEnd_toStartOf="@id/play"
+    app:layout_constraintBottom_toBottomOf="@id/play"
     tools:text="1"/>
+
+  <TextView
+    android:id="@+id/velocity_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toTopOf="@id/velocity"
+    app:layout_constraintStart_toStartOf="@id/velocity"
+    android:fontFamily="@font/font_family"
+    android:textColor="@color/text_color"
+    android:text="@string/velocity"/>
+
+  <com.google.android.material.slider.Slider
+    android:id="@+id/velocity"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintStart_toEndOf="@id/gravity"
+    app:layout_constraintBottom_toBottomOf="@id/angle_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:tickColor="@color/text_color"
+    app:trackColor="@color/primary_color"
+    app:thumbColor="@color/text_color"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    android:valueFrom="0"
+    android:stepSize="1.0"
+    android:valueTo="90"
+    android:theme="@style/Theme.MaterialComponents.DayNight"/>
+
 
   <TextView
     android:id="@+id/angle_text"
@@ -161,31 +191,6 @@
     android:valueTo="90"
     android:theme="@style/Theme.MaterialComponents.DayNight"/>
 
-  <TextView
-    android:id="@+id/velocity_text"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintBottom_toTopOf="@id/velocity"
-    app:layout_constraintStart_toStartOf="@id/velocity"
-    android:fontFamily="@font/font_family"
-    android:textColor="@color/text_color"
-    android:text="@string/velocity"/>
-
-  <com.google.android.material.slider.Slider
-    android:id="@+id/velocity"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    app:layout_constraintStart_toEndOf="@id/gravity"
-    app:layout_constraintBottom_toBottomOf="@id/angle_text"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:tickColor="@color/text_color"
-    app:trackColor="@color/primary_color"
-    app:thumbColor="@color/text_color"
-    android:layout_margin="@dimen/half_dynamic_spacing"
-    android:valueFrom="0"
-    android:stepSize="1.0"
-    android:valueTo="90"
-    android:theme="@style/Theme.MaterialComponents.DayNight"/>
 
   <Spinner
     android:id="@+id/gravity"
