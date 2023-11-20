@@ -82,7 +82,6 @@ public class GameField {
       addEnemies();
     }
     addShip();
-
     addMeteor();
   }
 
@@ -94,7 +93,10 @@ public class GameField {
   }
 
   public void update() {
-
+    if(!meteors.isEmpty()) {
+      meteor = meteors.get(meteors.size()-1); // FIXME: 11/20/23 Is there a better way to do it?
+      meteor.updatePosition(level, meteors.get(meteors.size() - 1));
+    }
     System.out.println(gravity); // FIXME: 11/17/23 Test for gravity changes.
     meteorDestroyed.clear();
     enemiesDestroyed.clear();
@@ -185,7 +187,6 @@ public class GameField {
 //          rng.nextInt());
       int h = boundingBox.height();
       int w = boundingBox.width();
-// FIXME: 11/9/23 How many enemies I'll create on each level?, max rng number?
       enemy = new Enemy(this, boundingBox.top + rng.nextInt(boundingBox.height()),
           boundingBox.left + boundingBox.width()/2 + rng.nextInt((boundingBox.width() / 2)));
       for (Enemy nmy : enemies) {

@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.gravity.model;
 
 import android.graphics.Rect;
+import android.util.Log;
 import java.security.SecureRandom;
 import java.util.Random;
 
@@ -17,8 +18,15 @@ public class Meteor {
 
   public Meteor(GameField gameField, int positionX, int positionY){
     this.gameField = gameField;
-    this.meteorBox = new Rect(positionX, positionY, positionX + METEOR_SIZE, positionY - METEOR_SIZE);
+    xPosition = positionX;
+    yPosition = positionY;
+    computeMeteor(positionX, positionY);
 
+  }
+
+  private void computeMeteor(int positionX, int positionY) {
+    this.meteorBox = new Rect(positionX, positionY, positionX + METEOR_SIZE, positionY - METEOR_SIZE);
+    Log.d(getClass().getSimpleName(), meteorBox.toString());
   }
 
   public boolean inside(Rect meteor){
@@ -33,8 +41,10 @@ public class Meteor {
 
   }
 
-  public void updatePosition(int increment){
+  public void updatePosition(int increment, Meteor meteor){
+    this.meteorBox = meteor.getMeteorBox(); // FIXME: 11/20/23 Is there a better way to do it?
     xPosition-= increment;
+    computeMeteor(xPosition, yPosition);
   }
 
   public int getyPosition() {

@@ -70,6 +70,7 @@ public class GameActivity extends AppCompatActivity {
           binding.counter.setText(String.valueOf(gameField.getCounter()));
           // TODO: 11/18/23 Pass updated gamefield to a view to render, create a subclass of view that's gonna render.
         });
+
     binding.play.setOnClickListener((view) -> gameFieldViewModel.run());
     binding.pause.setOnClickListener((view) -> gameFieldViewModel.paused());
     binding.moveUp.setOnClickListener((view) -> gameFieldViewModel.shipMoveUp());

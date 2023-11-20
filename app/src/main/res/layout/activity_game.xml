@@ -35,7 +35,10 @@
   <Button
     android:id="@+id/move_up"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="0dp"
+    android:fontFamily="@font/sports"
+    android:textColor="@color/text_color"
+    android:background="transparent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toTopOf="@id/shoot"
@@ -45,16 +48,21 @@
     android:id="@+id/shoot"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="transparent"
     android:text="Shoot"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
+    android:fontFamily="@font/sports"
+    android:textColor="@color/text_color"
     app:layout_constraintBottom_toBottomOf="parent"
-    />
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
 
   <Button
     android:id="@+id/move_down"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:fontFamily="@font/sports"
+    android:textColor="@color/text_color"
+    android:background="transparent"
     app:layout_constraintTop_toBottomOf="@id/shoot"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +87,17 @@
     android:background="@drawable/meteor"/>
 
   <ImageView
+    android:id="@+id/enemy"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_marginEnd="140dp"
+    android:background="@drawable/enemy"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.369"/>
+
+  <ImageView
     android:layout_width="80dp"
     android:layout_height="40dp"
     android:id="@+id/ship"
@@ -87,6 +106,17 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toEndOf="@id/shoot"
     android:background="@drawable/ship"/>
+
+
+  <ImageView
+    android:id="@+id/projectile"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    android:background="@drawable/projectile8"
+    app:layout_constraintStart_toEndOf="@id/ship"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
   <TextView
     android:id="@+id/counter_text"

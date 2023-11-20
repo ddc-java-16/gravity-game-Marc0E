@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity  {
 
     exitButton = findViewById(R.id.exit);
     exitButton.setOnClickListener((v) -> {
-
+      finish();
     });
   }
 
