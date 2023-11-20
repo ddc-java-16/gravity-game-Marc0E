@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import dagger.hilt.android.lifecycle.HiltViewModel;
@@ -19,7 +20,6 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
 
   private static final String TAG = GameFieldViewModel.class.getSimpleName();
   private final PlayingFieldRepository playingFieldRepository;
-  private final MutableLiveData<GameField> gameField;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
   private double gravity;
@@ -27,7 +27,6 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
   @Inject
    GameFieldViewModel(@ApplicationContext Context context, PlayingFieldRepository playingFieldRepository) {
     this.playingFieldRepository = playingFieldRepository;
-    this.gameField = new MutableLiveData<>();
     this.throwable = new MutableLiveData<>();
     this.pending = new CompositeDisposable();
     create();
@@ -35,7 +34,6 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
 
   public void create(){
     playingFieldRepository.create();
-    gameField.postValue(playingFieldRepository.getGameField());
   }
 
   public void run(){
@@ -44,7 +42,6 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
         .subscribe(
             (running) -> {
               Log.d(TAG, "Refresh; Running = " + running);
-              gameField.postValue(playingFieldRepository.getGameField());
             },
             this::postThrowable,
             () -> {
@@ -58,11 +55,11 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
     playingFieldRepository.pause();
   }
 
-  public MutableLiveData<GameField> getGameField() {
-    return gameField;
+  public LiveData<GameField> getGameField() {
+    return playingFieldRepository.getLiveGameField();
   }
 
-  public MutableLiveData<Throwable> getThrowable() {
+  public LiveData<Throwable> getThrowable() {
     return throwable;
   }
 

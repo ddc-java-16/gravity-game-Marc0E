@@ -2,6 +2,7 @@ package edu.cnm.deepdive.gravity.service;
 
 import android.content.Context;
 import android.graphics.Rect;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import edu.cnm.deepdive.gravity.model.GameField;
@@ -26,6 +27,7 @@ public class PlayingFieldRepository {
   private final Scheduler moveMeteors;
   private final Scheduler projectile;
   private final Scheduler refresh;
+  private final MutableLiveData<GameField> liveGameField;
   private Subject<Boolean> ticker;
 
   @Inject
@@ -34,6 +36,7 @@ public class PlayingFieldRepository {
     moveMeteors = Schedulers.single();
     projectile = Schedulers.single();
     refresh = Schedulers.single();
+    liveGameField = new MutableLiveData<>();
 
 
   }
@@ -65,6 +68,7 @@ public class PlayingFieldRepository {
     } else {
       result = true;
     }
+    liveGameField.postValue(gameField);
     return result;
   }
 
@@ -74,6 +78,7 @@ public class PlayingFieldRepository {
 
   public void create() {
     gameField = new GameField(500, 300);
+    liveGameField.postValue(gameField);
     // TODO: 11/18/23 Create ship.
 
   }
@@ -94,15 +99,22 @@ public class PlayingFieldRepository {
 
   public void shipMoveUp(){
     gameField.shipMoveUp();
+    liveGameField.postValue(gameField);
   }
   public void shipMoveDown(){
     gameField.shipMoveDown();
+    liveGameField.postValue(gameField);
   }
   public void shoot(){
     gameField.shoot();
+    liveGameField.postValue(gameField);
   }
 
-//  public void stop() {
+  public LiveData<GameField> getLiveGameField() {
+    return liveGameField;
+  }
+
+  //  public void stop() {
 //
 //  }
 

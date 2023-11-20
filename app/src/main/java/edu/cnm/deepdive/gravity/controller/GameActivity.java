@@ -65,7 +65,11 @@ public class GameActivity extends AppCompatActivity {
     gameFieldViewModel
         .getGameField()
         .observe(this, (field) -> {
-          gameField = field;
+          if (gameField != field) {
+            binding.gameView.setGameField(field);
+            gameField = field;
+          }
+          binding.gameView.invalidate();
           binding.level.setText(String.valueOf(gameField.getLevel()));
           binding.counter.setText(String.valueOf(gameField.getCounter()));
           // TODO: 11/18/23 Pass updated gamefield to a view to render, create a subclass of view that's gonna render.
@@ -76,7 +80,6 @@ public class GameActivity extends AppCompatActivity {
     binding.moveUp.setOnClickListener((view) -> gameFieldViewModel.shipMoveUp());
     binding.moveDown.setOnClickListener((view) -> gameFieldViewModel.shipMoveDown());
     binding.shoot.setOnClickListener((view) -> gameFieldViewModel.shoot());
-     
 
     //getScreenSize();
 
@@ -130,11 +133,11 @@ public class GameActivity extends AppCompatActivity {
   private void getScreenSize() {
     Point size = new Point();
     WindowManager w = getWindowManager();
-    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)    {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
       w.getDefaultDisplay().getSize(size);
       Measuredwidth = size.x;
       Measuredheight = size.y;
-    }else{
+    } else {
       Display d = w.getDefaultDisplay();
       Measuredwidth = d.getWidth();
       Measuredheight = d.getHeight();

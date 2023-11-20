@@ -42,6 +42,8 @@ public class GameField {
     enemies = new LinkedList<>();
     boundingBox = new Rect(0, 0, y, x);
     rng = new Random();
+    addMeteor();
+    addEnemies();
     //score
   }
 
@@ -68,6 +70,10 @@ public class GameField {
 
   public double getGravity() {
     return gravity;
+  }
+
+  public Meteor getMeteor() {
+    return meteor = meteors.get(meteors.size()-1); // FIXME: 11/20/23 
   }
 
   public double getSecondsPerTick() {
@@ -248,4 +254,5 @@ public class GameField {
   public void setGravity(double gravity) {
     this.gravity = gravity;
   }
+
 }
