@@ -13,14 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import edu.cnm.deepdive.gravity.R;
+import edu.cnm.deepdive.gravity.model.Enemy;
 import edu.cnm.deepdive.gravity.model.GameField;
+import edu.cnm.deepdive.gravity.model.Meteor;
+import java.util.ListIterator;
 
 public class GameFieldView extends View {
 
   private GameField gameField;
   private Drawable shipImage;
   private Drawable meteorImage;
-  private Rect destination = new Rect();
+  private Drawable projectileImage;
+  private Drawable enemyImage;
+  private final Rect destination = new Rect();
 
 
   public GameFieldView(Context context) {
@@ -63,19 +68,35 @@ public class GameFieldView extends View {
           (int) (gameField.getShip().getShipBox().right * horizontalScale),
           (int) (gameField.getShip().getShipBox().bottom * verticalScale));
       shipImage.setBounds(destination);
+      projectileImage.setBounds(destination);
       shipImage.draw(canvas);
+      projectileImage.draw(canvas);
 
-      destination.set((int) (gameField.getMeteor().getMeteorBox().left * horizontalScale),
-          (int) (gameField.getMeteor().getMeteorBox().top * verticalScale),
-          (int) (gameField.getMeteor().getMeteorBox().right * horizontalScale),
-          (int) (gameField.getMeteor().getMeteorBox().bottom * verticalScale));
-      meteorImage.setBounds(destination);
-      meteorImage.draw(canvas);
-      // TODO: 11/20/23 Draw the rest of the objects.
+      for (ListIterator<Meteor> iterator = gameField.getMeteors().listIterator(); iterator.hasNext(); ) {
+        Meteor meteor = iterator.next();
+        destination.set((int) (meteor.getMeteorBox().left * horizontalScale),
+            (int) (meteor.getMeteorBox().top * verticalScale),
+            (int) (meteor.getMeteorBox().right * horizontalScale),
+            (int) (meteor.getMeteorBox().bottom * verticalScale));
+        meteorImage.setBounds(destination);
+        meteorImage.draw(canvas);
+      }
 
-
+      for (ListIterator<Enemy> iterator = gameField.getEnemies().listIterator(); iterator.hasNext(); ) {
+        Enemy enemy = iterator.next();
+        destination.set((int) (enemy.getEnemyBox().left * horizontalScale),
+            (int) (enemy.getEnemyBox().top * verticalScale),
+            (int) (enemy.getEnemyBox().right * horizontalScale),
+            (int) (enemy.getEnemyBox().bottom * verticalScale));
+        enemyImage.setBounds(destination);
+        enemyImage.draw(canvas);
+      }
     }
+
+    // TODO: 11/20/23 Draw the rest of the objects.
+
   }
+
 
   public GameField getGameField() {
     return gameField;
@@ -85,8 +106,11 @@ public class GameFieldView extends View {
     this.gameField = gameField;
   }
 
-  private void loadResources(Resources resources){
+  private void loadResources(Resources resources) {
     shipImage = ResourcesCompat.getDrawable(resources, R.drawable.ship, null);
+    meteorImage = ResourcesCompat.getDrawable(resources, R.drawable.meteor, null);
+    enemyImage = ResourcesCompat.getDrawable(resources, R.drawable.enemy, null);
+    projectileImage = ResourcesCompat.getDrawable(resources, R.drawable.projectile9, null);
     // TODO: 11/20/23 Load the other drawables.
   }
 }

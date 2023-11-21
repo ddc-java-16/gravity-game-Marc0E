@@ -72,6 +72,14 @@ public class GameField {
     return gravity;
   }
 
+  public List<Meteor> getMeteors() {
+    return meteors;
+  }
+
+  public List<Enemy> getEnemies() {
+    return enemies;
+  }
+
   public Meteor getMeteor() {
     return meteor = meteors.get(meteors.size()-1); // FIXME: 11/20/23 
   }
@@ -89,6 +97,7 @@ public class GameField {
     }
     addShip();
     addMeteor();
+
   }
 
   public void shipFire() {

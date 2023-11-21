@@ -46,13 +46,13 @@ public class Ship {
   }
 
   public void moveUp(){
-    if(positionY - 10 - SHIP_SIZE/2 >= gameField.getBoundingBox().top){
+    if(positionY - 20 - SHIP_SIZE/2 >= gameField.getBoundingBox().top){
       positionY--;
       computeShipBox();
     }
   }
   public void moveDown(){
-    if((positionY + 10 - SHIP_SIZE/2 < gameField.getBoundingBox().bottom)) {
+    if((positionY + 20 - SHIP_SIZE/2 < gameField.getBoundingBox().bottom)) {
       positionY++;
       computeShipBox();
     }
