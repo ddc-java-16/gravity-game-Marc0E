@@ -30,23 +30,23 @@ public class GoogleSignInService {
   private final GoogleSignInClient client;
 
   @Inject
-  GoogleSignInService(@ApplicationContext Context context){
+  GoogleSignInService(@ApplicationContext Context context) {
     Resources res = context.getResources();
     @SuppressLint("DiscouragedApi")
-        int identifier = res.getIdentifier("client_id", "string", context.getPackageName());
+    int identifier = res.getIdentifier("client_id", "string", context.getPackageName());
     String clientId = (identifier != 0) ? res.getString(identifier) : null;
     GoogleSignInOptions.Builder builder = new Builder()
         .requestEmail()
         .requestId()
         .requestProfile();
-    if(clientId != null && !clientId.isEmpty()){
+    if (clientId != null && !clientId.isEmpty()) {
       builder.requestIdToken(clientId);
     }
     client = GoogleSignIn.getClient(context, builder.build());
 
   }
 
-  public Single<GoogleSignInAccount> refresh(){
+  public Single<GoogleSignInAccount> refresh() {
     return Single
         .create((SingleEmitter<GoogleSignInAccount> emmitter) ->
             client
@@ -57,24 +57,24 @@ public class GoogleSignInService {
         .observeOn(Schedulers.io());
   }
 
-  public Single<String> refreshBearerToken(){
+  public Single<String> refreshBearerToken() {
     return refresh()
         .map(this::getBearerToken);
   }
 
-  public void startSignIn(ActivityResultLauncher<Intent> launcher){
+  public void startSignIn(ActivityResultLauncher<Intent> launcher) {
     launcher.launch(client.getSignInIntent());
   }
 
-  public Single<GoogleSignInAccount> completeSignIn(ActivityResult result){
+  public Single<GoogleSignInAccount> completeSignIn(ActivityResult result) {
     return Single
         .create((SingleEmitter<GoogleSignInAccount> emitter) -> {
-          try{
+          try {
             Task<GoogleSignInAccount> task =
                 GoogleSignIn.getSignedInAccountFromIntent(result.getData());
             GoogleSignInAccount account = task.getResult(ApiException.class);
             emitter.onSuccess(account);
-          } catch (ApiException e){
+          } catch (ApiException e) {
             emitter.onError(e);
           }
         })

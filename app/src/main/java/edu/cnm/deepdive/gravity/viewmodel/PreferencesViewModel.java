@@ -35,8 +35,8 @@ import kotlin.jvm.functions.Function1;
  * {@link Transformations#map(LiveData, Function1)} to provide {@link LiveData}-based read-only
  * access to individual preference values. This approach is of most use when an instance of a
  * {@link androidx.preference.PreferenceFragmentCompat} subclass is used to modify
- * {@link SharedPreferences}, and the preference values need to be used (but not
- * modified) in other UI controllers.
+ * {@link SharedPreferences}, and the preference values need to be used (but not modified) in other
+ * UI controllers.
  */
 @HiltViewModel
 public class PreferencesViewModel extends ViewModel implements DefaultLifecycleObserver {
@@ -44,7 +44,6 @@ public class PreferencesViewModel extends ViewModel implements DefaultLifecycleO
   private final LiveData<Boolean> selectableTextPreference;
   // TODO: 11/5/23 Game Field.
   //private final LiveData<Integer> playingFieldWidthPreference;
-
 
   // TODO Declare additional LiveData fields for individual preferences as necessary.
 

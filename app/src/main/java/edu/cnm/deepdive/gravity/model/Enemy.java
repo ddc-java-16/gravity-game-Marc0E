@@ -15,17 +15,18 @@ public class Enemy {
   public Enemy(GameField gameField, int positionY, int positionX) {
     this.gameField = gameField;
     // FIXME: 11/13/23 Check logic.
-    this.enemyBox = new Rect(positionX, positionY, positionX+ENEMY_SIZE, positionY - ENEMY_SIZE);
+    this.enemyBox = new Rect(positionX, positionY, positionX + ENEMY_SIZE, positionY - ENEMY_SIZE);
   }
 
-  public boolean inside(Rect enemy){
+  public boolean inside(Rect enemy) {
     return enemyBox.intersect(enemy);
   }
-  public Rect position(){
+
+  public Rect position() {
     throw new UnsupportedOperationException(); // FIXME: 11/8/23 Do I need more than Y position?
   }
 
-  public void move(){ // TODO: 10/24/23 Not sure if it'll move or not.
+  public void move() { // TODO: 10/24/23 Not sure if it'll move or not.
   }
 
   public Rect getEnemyBox() {

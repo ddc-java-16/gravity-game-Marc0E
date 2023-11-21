@@ -15,39 +15,45 @@ import javax.inject.Singleton;
 @Singleton
 public class UserRepository {
 
-private final UserDao userDao;
-private final GoogleSignInService signInService;
+  private final UserDao userDao;
+  private final GoogleSignInService signInService;
 
-@Inject
-  UserRepository(UserDao userDao, GoogleSignInService signInService){
-  this.userDao = userDao;
-  this.signInService = signInService;
-}
-
-public Single<User> getCurrent(){return getOrCreate().subscribeOn(Schedulers.io());}
-
-  public LiveData<User> get(long id) {return userDao.select(id);}
-
-  public LiveData<List<User>> getAll(){return userDao.select();}
-
-  public Single<User> save(User user){
-  return (
-      (user.getId() == 0)
-      ? insert(user)
-          :update(user)
-      )
-      .subscribeOn(Schedulers.io());
+  @Inject
+  UserRepository(UserDao userDao, GoogleSignInService signInService) {
+    this.userDao = userDao;
+    this.signInService = signInService;
   }
 
-  public Completable delete(User user){
-  return (
-      (user.getId() == 0)
-      ? Completable.complete()
-          : checkSafeDelete(user)
-              .flatMap(userDao:: delete)
-              .ignoreElement()
-      )
-      .subscribeOn(Schedulers.io());
+  public Single<User> getCurrent() {
+    return getOrCreate().subscribeOn(Schedulers.io());
+  }
+
+  public LiveData<User> get(long id) {
+    return userDao.select(id);
+  }
+
+  public LiveData<List<User>> getAll() {
+    return userDao.select();
+  }
+
+  public Single<User> save(User user) {
+    return (
+        (user.getId() == 0)
+            ? insert(user)
+            : update(user)
+    )
+        .subscribeOn(Schedulers.io());
+  }
+
+  public Completable delete(User user) {
+    return (
+        (user.getId() == 0)
+            ? Completable.complete()
+            : checkSafeDelete(user)
+                .flatMap(userDao::delete)
+                .ignoreElement()
+    )
+        .subscribeOn(Schedulers.io());
   }
 
   private Single<User> getOrCreate() {

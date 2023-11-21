@@ -3,9 +3,9 @@ package edu.cnm.deepdive.gravity.model;
 import android.graphics.Rect;
 import android.util.Log;
 import java.security.SecureRandom;
-import java.util.Random;
 
 public class Meteor {
+
   private Rect meteorBox;
   private final int METEOR_SIZE = 40;
   private SecureRandom rng;
@@ -15,8 +15,7 @@ public class Meteor {
   private int yPosition;
 
 
-
-  public Meteor(GameField gameField, int positionX, int positionY){
+  public Meteor(GameField gameField, int positionX, int positionY) {
     this.gameField = gameField;
     xPosition = positionX;
     yPosition = positionY;
@@ -25,25 +24,25 @@ public class Meteor {
   }
 
   private void computeMeteor(int positionX, int positionY) {
-    this.meteorBox = new Rect(positionX, positionY, positionX + METEOR_SIZE, positionY - METEOR_SIZE);
-    Log.d(getClass().getSimpleName(), meteorBox.toString());
+    this.meteorBox = new Rect(positionX - METEOR_SIZE / 2, positionY - METEOR_SIZE / 2, positionX + METEOR_SIZE / 2,
+        positionY + METEOR_SIZE / 2);
+    //Log.d(getClass().getSimpleName(), meteorBox.toString());
   }
 
-  public boolean inside(Rect meteor){
+  public boolean inside(Rect meteor) {
     return meteorBox.intersect(meteor);
   }
 
-  public boolean isInBounds(){
+  public boolean isInBounds() {
     return xPosition >= 0;
   }
 
-  public void velocity(){
+  public void velocity() {
 
   }
 
-  public void updatePosition(int increment, Meteor meteor){
-    this.meteorBox = meteor.getMeteorBox(); // FIXME: 11/20/23 Is there a better way to do it?
-    xPosition-= increment;
+  public void updatePosition(int increment) {//FIXME: 11/20/23 Is there a better way to do it?
+    xPosition -= increment; // FIXME: 11/21/23 Increment should be more than one at a time.
     computeMeteor(xPosition, yPosition);
   }
 

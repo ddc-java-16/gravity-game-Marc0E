@@ -8,6 +8,7 @@ import edu.cnm.deepdive.gravity.R;
 import edu.cnm.deepdive.gravity.databinding.FragmentScoresBinding;
 
 public class ScoresActivity extends AppCompatActivity {
+
   private FragmentScoresBinding binding;
 
   @Override

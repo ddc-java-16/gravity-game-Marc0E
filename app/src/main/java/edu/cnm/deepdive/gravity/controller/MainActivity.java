@@ -35,9 +35,8 @@ import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
 
 /**
  * Serves as a basic container activity&mdash;that is, it presents no UI elements of its own (apart
- * from an options menu), but hosts a {@link NavHostFragment} for
- * presentation of one or more {@link androidx.fragment.app.Fragment} instances, associated with a
- * navigation graph.
+ * from an options menu), but hosts a {@link NavHostFragment} for presentation of one or more
+ * {@link androidx.fragment.app.Fragment} instances, associated with a navigation graph.
  * <p>In addition to the navigation host role, this activity demonstrates the
  * handling of:</p>
  * <ul><li><p>user sign-out (initiated by selection of an options menu item), with automatic
@@ -48,7 +47,7 @@ import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
  * <li><p>key events in the permissions request flow.</p></li></ul>
  */
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
   private LoginViewModel loginViewModel;
   private UserViewModel userViewModel;
@@ -118,8 +117,7 @@ public class MainActivity extends AppCompatActivity  {
   }
 
 
-
-  private void setupNavigation(){
+  private void setupNavigation() {
 //    AppBarConfiguration config = new AppBarConfiguration.Builder(
 //        R.id.game_fragment, R.id.scores_fragment
 //    ).build();

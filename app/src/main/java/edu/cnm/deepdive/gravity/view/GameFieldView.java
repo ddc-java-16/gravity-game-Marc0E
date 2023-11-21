@@ -68,11 +68,19 @@ public class GameFieldView extends View {
           (int) (gameField.getShip().getShipBox().right * horizontalScale),
           (int) (gameField.getShip().getShipBox().bottom * verticalScale));
       shipImage.setBounds(destination);
-      projectileImage.setBounds(destination);
       shipImage.draw(canvas);
-      projectileImage.draw(canvas);
 
-      for (ListIterator<Meteor> iterator = gameField.getMeteors().listIterator(); iterator.hasNext(); ) {
+      if (gameField.getProjectile() != null) {
+        destination.set((int) (gameField.getProjectile().getProjectileBox().left * horizontalScale),
+            (int) (gameField.getProjectile().getProjectileBox().top * verticalScale),
+            (int) (gameField.getProjectile().getProjectileBox().right * horizontalScale),
+            (int) (gameField.getProjectile().getProjectileBox().bottom * verticalScale));
+        projectileImage.setBounds(destination);
+        projectileImage.draw(canvas);
+      }
+
+      for (ListIterator<Meteor> iterator = gameField.getMeteors().listIterator();
+          iterator.hasNext(); ) {
         Meteor meteor = iterator.next();
         destination.set((int) (meteor.getMeteorBox().left * horizontalScale),
             (int) (meteor.getMeteorBox().top * verticalScale),
@@ -82,7 +90,8 @@ public class GameFieldView extends View {
         meteorImage.draw(canvas);
       }
 
-      for (ListIterator<Enemy> iterator = gameField.getEnemies().listIterator(); iterator.hasNext(); ) {
+      for (ListIterator<Enemy> iterator = gameField.getEnemies().listIterator();
+          iterator.hasNext(); ) {
         Enemy enemy = iterator.next();
         destination.set((int) (enemy.getEnemyBox().left * horizontalScale),
             (int) (enemy.getEnemyBox().top * verticalScale),

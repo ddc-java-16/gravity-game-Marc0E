@@ -21,6 +21,8 @@ import javax.inject.Singleton;
 @Singleton
 public class PlayingFieldRepository {
 
+  public double setVelocity;
+  public int setAngle;
   private GameField gameField;
   private Ship ship;
   private final Scheduler moveShip;
@@ -41,9 +43,9 @@ public class PlayingFieldRepository {
 
   }
 
-  public Observable<Boolean> run(){
+  public Observable<Boolean> run() {
     clearTicker();
-    if(gameField.getLevel() == 0){
+    if (gameField.getLevel() == 0) {
       gameField.start(1);
     } // TODO: 11/16/23 Check to see if the game has ended.
     ticker = BehaviorSubject.createDefault(true);
@@ -56,13 +58,13 @@ public class PlayingFieldRepository {
   }
 
 
-  private boolean tick(boolean running){
+  private boolean tick(boolean running) {
     boolean result;
     gameField.update();
     if (gameField.isGameOver()) {
       ticker.onComplete();
       result = false;
-    } else if(ticker != null && !ticker.hasComplete()) {
+    } else if (ticker != null && !ticker.hasComplete()) {
       ticker.onNext(true);
       result = true;
     } else {
@@ -72,7 +74,7 @@ public class PlayingFieldRepository {
     return result;
   }
 
-  public void pause(){
+  public void pause() {
     clearTicker();
   }
 
@@ -87,25 +89,35 @@ public class PlayingFieldRepository {
     return gameField;
   }
 
-  private void clearTicker(){
-    if (ticker != null && ! ticker.hasComplete()){
+  private void clearTicker() {
+    if (ticker != null && !ticker.hasComplete()) {
       ticker.onComplete();
     }
   }
 
-  public void setGravity(double gravity){
+  public void setGravity(double gravity) {
     gameField.setGravity(gravity);
   }
 
-  public void shipMoveUp(){
+  public void setVelocity(double velocity) {
+    gameField.setVelocity(velocity);
+  }
+
+  public void setAngle(int angle){
+    gameField.setAngle(angle);
+  }
+
+  public void shipMoveUp() {
     gameField.shipMoveUp();
     liveGameField.postValue(gameField);
   }
-  public void shipMoveDown(){
+
+  public void shipMoveDown() {
     gameField.shipMoveDown();
     liveGameField.postValue(gameField);
   }
-  public void shoot(){
+
+  public void shoot() {
     gameField.shoot();
     liveGameField.postValue(gameField);
   }
@@ -149,11 +161,11 @@ public class PlayingFieldRepository {
     // TODO: 11/1/23 Display enemies in different positions of the screen.
   }
 
-  public void enemyIntersection(){
+  public void enemyIntersection() {
 
   }
 
-  public void shipIntersection(){
+  public void shipIntersection() {
 
   }
 

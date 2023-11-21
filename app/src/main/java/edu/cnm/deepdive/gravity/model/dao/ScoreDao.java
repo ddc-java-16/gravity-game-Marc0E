@@ -9,6 +9,7 @@ import edu.cnm.deepdive.gravity.model.entity.Score;
 import edu.cnm.deepdive.gravity.model.pojo.UserScore;
 import io.reactivex.rxjava3.core.Single;
 import java.util.List;
+
 @Dao
 public interface ScoreDao {
 

@@ -16,7 +16,6 @@ import edu.cnm.deepdive.gravity.service.GravityDatabase.Converters;
 import java.time.Instant;
 
 
-
 @Database(
     entities = {User.class, Score.class},
     views = {UserScore.class},

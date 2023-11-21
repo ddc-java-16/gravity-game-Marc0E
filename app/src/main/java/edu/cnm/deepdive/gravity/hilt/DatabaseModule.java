@@ -21,7 +21,7 @@ public class DatabaseModule {
 
   @Provides
   @Singleton
-  GravityDatabase provideLocalDatabase(@ApplicationContext Context context){
+  GravityDatabase provideLocalDatabase(@ApplicationContext Context context) {
     return Room
         .databaseBuilder(context, GravityDatabase.class, GravityDatabase.NAME)
         .addCallback(new GravityDatabase.Callback())
@@ -29,10 +29,14 @@ public class DatabaseModule {
   }
 
   @Provides
-  UserDao provideUserDao(GravityDatabase database) {return database.getUserDao();}
+  UserDao provideUserDao(GravityDatabase database) {
+    return database.getUserDao();
+  }
 
   @Provides
   @Singleton
-  ScoreDao provideScoreDao(GravityDatabase database) {return database.getScoreDao();}
+  ScoreDao provideScoreDao(GravityDatabase database) {
+    return database.getScoreDao();
+  }
 
 }

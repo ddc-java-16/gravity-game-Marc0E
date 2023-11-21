@@ -12,6 +12,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 import edu.cnm.deepdive.gravity.model.GameField;
 import edu.cnm.deepdive.gravity.service.PlayingFieldRepository;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import java.sql.Struct;
 import javax.inject.Inject;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,20 +24,23 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
   private double gravity;
+  private double velocity;
+  private int angle;
 
   @Inject
-   GameFieldViewModel(@ApplicationContext Context context, PlayingFieldRepository playingFieldRepository) {
+  GameFieldViewModel(@ApplicationContext Context context,
+      PlayingFieldRepository playingFieldRepository) {
     this.playingFieldRepository = playingFieldRepository;
     this.throwable = new MutableLiveData<>();
     this.pending = new CompositeDisposable();
     create();
   }
 
-  public void create(){
+  public void create() {
     playingFieldRepository.create();
   }
 
-  public void run(){
+  public void run() {
     playingFieldRepository
         .run()
         .subscribe(
@@ -51,7 +55,7 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
         );
   }
 
-  public void paused(){
+  public void paused() {
     playingFieldRepository.pause();
   }
 
@@ -75,7 +79,7 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
     DefaultLifecycleObserver.super.onStop(owner);
   }
 
-  private void postThrowable(Throwable throwable){
+  private void postThrowable(Throwable throwable) {
     Log.e(TAG, throwable.getMessage(), throwable);
     this.throwable.postValue(throwable);
   }
@@ -84,15 +88,23 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
     playingFieldRepository.setGravity(gravity);
   }
 
-  public void shipMoveUp(){
+  public void setVelocity(double velocity) {
+    playingFieldRepository.setVelocity(velocity);
+  }
+
+  public void setAngle(int angle) {
+    playingFieldRepository.setAngle(angle);
+  }
+
+  public void shipMoveUp() {
     playingFieldRepository.shipMoveUp();
   }
 
-  public void shipMoveDown(){
+  public void shipMoveDown() {
     playingFieldRepository.shipMoveDown();
   }
 
-  public void shoot(){
+  public void shoot() {
     playingFieldRepository.shoot();
   }
 }

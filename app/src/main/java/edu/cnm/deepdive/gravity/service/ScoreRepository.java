@@ -12,6 +12,7 @@ import javax.inject.Singleton;
 
 @Singleton
 public class ScoreRepository {
+
   private final ScoreDao dao;
 
   @Inject
@@ -19,25 +20,25 @@ public class ScoreRepository {
     this.dao = dao;
   }
 
-  public Single<Long> create(Score score){
+  public Single<Long> create(Score score) {
     return dao.insert(score)
         .subscribeOn(Schedulers.io());
   }
 
-  public Single<Integer> delete(Score score){
+  public Single<Integer> delete(Score score) {
     return dao.delete(score)
         .subscribeOn(Schedulers.io());
   }
 
-  public LiveData<Score> read(long id){
+  public LiveData<Score> read(long id) {
     return dao.select(id);
   }
 
-  public LiveData<List<Score>> readAllScoresForUser(long userId){
+  public LiveData<List<Score>> readAllScoresForUser(long userId) {
     return dao.selectByPlayerId(userId);
   }
 
-  public LiveData<List<UserScore>> readAllUserScores(){
+  public LiveData<List<UserScore>> readAllUserScores() {
     return dao.selectUserScores();
   }
 }

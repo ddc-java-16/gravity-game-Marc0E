@@ -1,4 +1,5 @@
 package edu.cnm.deepdive.gravity.service;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -16,19 +17,22 @@ public class PreferencesRepository implements OnSharedPreferenceChangeListener {
   private final SharedPreferences prefs;
 
   @Inject
-  PreferencesRepository(@ApplicationContext Context context){
+  PreferencesRepository(@ApplicationContext Context context) {
     prefs = PreferenceManager.getDefaultSharedPreferences(context);
     preferences = new MutableLiveData<>(prefs);
     prefs.registerOnSharedPreferenceChangeListener((prefs, key) -> preferences.postValue(prefs));
   }
 
-  public LiveData<SharedPreferences> getPreferences() {return preferences;}
+  public LiveData<SharedPreferences> getPreferences() {
+    return preferences;
+  }
 
-  public <T>T get(String key, T defaultValue){
+  public <T> T get(String key, T defaultValue) {
     //noinspection unchecked
     T result = (T) prefs.getAll().get(key);
     return (result != null) ? result : defaultValue;
   }
+
   @Override
   public void onSharedPreferenceChanged(SharedPreferences preferences, String ignoredKey) {
     this.preferences.postValue(preferences);

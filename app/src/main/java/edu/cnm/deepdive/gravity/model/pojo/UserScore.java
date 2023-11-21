@@ -12,6 +12,7 @@ import java.time.Instant;
             + "ORDER BY value DESC"
 )
 public class UserScore {
+
   @ColumnInfo(name = "player_id")
   private long playerId;
 

@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.gravity.model;
 
 import android.graphics.Rect;
-import java.security.SecureRandom;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -26,6 +25,7 @@ public class GameField {
   private double gravity;
   private int angle;
   private int levelEnemiesRemoved;
+  private  int colition;
   private Projectile projectile;
   private List<Meteor> meteors;
   private List<Enemy> enemies;
@@ -35,15 +35,16 @@ public class GameField {
   public GameField(int x, int y) {
     this.level = 0;
     this.counter = 0;
-    ship = new Ship(this, 40, 40);
+    boundingBox = new Rect(0, 0, x, y);
+    ship = new Ship(this, y , 40);
     enemiesDestroyed = new LinkedList<>();
     meteorDestroyed = new LinkedList<>();
     meteors = new LinkedList<>();
     enemies = new LinkedList<>();
-    boundingBox = new Rect(0, 0, y, x);
     rng = new Random();
     addMeteor();
     addEnemies();
+    //addProjectile();
     //score
   }
 
@@ -54,6 +55,10 @@ public class GameField {
 
   public Ship getShip() {
     return ship;
+  }
+
+  public Projectile getProjectile() {
+    return projectile;
   }
 
   public Rect getBoundingBox() {
@@ -72,6 +77,10 @@ public class GameField {
     return gravity;
   }
 
+  public void setGravity(double gravity) {
+    this.gravity = gravity;
+  }
+
   public List<Meteor> getMeteors() {
     return meteors;
   }
@@ -81,22 +90,31 @@ public class GameField {
   }
 
   public Meteor getMeteor() {
-    return meteor = meteors.get(meteors.size()-1); // FIXME: 11/20/23 
+    return meteor = meteors.get(meteors.size() - 1); // FIXME: 11/20/23
   }
 
   public double getSecondsPerTick() {
     return secondsPerTick;
   }
 
-  public void start(int level){
+  public void setVelocity(double velocity) {
+    this.velocity = velocity;
+  }
+
+  public void setAngle(int angle) {
+    this.angle = angle;
+  }
+
+  public void start(int level) {
     //level = 1;
     this.level = level;
     computeTiming();
     for (int i = 0; i < 3 * level; i++) {
       addEnemies();
     }
-    addShip();
+    //addShip();
     addMeteor();
+    //addProjectile();
 
   }
 
@@ -108,11 +126,10 @@ public class GameField {
   }
 
   public void update() {
-    if(!meteors.isEmpty()) {
-      meteor = meteors.get(meteors.size()-1); // FIXME: 11/20/23 Is there a better way to do it?
-      meteor.updatePosition(level, meteors.get(meteors.size() - 1));
+   for(Meteor meteor: meteors) {
+      meteor.updatePosition(level);
     }
-    System.out.println(gravity); // FIXME: 11/17/23 Test for gravity changes.
+    //System.out.println(gravity); // FIXME: 11/17/23 Test for gravity changes.
     meteorDestroyed.clear();
     enemiesDestroyed.clear();
     for (ListIterator<Meteor> iterator = meteors.listIterator(); iterator.hasNext(); ) {
@@ -120,11 +137,14 @@ public class GameField {
       // TODO: 11/13/23 Meteors update position
       if (ship.intersects(meteor.getMeteorBox())) {
         // TODO: 11/13/23 damage the ship/ change gravity.
+        colition ++;
+        ship = null;
         meteorDestroyed.add(meteor);
         iterator.remove();
+
       }
     }
-    if(rng.nextDouble() < BASED_METEOR_PROBABILITY * level){
+    if (rng.nextDouble() < BASED_METEOR_PROBABILITY * level) {
       addMeteor();
     }
     if (projectile != null) {
@@ -143,18 +163,21 @@ public class GameField {
             break;
           }
         }
-        if(enemies.isEmpty()){
-          start(level+1);
+        if (enemies.isEmpty()) {
+          start(level + 1);
         }
       }
     }
   }
 
-  public void addShip(){
+  public void addShip() {
     // FIXME: 11/16/23 How to know the X position of the ship, change new Rect().
-     ship = new Ship(this, boundingBox.height()/2, boundingBox.right+30);
-
+    ship = new Ship(this, boundingBox.height() / 2, boundingBox.right + 30);
   }
+
+//  public void addProjectile() {
+//    projectile = new Projectile(ship.getShipBox().right, ship.getShipBox().top / 2);
+//  }
 
   public void shipMoveUp() {
     ship.moveUp();
@@ -164,16 +187,18 @@ public class GameField {
     ship.moveDown();
   }
 
-  public void shoot(){
-    ship.setAngle(45);
-    ship.setVelocity(40); // FIXME: 11/18/23 Get velocity from input.
+  public void shoot() {
+    ship.setGravity(this.gravity);
+    ship.setAngle(this.angle);
+    ship.setVelocity(this.velocity);
     ship.fire();
+    projectile = ship.fire();
   }
 
   public void addMeteor() {
     boolean intersection;
     Meteor meteor = new Meteor(this,
-        boundingBox.right - 1,
+        boundingBox.right - 20,
         boundingBox.top + rng.nextInt(
             boundingBox.height())); // FIXME: 11/13/23 I think it should be boundingBox.bottom.
     do {
@@ -203,7 +228,7 @@ public class GameField {
       int h = boundingBox.height();
       int w = boundingBox.width();
       enemy = new Enemy(this, boundingBox.top + rng.nextInt(boundingBox.height()),
-          boundingBox.left + boundingBox.width()/2 + rng.nextInt((boundingBox.width() / 2)));
+          boundingBox.left + boundingBox.width() / 2 + rng.nextInt((boundingBox.width() / 2)));
       for (Enemy nmy : enemies) {
         if (nmy.inside(enemy.getEnemyBox())) {
           intersection = true;
@@ -231,16 +256,14 @@ public class GameField {
     }
   }
 
-  public boolean isGameOver(){
-    return level>0 && ship == null;
+  public boolean isGameOver() {
+    return level > 0 && ship == null;
   }
-
 
   // FIXME: 11/16/23
   public boolean projectileOutOfBounds() {
     return true;
   }
-
 
   public void obstacle() {
     // TODO: 10/24/23 Field will display some obstacles to make more difficult to hit the enemies.
@@ -258,10 +281,6 @@ public class GameField {
 
   private void computeTiming() {
     secondsPerTick = Math.pow(TIMING_OFFSET - (level - 1) * TIMING_LEVEL_MULTIPLIER, level - 1);
-  }
-
-  public void setGravity(double gravity) {
-    this.gravity = gravity;
   }
 
 }

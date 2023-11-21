@@ -16,12 +16,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.material.slider.Slider;
+import com.google.android.material.slider.Slider.OnChangeListener;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.gravity.R;
 import edu.cnm.deepdive.gravity.databinding.ActivityGameBinding;
@@ -31,6 +34,7 @@ import edu.cnm.deepdive.gravity.viewmodel.GameFieldViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.ScoreViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.jetbrains.annotations.NotNull;
 
 @AndroidEntryPoint
 public class GameActivity extends AppCompatActivity {
@@ -55,13 +59,20 @@ public class GameActivity extends AppCompatActivity {
     return super.onTouchEvent(event);
   }
 
+
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     binding = ActivityGameBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
+
+//    getWindow().getDecorView().setSystemUiVisibility(
+//        binding.getRoot().SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+//            binding.getRoot().SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
     gameFieldViewModel = new ViewModelProvider(this).get(GameFieldViewModel.class);
-    Log.i("GameActivity", "Initialized");
+    //Log.i("GameActivity", "Initialized");
     gameFieldViewModel
         .getGameField()
         .observe(this, (field) -> {
@@ -75,11 +86,29 @@ public class GameActivity extends AppCompatActivity {
           // TODO: 11/18/23 Pass updated gamefield to a view to render, create a subclass of view that's gonna render.
         });
 
+
+
     binding.play.setOnClickListener((view) -> gameFieldViewModel.run());
     binding.pause.setOnClickListener((view) -> gameFieldViewModel.paused());
     binding.moveUp.setOnClickListener((view) -> gameFieldViewModel.shipMoveUp());
     binding.moveDown.setOnClickListener((view) -> gameFieldViewModel.shipMoveDown());
     binding.shoot.setOnClickListener((view) -> gameFieldViewModel.shoot());
+    binding.velocity.addOnChangeListener(new OnChangeListener() {
+      @Override
+      public void onValueChange(@NonNull @NotNull Slider slider, float value, boolean fromUser) {
+        gameField.setVelocity(value);
+        //System.out.println(value);
+      }
+    });
+    binding.angle.addOnChangeListener(new OnChangeListener() {
+      @Override
+      public void onValueChange(@NonNull @NotNull Slider slider, float value, boolean fromUser) {
+        gameField.setAngle((int) value);
+        //System.out.println(value);
+      }
+    });
+
+    //
 
     //getScreenSize();
 
@@ -89,7 +118,7 @@ public class GameActivity extends AppCompatActivity {
       @Override
       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String value = binding.gravity.getSelectedItem().toString();
-        System.out.println(value);
+        //System.out.println(value);
         switch (value) {
           case "Moon":
             gameFieldViewModel.setGravity(1.6);

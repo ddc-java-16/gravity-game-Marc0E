@@ -30,7 +30,7 @@ public class ScoreViewModel extends ViewModel implements DefaultLifecycleObserve
   private final CompositeDisposable pending;
 
   @Inject
-  ScoreViewModel(@ApplicationContext Context context, ScoreRepository repository){
+  ScoreViewModel(@ApplicationContext Context context, ScoreRepository repository) {
     this.repository = repository;
     scoreId = new MutableLiveData<>();
     score = Transformations.switchMap(scoreId, repository::read);
@@ -38,10 +38,11 @@ public class ScoreViewModel extends ViewModel implements DefaultLifecycleObserve
     pending = new CompositeDisposable();
   }
 
-  public LiveData<List<UserScore>> getAllScores(){
+  public LiveData<List<UserScore>> getAllScores() {
     return repository.readAllUserScores();
   }
-  public LiveData<List<Score>> getUserScores(User user){
+
+  public LiveData<List<Score>> getUserScores(User user) {
     return repository.readAllScoresForUser(user.getId());
   }
 
@@ -57,7 +58,7 @@ public class ScoreViewModel extends ViewModel implements DefaultLifecycleObserve
     return throwable;
   }
 
-  public void save(Score score, User user){
+  public void save(Score score, User user) {
     score.setPlayer_id(user.getId());
     throwable.postValue(null);
     repository
@@ -76,8 +77,8 @@ public class ScoreViewModel extends ViewModel implements DefaultLifecycleObserve
     pending.clear();
   }
 
-  private void postThrowable(Throwable throwable){
-  Log.e(getClass().getSimpleName(), throwable.getMessage(), throwable);
-  this.throwable.postValue(throwable);
-}
+  private void postThrowable(Throwable throwable) {
+    Log.e(getClass().getSimpleName(), throwable.getMessage(), throwable);
+    this.throwable.postValue(throwable);
+  }
 }

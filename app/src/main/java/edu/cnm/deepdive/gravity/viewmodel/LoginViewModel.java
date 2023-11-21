@@ -138,7 +138,8 @@ public class LoginViewModel extends ViewModel implements DefaultLifecycleObserve
         .signOut()
         .doFinally(() -> account.postValue(null))
         .subscribe(
-            () -> {},
+            () -> {
+            },
             this::postThrowable,
             pending
         );

@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class Projectile {
 
-  private static final int  PROJECTILE_SIZE = 10;
+  private static final int PROJECTILE_SIZE = 20;
   private GameField gameField;
   private Rect projectileBox;
   private double flyingTime;
@@ -34,62 +34,66 @@ public class Projectile {
     return positionY;
   }
 
-  public Projectile(double xVelocity, double  yVelocity, double gravity, GameField gameField) {
+  public Rect getProjectileBox() {
+    return projectileBox;
+  }
+
+  public Projectile(int positionX, int positionY, double xVelocity, double yVelocity, double gravity, GameField gameField) {
     // TODO: 11/13/23 xposition, yposition, gameFiled, xvelocity and yvelocity.
     this.xVelocity = xVelocity;
     this.yVelocity = yVelocity;
     this.gravity = gravity;
     this.gameField = gameField;
-    positionX = gameField.getShip().getPositionX();
-    positionY = gameField.getShip().getPositionY();
+    this.positionX = positionX;
+    this.positionY = positionY;
+//    positionX = gameField.getShip().getPositionX();
+//    positionY = gameField.getShip().getPositionY();
     computeProjectileBox();
 
   }
-  private void computeProjectileBox() {
-    projectileBox = new Rect(positionX - PROJECTILE_SIZE/2, positionY - PROJECTILE_SIZE/2, positionX+PROJECTILE_SIZE/2, positionY+PROJECTILE_SIZE/2);
-    Log.d(getClass().getSimpleName(), projectileBox.toString());
-  }
-  
 
-  public boolean intersects(Rect other){
+//  public Projectile(int positionX, int positionY) {
+//    this.positionX = positionX;
+//    this.positionY = positionY;
+//    computeProjectileBox();
+//  }
+
+  private void computeProjectileBox() {
+    projectileBox = new Rect(positionX - PROJECTILE_SIZE / 2, positionY - PROJECTILE_SIZE  / 2,
+        positionX + PROJECTILE_SIZE / 2, positionY + PROJECTILE_SIZE / 2);
+    //Log.d(getClass().getSimpleName(), projectileBox.toString());
+  }
+
+
+  public boolean intersects(Rect other) {
     return projectileBox.intersect(other);
   }
 
-  public boolean detonate(Rect enemy){
+  public boolean detonate(Rect enemy) {
     return projectileBox.intersect(enemy);
   }
-  
-  public void fire(){
+
+  public void fire() {
     if (gameField.getShip().canFire(projectileBox)) {
       shipPosition = gameField.getShip().getPositionY();
       double positionX =
           xVelocity * flyingTime; // TODO: 11/2/23 Add a loop to increment the position.
       double positionY =
           (shipPosition + yVelocity) * flyingTime + (0.5 * gravity * Math.pow(flyingTime, 2));
-      projectileBox.inset((int) positionX, (int) positionY); // FIXME: 11/9/23 Check if cast is the  best option for this.
+      projectileBox.inset((int) positionX,
+          (int) positionY); // FIXME: 11/9/23 Check if cast is the  best option for this.
       updatePosition();
     }
   }
-  public void updatePosition(){
-    positionX += xVelocity;
-    positionY += yVelocity;
-    yVelocity += gameField.getGravity();
+
+  public void updatePosition() {
+    positionX += xVelocity / 100;
+    positionY += yVelocity / 100;
+    yVelocity += (gameField.getGravity())/100;
     computeProjectileBox();
   }
 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   @Override
   public boolean equals(@Nullable Object obj) {
     boolean equivalent;

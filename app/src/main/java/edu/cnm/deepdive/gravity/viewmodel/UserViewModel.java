@@ -29,7 +29,7 @@ public class UserViewModel extends ViewModel implements DefaultLifecycleObserver
   private final CompositeDisposable pending;
 
   @Inject
-  UserViewModel(@ApplicationContext Context context, UserRepository repository){
+  UserViewModel(@ApplicationContext Context context, UserRepository repository) {
     this.repository = repository;
     currentUserId = new MutableLiveData<>();
     currentUser = Transformations.switchMap(currentUserId, repository::get);
@@ -40,19 +40,23 @@ public class UserViewModel extends ViewModel implements DefaultLifecycleObserver
     fetchCurrentUser();
   }
 
-  public LiveData<User> getCurrentUser(){
+  public LiveData<User> getCurrentUser() {
     return currentUser;
   }
 
-  public void setUserId(long userId){
+  public void setUserId(long userId) {
     this.userId.setValue(userId);
   }
 
-  public LiveData<User> getUser() {return user;}
+  public LiveData<User> getUser() {
+    return user;
+  }
 
-  public LiveData<List<User>> getUsers(){return repository.getAll();}
+  public LiveData<List<User>> getUsers() {
+    return repository.getAll();
+  }
 
-  public void save(User user){
+  public void save(User user) {
     repository
         .save(user)
         .subscribe(
@@ -63,22 +67,23 @@ public class UserViewModel extends ViewModel implements DefaultLifecycleObserver
         );
   }
 
-  public void delete(User user){
+  public void delete(User user) {
     repository
         .delete(user)
         .subscribe(
-            () -> {},
+            () -> {
+            },
             this::postThrowable,
             pending
         );
   }
 
   @Override
-  public void onStop(@NonNull LifecycleOwner owner){
+  public void onStop(@NonNull LifecycleOwner owner) {
     DefaultLifecycleObserver.super.onStop(owner);
   }
 
-  private void fetchCurrentUser(){
+  private void fetchCurrentUser() {
     repository
         .getCurrent()
         .subscribe(
@@ -88,8 +93,8 @@ public class UserViewModel extends ViewModel implements DefaultLifecycleObserver
         );
   }
 
-  private void postThrowable(Throwable throwable){
-    Log.e(getClass().getSimpleName(), throwable.getMessage(),throwable);
+  private void postThrowable(Throwable throwable) {
+    Log.e(getClass().getSimpleName(), throwable.getMessage(), throwable);
     this.throwable.postValue(throwable);
   }
 
