@@ -7,7 +7,7 @@ import java.security.SecureRandom;
 public class Meteor {
 
   private Rect meteorBox;
-  private final int METEOR_SIZE = 40;
+  private final int METEOR_SIZE = 80;
   private SecureRandom rng;
   GameField gameField;
   private double gravity;

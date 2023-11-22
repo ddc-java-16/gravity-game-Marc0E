@@ -41,8 +41,8 @@ public class Ship {
   }
 
   private void computeShipBox() {
-    shipBox = new Rect(positionX - SHIP_SIZE / 2, positionY - SHIP_SIZE, positionX + SHIP_SIZE / 2,
-        positionY + SHIP_SIZE);
+    shipBox = new Rect(positionX - SHIP_SIZE, positionY - SHIP_SIZE /2, positionX + SHIP_SIZE,
+        positionY + SHIP_SIZE/2);
     //Log.d(getClass().getSimpleName(), shipBox.toString());
   }
 

@@ -7,12 +7,15 @@ import androidx.lifecycle.MutableLiveData;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import edu.cnm.deepdive.gravity.model.GameField;
 import edu.cnm.deepdive.gravity.model.Ship;
+import edu.cnm.deepdive.gravity.model.entity.Score;
+import edu.cnm.deepdive.gravity.viewmodel.ScoreViewModel;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import io.reactivex.rxjava3.subjects.Subject;
+import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import javax.inject.Inject;
@@ -23,6 +26,7 @@ public class PlayingFieldRepository {
 
   public double setVelocity;
   public int setAngle;
+  boolean gameOver = false;
   private GameField gameField;
   private Ship ship;
   private final Scheduler moveShip;
@@ -62,8 +66,8 @@ public class PlayingFieldRepository {
     boolean result;
     gameField.update();
     if (gameField.isGameOver()) {
-      ticker.onComplete();
       result = false;
+      gameOver = true;
     } else if (ticker != null && !ticker.hasComplete()) {
       ticker.onNext(true);
       result = true;
@@ -95,6 +99,9 @@ public class PlayingFieldRepository {
     }
   }
 
+  public boolean isGameOver() {
+    return gameOver;
+  }
   public void setGravity(double gravity) {
     gameField.setGravity(gravity);
   }

@@ -57,6 +57,10 @@ public class GameField {
     return ship;
   }
 
+  public int getColition() {
+    return colition;
+  }
+
   public Projectile getProjectile() {
     return projectile;
   }
@@ -141,6 +145,7 @@ public class GameField {
         ship = null;
         meteorDestroyed.add(meteor);
         iterator.remove();
+        break;
 
       }
     }
@@ -158,6 +163,7 @@ public class GameField {
           Enemy enemy = iterator.next();
           if (projectile.intersects(enemy.getEnemyBox())) {
             enemiesDestroyed.add(enemy);
+            counter++;
             projectile = null;
             iterator.remove();
             break;
@@ -225,10 +231,8 @@ public class GameField {
       intersection = false;
 //      enemy.setyPosition(
 //          rng.nextInt());
-      int h = boundingBox.height();
-      int w = boundingBox.width();
       enemy = new Enemy(this, boundingBox.top + rng.nextInt(boundingBox.height()),
-          boundingBox.left + boundingBox.width() / 2 + rng.nextInt((boundingBox.width() / 2)));
+          boundingBox.left + boundingBox.width() / 2 + rng.nextInt((boundingBox.width()/2)));
       for (Enemy nmy : enemies) {
         if (nmy.inside(enemy.getEnemyBox())) {
           intersection = true;
@@ -239,13 +243,13 @@ public class GameField {
     enemies.add(enemy);
   }
 
-  public void countObjectDestroyed() {
-    // FIXME: 11/9/23 Do I need a loop to check all possible enemies?
-    if (projectile.detonate(enemy.position())) {
-      counter++;
-      // FIXME: 11/16/23 when do I check update level.
-    }
-  }
+//  public void countObjectDestroyed() {
+//    // FIXME: 11/9/23 Do I need a loop to check all possible enemies?
+//    if (projectile.detonate(enemy.position())) {
+//      counter++;
+//      // FIXME: 11/16/23 when do I check update level.
+//    }
+//  }
 
   private void updateLevel(int enemiesRemoved) {
     levelEnemiesRemoved += enemiesRemoved;

@@ -15,7 +15,7 @@ public class Enemy {
   public Enemy(GameField gameField, int positionY, int positionX) {
     this.gameField = gameField;
     // FIXME: 11/13/23 Check logic.
-    this.enemyBox = new Rect(positionX, positionY, positionX + ENEMY_SIZE, positionY - ENEMY_SIZE);
+    this.enemyBox = new Rect(positionX - ENEMY_SIZE /2, positionY - ENEMY_SIZE/2 , positionX + ENEMY_SIZE /2 , positionY + ENEMY_SIZE );
   }
 
   public boolean inside(Rect enemy) {

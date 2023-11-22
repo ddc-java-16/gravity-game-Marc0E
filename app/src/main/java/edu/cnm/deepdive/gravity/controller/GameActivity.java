@@ -1,39 +1,35 @@
 package edu.cnm.deepdive.gravity.controller;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Point;
-import android.os.Build;
-import android.util.Log;
-import android.view.Display;
+import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.slider.Slider.OnChangeListener;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.gravity.R;
 import edu.cnm.deepdive.gravity.databinding.ActivityGameBinding;
 import edu.cnm.deepdive.gravity.model.GameField;
+import edu.cnm.deepdive.gravity.model.entity.Score;
 import edu.cnm.deepdive.gravity.model.entity.User;
 import edu.cnm.deepdive.gravity.viewmodel.GameFieldViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.ScoreViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.time.Instant;
 import org.jetbrains.annotations.NotNull;
 
 @AndroidEntryPoint
@@ -47,6 +43,7 @@ public class GameActivity extends AppCompatActivity {
   Button moveUp;
   int Measuredwidth = 0;
   int Measuredheight = 0;
+  int score = 100;
   GameFieldViewModel gameFieldViewModel;
   private ActivityGameBinding binding;
   private UserViewModel userViewModel;
@@ -66,6 +63,16 @@ public class GameActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     binding = ActivityGameBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
+//    GoogleSignInResult result =
+//        Auth.GoogleSignInApi.getSignInResultFromIntent();
+//    GoogleSignInAccount acct = result.getSignInAccount();
+//    String personName = acct.getDisplayName();
+//    String personGivenName = acct.getGivenName();
+//    String personFamilyName = acct.getFamilyName();
+//    String personEmail = acct.getEmail();
+//    String personId = acct.getId();
+//    Uri personPhoto = acct.getPhotoUrl();
+
 
 //    getWindow().getDecorView().setSystemUiVisibility(
 //        binding.getRoot().SYSTEM_UI_FLAG_HIDE_NAVIGATION|
@@ -96,14 +103,14 @@ public class GameActivity extends AppCompatActivity {
     binding.velocity.addOnChangeListener(new OnChangeListener() {
       @Override
       public void onValueChange(@NonNull @NotNull Slider slider, float value, boolean fromUser) {
-        gameField.setVelocity(value);
+        gameFieldViewModel.setVelocity(value);
         //System.out.println(value);
       }
     });
     binding.angle.addOnChangeListener(new OnChangeListener() {
       @Override
       public void onValueChange(@NonNull @NotNull Slider slider, float value, boolean fromUser) {
-        gameField.setAngle((int) value);
+        gameFieldViewModel.setAngle((int) value);
         //System.out.println(value);
       }
     });
@@ -112,6 +119,7 @@ public class GameActivity extends AppCompatActivity {
 
     //getScreenSize();
 
+    binding.gravity.setBackgroundColor(Color.parseColor("#FFFFFF"));
     binding.gravity.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
         getResources().getStringArray(R.array.gravity_array)));
     binding.gravity.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -157,35 +165,49 @@ public class GameActivity extends AppCompatActivity {
       }
     });
 
+//    if(gameFieldViewModel.isGameOver()){
+//      AccountManager manager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
+//      Account[] list = manager.getAccounts();
+//      setupUserViewModel(this, list[0]);
+//      //setupScoreViewModel();
+//      //handleScores();
+//    }
   }
 
-  private void getScreenSize() {
-    Point size = new Point();
-    WindowManager w = getWindowManager();
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-      w.getDefaultDisplay().getSize(size);
-      Measuredwidth = size.x;
-      Measuredheight = size.y;
-    } else {
-      Display d = w.getDefaultDisplay();
-      Measuredwidth = d.getWidth();
-      Measuredheight = d.getHeight();
-    }
-  }
+//  private void getScreenSize() {
+//    Point size = new Point();
+//    WindowManager w = getWindowManager();
+//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//      w.getDefaultDisplay().getSize(size);
+//      Measuredwidth = size.x;
+//      Measuredheight = size.y;
+//    } else {
+//      Display d = w.getDefaultDisplay();
+//      Measuredwidth = d.getWidth();
+//      Measuredheight = d.getHeight();
+//    }
+//  }
 
 
-  private void setupUserViewModel(FragmentActivity activity, LifecycleOwner owner) {
-    userViewModel = new ViewModelProvider(activity)
+  private void setupUserViewModel(Activity activity, Account owner) {
+    userViewModel = new ViewModelProvider((ViewModelStoreOwner) activity)
         .get(UserViewModel.class);
     userViewModel
         .getCurrentUser()
-        .observe(owner, (user) -> this.currentUser = user);
+        .observe((LifecycleOwner) owner, (user) -> this.currentUser = user);
   }
 
-  private void setupScoreViewModel(FragmentActivity activity, LifecycleOwner owner) {
-    scoreViewModel = new ViewModelProvider(activity)
+  private void setupScoreViewModel(Activity activity, LifecycleOwner owner) {
+    scoreViewModel = new ViewModelProvider((ViewModelStoreOwner) activity)
         .get(ScoreViewModel.class);
     // TODO: 10/26/23 Observe scoreId or Score from view model.
+  }
+
+  private void handleScores() { //Add scores to DB
+    Score score = new Score();
+    score.setStarted(Instant.now());
+    score.setValue(this.score);
+    scoreViewModel.save(score, currentUser);
   }
 
 }

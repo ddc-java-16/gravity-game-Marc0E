@@ -45,7 +45,8 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
         .run()
         .subscribe(
             (running) -> {
-              Log.d(TAG, "Refresh; Running = " + running);
+              // FIXME: 11/21/23
+              //Log.d(TAG, "Refresh; Running = " + running);
             },
             this::postThrowable,
             () -> {
@@ -84,6 +85,10 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
     this.throwable.postValue(throwable);
   }
 
+
+  public boolean isGameOver(){
+    return playingFieldRepository.isGameOver();
+  }
   public void setGravity(double gravity) {
     playingFieldRepository.setGravity(gravity);
   }

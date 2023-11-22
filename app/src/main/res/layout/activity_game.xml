@@ -87,8 +87,8 @@
     app:layout_constraintTop_toTopOf="@id/play"/>
 
   <ImageView
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
     android:id="@+id/meteor"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -97,8 +97,8 @@
 
   <ImageView
     android:id="@+id/enemy"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
     android:layout_marginEnd="140dp"
     android:background="@drawable/enemy"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -199,8 +199,8 @@
     app:thumbColor="@color/text_color"
     android:layout_margin="@dimen/half_dynamic_spacing"
     android:valueFrom="0"
-    android:stepSize="1.0"
-    android:valueTo="90"
+    android:stepSize="10.0"
+    android:valueTo="1000"
     android:theme="@style/Theme.MaterialComponents.DayNight"/>
 
 

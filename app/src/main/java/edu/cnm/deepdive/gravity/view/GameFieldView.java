@@ -79,9 +79,7 @@ public class GameFieldView extends View {
         projectileImage.draw(canvas);
       }
 
-      for (ListIterator<Meteor> iterator = gameField.getMeteors().listIterator();
-          iterator.hasNext(); ) {
-        Meteor meteor = iterator.next();
+      for (Meteor meteor : gameField.getMeteors()) {
         destination.set((int) (meteor.getMeteorBox().left * horizontalScale),
             (int) (meteor.getMeteorBox().top * verticalScale),
             (int) (meteor.getMeteorBox().right * horizontalScale),
@@ -90,9 +88,7 @@ public class GameFieldView extends View {
         meteorImage.draw(canvas);
       }
 
-      for (ListIterator<Enemy> iterator = gameField.getEnemies().listIterator();
-          iterator.hasNext(); ) {
-        Enemy enemy = iterator.next();
+      for (Enemy enemy : gameField.getEnemies()) {
         destination.set((int) (enemy.getEnemyBox().left * horizontalScale),
             (int) (enemy.getEnemyBox().top * verticalScale),
             (int) (enemy.getEnemyBox().right * horizontalScale),
