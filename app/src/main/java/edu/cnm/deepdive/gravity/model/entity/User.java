@@ -37,7 +37,6 @@ public class User {
   private String displayNickName = "";
 
   @ColumnInfo(name = "user_photo")
-  @NonNull
   private String userPhoto = "";
 
   public long getId() {
@@ -84,12 +83,11 @@ public class User {
     this.displayNickName = displayNickName;
   }
 
-  @NonNull
   public String getUserPhoto() {
     return userPhoto;
   }
 
-  public void setUserPhoto(@NonNull String userPhoto) {
+  public void setUserPhoto(String userPhoto) {
     this.userPhoto = userPhoto;
   }
 

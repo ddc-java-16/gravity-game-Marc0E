@@ -3,6 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/game_constraint"
   android:orientation="horizontal"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -27,7 +28,7 @@
     android:minWidth="40dp"
     android:minHeight="40dp"
     android:background="@drawable/ic_play"
-    app:layout_constraintEnd_toStartOf="@id/pause"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
 
   <ImageButton
@@ -86,46 +87,69 @@
     app:layout_constraintEnd_toStartOf="@id/counter_text"
     app:layout_constraintTop_toTopOf="@id/play"/>
 
-  <ImageView
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:id="@+id/meteor"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:background="@drawable/meteor"/>
+<!--  <ImageView-->
+<!--    android:layout_width="50dp"-->
+<!--    android:layout_height="50dp"-->
+<!--    android:id="@+id/meteor"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="parent"-->
+<!--    android:background="@drawable/meteor"/>-->
 
-  <ImageView
-    android:id="@+id/enemy"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:layout_marginEnd="140dp"
-    android:background="@drawable/enemy"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.369"/>
+<!--  <ImageView-->
+<!--    android:id="@+id/enemy"-->
+<!--    android:layout_width="50dp"-->
+<!--    android:layout_height="50dp"-->
+<!--    android:layout_marginEnd="140dp"-->
+<!--    android:background="@drawable/enemy"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="parent"-->
+<!--    app:layout_constraintVertical_bias="0.369"/>-->
 
-  <ImageView
-    android:layout_width="80dp"
-    android:layout_height="40dp"
-    android:id="@+id/ship"
+<!--  <ImageView-->
+<!--    android:layout_width="80dp"-->
+<!--    android:layout_height="40dp"-->
+<!--    android:id="@+id/ship"-->
+<!--    android:layout_margin="@dimen/half_dynamic_spacing"-->
+<!--    app:layout_constraintTop_toTopOf="parent"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintStart_toEndOf="@id/shoot"-->
+<!--    android:background="@drawable/ship"/>-->
+
+
+<!--  <ImageView-->
+<!--    android:id="@+id/projectile"-->
+<!--    android:layout_width="40dp"-->
+<!--    android:layout_height="40dp"-->
+<!--    android:layout_margin="@dimen/half_dynamic_spacing"-->
+<!--    android:background="@drawable/projectile9"-->
+<!--    app:layout_constraintStart_toEndOf="@id/ship"-->
+<!--    app:layout_constraintTop_toTopOf="parent"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+  <TextView
+    android:id="@+id/score_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/text_color"
+    android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toEndOf="@id/shoot"
-    android:background="@drawable/ship"/>
+    app:layout_constraintBottom_toBottomOf="@id/play"
+    app:layout_constraintStart_toEndOf="@id/move_up"
+    android:text="Score: "/>
 
-
-  <ImageView
-    android:id="@+id/projectile"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
+  <TextView
+    android:id="@+id/score_value_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/text_color"
+    android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
-    android:background="@drawable/projectile9"
-    app:layout_constraintStart_toEndOf="@id/ship"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"/>
+    app:layout_constraintBottom_toBottomOf="@id/play"
+    app:layout_constraintStart_toEndOf="@id/score_text"
+    tools:text="150"
+    />
 
   <TextView
     android:id="@+id/counter_text"
@@ -170,7 +194,7 @@
     android:layout_height="wrap_content"
     android:textColor="@color/text_color"
     android:layout_margin="@dimen/half_dynamic_spacing"
-    android:layout_marginEnd="20dp"
+    android:layout_marginEnd="30dp"
     android:tooltipText="Counter"
     android:fontFamily="@font/sports"
     app:layout_constraintEnd_toStartOf="@id/play"
@@ -199,8 +223,8 @@
     app:thumbColor="@color/text_color"
     android:layout_margin="@dimen/half_dynamic_spacing"
     android:valueFrom="0"
-    android:stepSize="10.0"
-    android:valueTo="1000"
+    android:stepSize="1.0"
+    android:valueTo="100"
     android:theme="@style/Theme.MaterialComponents.DayNight"/>
 
 
@@ -230,6 +254,17 @@
     android:valueTo="90"
     android:theme="@style/Theme.MaterialComponents.DayNight"/>
 
+  <TextView
+    android:id="@+id/gravity_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintTop_toTopOf="@id/gravity"
+    app:layout_constraintBottom_toBottomOf="@id/gravity"
+    app:layout_constraintEnd_toStartOf="@id/gravity"
+    android:fontFamily="@font/font_family"
+    android:textColor="@color/text_color"
+    android:text="@string/gravity"/>
 
   <Spinner
     android:id="@+id/gravity"

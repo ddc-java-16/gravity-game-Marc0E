@@ -65,6 +65,7 @@ public class Ship {
 //  }
 
   public boolean intersects(Rect intersect) {
+    //return shipBox.centerX() == intersect.centerX() && shipBox.centerY() == intersect.centerY();
     return shipBox.intersect(intersect);
   }
 

@@ -26,7 +26,7 @@ public class PlayingFieldRepository {
 
   public double setVelocity;
   public int setAngle;
-  boolean gameOver = false;
+  boolean gameOver = false ;
   private GameField gameField;
   private Ship ship;
   private final Scheduler moveShip;
@@ -43,6 +43,7 @@ public class PlayingFieldRepository {
     projectile = Schedulers.single();
     refresh = Schedulers.single();
     liveGameField = new MutableLiveData<>();
+
 
 
   }
@@ -64,6 +65,7 @@ public class PlayingFieldRepository {
 
   private boolean tick(boolean running) {
     boolean result;
+    System.out.println("ticker");
     gameField.update();
     if (gameField.isGameOver()) {
       result = false;

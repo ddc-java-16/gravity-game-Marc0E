@@ -4,6 +4,8 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,13 +39,15 @@ public class GameActivity extends AppCompatActivity {
 
   GameField gameField;
   ImageView imageViewPhoto;
+  Drawable backgroundDrawable;
   ImageView imageViewShip;
   TextView levelView;
   TextView counterView;
   Button moveUp;
   int Measuredwidth = 0;
   int Measuredheight = 0;
-  int score = 100;
+  Boolean inProgress;
+  int score;
   GameFieldViewModel gameFieldViewModel;
   private ActivityGameBinding binding;
   private UserViewModel userViewModel;
@@ -63,6 +67,15 @@ public class GameActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     binding = ActivityGameBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
+    binding.pause.setVisibility(View.INVISIBLE);
+    binding.moveUp.setEnabled(false);
+    binding.moveDown.setEnabled(false);
+    binding.shoot.setEnabled(false);
+
+
+
+
+
 //    GoogleSignInResult result =
 //        Auth.GoogleSignInApi.getSignInResultFromIntent();
 //    GoogleSignInAccount acct = result.getSignInAccount();
@@ -78,7 +91,8 @@ public class GameActivity extends AppCompatActivity {
 //        binding.getRoot().SYSTEM_UI_FLAG_HIDE_NAVIGATION|
 //            binding.getRoot().SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-    gameFieldViewModel = new ViewModelProvider(this).get(GameFieldViewModel.class);
+    ViewModelProvider viewModelProvider = new ViewModelProvider(this);
+    gameFieldViewModel = viewModelProvider.get(GameFieldViewModel.class);
     //Log.i("GameActivity", "Initialized");
     gameFieldViewModel
         .getGameField()
@@ -90,13 +104,37 @@ public class GameActivity extends AppCompatActivity {
           binding.gameView.invalidate();
           binding.level.setText(String.valueOf(gameField.getLevel()));
           binding.counter.setText(String.valueOf(gameField.getCounter()));
-          // TODO: 11/18/23 Pass updated gamefield to a view to render, create a subclass of view that's gonna render.
+          score = gameField.getCounter() * 50;
+          binding.scoreValueText.setText(String.valueOf(score));
         });
+    gameFieldViewModel.getInProgress()
+        .observe(this, (inProgress) -> {
+          Log.d(getClass().getSimpleName(), "inProgress=" + inProgress);
+          if (Boolean.TRUE.equals(this.inProgress) && Boolean.FALSE.equals(inProgress)) {
+            addScores();
+          }
+          this.inProgress = inProgress;
+        });
+    setupUserViewModel(viewModelProvider, this);
+    setupScoreViewModel(viewModelProvider, this);
 
-
-
-    binding.play.setOnClickListener((view) -> gameFieldViewModel.run());
-    binding.pause.setOnClickListener((view) -> gameFieldViewModel.paused());
+    binding.play.setOnClickListener((view) -> {
+      gameFieldViewModel.run();
+      binding.pause.setVisibility(View.VISIBLE);
+      binding.pause.setEnabled(true);
+      binding.moveUp.setEnabled(true);
+      binding.moveDown.setEnabled(true);
+      binding.shoot.setEnabled(true);
+      binding.play.setVisibility(View.INVISIBLE);
+    });
+    binding.pause.setOnClickListener((view) -> {
+      binding.play.setVisibility(View.VISIBLE);
+      binding.moveUp.setEnabled(false);
+      binding.moveDown.setEnabled(false);
+      binding.shoot.setEnabled(false);
+      binding.pause.setVisibility(View.INVISIBLE);
+      gameFieldViewModel.paused();
+    });
     binding.moveUp.setOnClickListener((view) -> gameFieldViewModel.shipMoveUp());
     binding.moveDown.setOnClickListener((view) -> gameFieldViewModel.shipMoveDown());
     binding.shoot.setOnClickListener((view) -> gameFieldViewModel.shoot());
@@ -189,24 +227,25 @@ public class GameActivity extends AppCompatActivity {
 //  }
 
 
-  private void setupUserViewModel(Activity activity, Account owner) {
-    userViewModel = new ViewModelProvider((ViewModelStoreOwner) activity)
+  private void setupUserViewModel(ViewModelProvider provider, LifecycleOwner owner) {
+    userViewModel = provider
         .get(UserViewModel.class);
     userViewModel
         .getCurrentUser()
-        .observe((LifecycleOwner) owner, (user) -> this.currentUser = user);
+        .observe(owner, (user) -> this.currentUser = user);
   }
 
-  private void setupScoreViewModel(Activity activity, LifecycleOwner owner) {
-    scoreViewModel = new ViewModelProvider((ViewModelStoreOwner) activity)
+  private void setupScoreViewModel(ViewModelProvider provider, LifecycleOwner owner) {
+    scoreViewModel = provider
         .get(ScoreViewModel.class);
     // TODO: 10/26/23 Observe scoreId or Score from view model.
   }
 
-  private void handleScores() { //Add scores to DB
+  private void addScores() {
     Score score = new Score();
     score.setStarted(Instant.now());
     score.setValue(this.score);
+    score.setPlayer_id(currentUser.getId());
     scoreViewModel.save(score, currentUser);
   }
 

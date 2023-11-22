@@ -23,7 +23,7 @@ public class Score {
   private long id;
 
   @NonNull
-  private Instant created = Instant.MIN;
+  private Instant created = Instant.now();
   @NonNull
   private Instant started = Instant.MIN;
 

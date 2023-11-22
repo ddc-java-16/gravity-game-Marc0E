@@ -52,6 +52,7 @@
   <string name="angle">Angle:</string>
   <string name="level">Level:</string>
   <string name="enemies">Enemies:</string>
+  <string name="gravity">Gravity:</string>
 
 
   <string-array name="gravity_array">

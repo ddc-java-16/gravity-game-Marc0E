@@ -13,7 +13,8 @@
     tools:ignore="AllowBackup,DataExtractionRules">
     <activity
       android:exported="false"
-      android:name=".controller.ScoresActivity"/>
+      android:name=".controller.ScoresActivity"
+      android:parentActivityName=".controller.MainActivity"/>
 <!--    <activity-->
 <!--      android:exported="false"-->
 <!--      android:name=".activity_hight_scores"/>-->

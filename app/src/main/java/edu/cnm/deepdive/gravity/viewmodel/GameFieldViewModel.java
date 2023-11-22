@@ -21,6 +21,8 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
 
   private static final String TAG = GameFieldViewModel.class.getSimpleName();
   private final PlayingFieldRepository playingFieldRepository;
+  private final MutableLiveData<Boolean> running;
+  private final MutableLiveData<Boolean> inProgress;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
   private double gravity;
@@ -31,6 +33,8 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
   GameFieldViewModel(@ApplicationContext Context context,
       PlayingFieldRepository playingFieldRepository) {
     this.playingFieldRepository = playingFieldRepository;
+    running = new MutableLiveData<>();
+    inProgress = new MutableLiveData<>();
     this.throwable = new MutableLiveData<>();
     this.pending = new CompositeDisposable();
     create();
@@ -44,10 +48,7 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
     playingFieldRepository
         .run()
         .subscribe(
-            (running) -> {
-              // FIXME: 11/21/23
-              //Log.d(TAG, "Refresh; Running = " + running);
-            },
+            inProgress::postValue,
             this::postThrowable,
             () -> {
               // TODO: 11/16/23 Take appropriate action for the game paused.
@@ -62,6 +63,14 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
 
   public LiveData<GameField> getGameField() {
     return playingFieldRepository.getLiveGameField();
+  }
+
+  public LiveData<Boolean> getRunning() {
+    return running;
+  }
+
+  public LiveData<Boolean> getInProgress() {
+    return inProgress;
   }
 
   public LiveData<Throwable> getThrowable() {

@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.gravity.model;
 
 import android.graphics.Rect;
+import android.util.Log;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -25,7 +26,8 @@ public class GameField {
   private double gravity;
   private int angle;
   private int levelEnemiesRemoved;
-  private  int colition;
+  private int collision;
+  private int meteorOut;
   private Projectile projectile;
   private List<Meteor> meteors;
   private List<Enemy> enemies;
@@ -36,14 +38,14 @@ public class GameField {
     this.level = 0;
     this.counter = 0;
     boundingBox = new Rect(0, 0, x, y);
-    ship = new Ship(this, y , 40);
+    ship = new Ship(this, y, 40);
     enemiesDestroyed = new LinkedList<>();
     meteorDestroyed = new LinkedList<>();
     meteors = new LinkedList<>();
     enemies = new LinkedList<>();
     rng = new Random();
-    addMeteor();
-    addEnemies();
+    //addMeteor();
+    //addEnemies();
     //addProjectile();
     //score
   }
@@ -57,8 +59,8 @@ public class GameField {
     return ship;
   }
 
-  public int getColition() {
-    return colition;
+  public int getCollision() {
+    return collision;
   }
 
   public Projectile getProjectile() {
@@ -113,7 +115,8 @@ public class GameField {
     //level = 1;
     this.level = level;
     computeTiming();
-    for (int i = 0; i < 3 * level; i++) {
+    // FIXME: 11/22/23 If I want more enemies multiply by level.
+    for (int i = 0; i < 3; i++) {
       addEnemies();
     }
     //addShip();
@@ -130,8 +133,8 @@ public class GameField {
   }
 
   public void update() {
-   for(Meteor meteor: meteors) {
-      meteor.updatePosition(level);
+    for (Meteor meteor : meteors) {
+     meteor.updatePosition(level);
     }
     //System.out.println(gravity); // FIXME: 11/17/23 Test for gravity changes.
     meteorDestroyed.clear();
@@ -141,12 +144,11 @@ public class GameField {
       // TODO: 11/13/23 Meteors update position
       if (ship.intersects(meteor.getMeteorBox())) {
         // TODO: 11/13/23 damage the ship/ change gravity.
-        colition ++;
+        collision++;
         ship = null;
         meteorDestroyed.add(meteor);
         iterator.remove();
         break;
-
       }
     }
     if (rng.nextDouble() < BASED_METEOR_PROBABILITY * level) {
@@ -165,21 +167,24 @@ public class GameField {
             enemiesDestroyed.add(enemy);
             counter++;
             projectile = null;
+            updateLevel();
             iterator.remove();
             break;
           }
         }
         if (enemies.isEmpty()) {
-          start(level + 1);
+          for (int i = 0; i < 3; i++) {
+            addEnemies();
+          }
         }
       }
     }
   }
 
-  public void addShip() {
-    // FIXME: 11/16/23 How to know the X position of the ship, change new Rect().
-    ship = new Ship(this, boundingBox.height() / 2, boundingBox.right + 30);
-  }
+//  public void addShip() {
+//    // FIXME: 11/16/23 How to know the X position of the ship, change new Rect().
+//    ship = new Ship(this, boundingBox.height() / 2, boundingBox.right + 30);
+//  }
 
 //  public void addProjectile() {
 //    projectile = new Projectile(ship.getShipBox().right, ship.getShipBox().top / 2);
@@ -207,6 +212,7 @@ public class GameField {
         boundingBox.right - 20,
         boundingBox.top + rng.nextInt(
             boundingBox.height())); // FIXME: 11/13/23 I think it should be boundingBox.bottom.
+
     do {
       intersection = false;
 //      meteor.setyPosition(
@@ -221,6 +227,7 @@ public class GameField {
         }
       }
     } while (intersection);
+
     meteors.add(meteor);
   }
 
@@ -232,7 +239,7 @@ public class GameField {
 //      enemy.setyPosition(
 //          rng.nextInt());
       enemy = new Enemy(this, boundingBox.top + rng.nextInt(boundingBox.height()),
-          boundingBox.left + boundingBox.width() / 2 + rng.nextInt((boundingBox.width()/2)));
+          boundingBox.left + boundingBox.width() / 2 + rng.nextInt((boundingBox.width() / 2)));
       for (Enemy nmy : enemies) {
         if (nmy.inside(enemy.getEnemyBox())) {
           intersection = true;
@@ -251,9 +258,9 @@ public class GameField {
 //    }
 //  }
 
-  private void updateLevel(int enemiesRemoved) {
-    levelEnemiesRemoved += enemiesRemoved;
-    if (levelEnemiesRemoved >= ENEMY_LEVEL_MULTIPLIER * level) {
+  private void updateLevel() {
+    levelEnemiesRemoved += 1;
+    if (levelEnemiesRemoved >= (ENEMY_LEVEL_MULTIPLIER * level)) {
       level++;
       computeTiming();
       levelEnemiesRemoved = 0;

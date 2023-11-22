@@ -89,7 +89,7 @@ public class Projectile {
   public void updatePosition() {
     positionX += xVelocity;
     positionY += yVelocity;
-    yVelocity += (gameField.getGravity())/100;
+    yVelocity += (gameField.getGravity())/1000;
     computeProjectileBox();
   }
 

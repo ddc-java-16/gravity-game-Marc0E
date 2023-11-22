@@ -56,5 +56,6 @@ public class Meteor {
 
   public void setyPosition(int yPosition) {
     this.yPosition = yPosition;
+    computeMeteor(xPosition, yPosition);
   }
 }

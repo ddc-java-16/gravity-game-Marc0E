@@ -66,7 +66,7 @@ public class UserRepository {
                       User user = new User();
                       user.setOauthKey(Objects.requireNonNull(account.getId()));
                       user.setDisplayName(Objects.requireNonNull(account.getDisplayName()));
-                      user.setUserPhoto(Objects.requireNonNull(account.getPhotoUrl()).toString());
+                      user.setUserPhoto((account.getPhotoUrl() != null) ? account.getPhotoUrl().toString() : null);
                       return user;
                     })
                     .flatMap(this::insert)

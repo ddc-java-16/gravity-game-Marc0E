@@ -25,6 +25,7 @@ public class GameFieldView extends View {
   private Drawable meteorImage;
   private Drawable projectileImage;
   private Drawable enemyImage;
+  int test = 0;
   private final Rect destination = new Rect();
 
 
@@ -54,6 +55,7 @@ public class GameFieldView extends View {
   @Override
   protected void onDraw(@NonNull Canvas canvas) {
     super.onDraw(canvas);
+
     if (gameField != null) {
       int canvasWidth = canvas.getWidth();
       int canvasHeight = canvas.getHeight();
@@ -63,12 +65,14 @@ public class GameFieldView extends View {
       double verticalScale = (double) canvasHeight / gameHeight;
 
       // TODO: 11/20/23 Draw the ship on canvas.
-      destination.set((int) (gameField.getShip().getShipBox().left * horizontalScale),
-          (int) (gameField.getShip().getShipBox().top * verticalScale),
-          (int) (gameField.getShip().getShipBox().right * horizontalScale),
-          (int) (gameField.getShip().getShipBox().bottom * verticalScale));
-      shipImage.setBounds(destination);
-      shipImage.draw(canvas);
+      if (gameField.getShip() != null) {
+        destination.set((int) (gameField.getShip().getShipBox().left * horizontalScale),
+            (int) (gameField.getShip().getShipBox().top * verticalScale),
+            (int) (gameField.getShip().getShipBox().right * horizontalScale),
+            (int) (gameField.getShip().getShipBox().bottom * verticalScale));
+        shipImage.setBounds(destination);
+        shipImage.draw(canvas);
+      }
 
       if (gameField.getProjectile() != null) {
         destination.set((int) (gameField.getProjectile().getProjectileBox().left * horizontalScale),
