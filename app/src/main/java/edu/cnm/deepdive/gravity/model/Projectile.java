@@ -87,9 +87,14 @@ public class Projectile {
   }
 
   public void updatePosition() {
-    positionX += xVelocity;
-    positionY += yVelocity;
-    yVelocity += (gameField.getGravity())/1000;
+    flyingTime += 0.1;
+    positionX += (int) (xVelocity * flyingTime);
+    positionY += (int) ((gameField.getShip().getPositionY() + yVelocity) * flyingTime + (0.5 * gameField.getGravity() * Math.pow(flyingTime, 2)))/10;
+    System.out.println(gameField.getGravity());
+
+//    positionX += xVelocity;
+//    positionY += yVelocity;
+//    yVelocity += (gameField.getGravity())/100;
     computeProjectileBox();
   }
 

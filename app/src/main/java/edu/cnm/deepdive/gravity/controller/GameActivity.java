@@ -3,6 +3,9 @@ package edu.cnm.deepdive.gravity.controller;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
@@ -28,6 +32,7 @@ import edu.cnm.deepdive.gravity.databinding.ActivityGameBinding;
 import edu.cnm.deepdive.gravity.model.GameField;
 import edu.cnm.deepdive.gravity.model.entity.Score;
 import edu.cnm.deepdive.gravity.model.entity.User;
+import edu.cnm.deepdive.gravity.view.GameFieldView;
 import edu.cnm.deepdive.gravity.viewmodel.GameFieldViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.ScoreViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
@@ -39,7 +44,8 @@ public class GameActivity extends AppCompatActivity {
 
   GameField gameField;
   ImageView imageViewPhoto;
-  Drawable backgroundDrawable;
+  private GameFieldView gameFieldView;
+  int background = 1;
   ImageView imageViewShip;
   TextView levelView;
   TextView counterView;
@@ -54,6 +60,8 @@ public class GameActivity extends AppCompatActivity {
   private ScoreViewModel scoreViewModel;
   private User currentUser;
 
+
+
   @Override
   public boolean onTouchEvent(MotionEvent event) {
     imageViewPhoto = findViewById(R.id.profile_photo);
@@ -67,57 +75,11 @@ public class GameActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     binding = ActivityGameBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
-    binding.pause.setVisibility(View.INVISIBLE);
-    binding.moveUp.setEnabled(false);
-    binding.moveDown.setEnabled(false);
-    binding.shoot.setEnabled(false);
+    setup();
+    gameButtons();
+  }
 
-
-
-
-
-//    GoogleSignInResult result =
-//        Auth.GoogleSignInApi.getSignInResultFromIntent();
-//    GoogleSignInAccount acct = result.getSignInAccount();
-//    String personName = acct.getDisplayName();
-//    String personGivenName = acct.getGivenName();
-//    String personFamilyName = acct.getFamilyName();
-//    String personEmail = acct.getEmail();
-//    String personId = acct.getId();
-//    Uri personPhoto = acct.getPhotoUrl();
-
-
-//    getWindow().getDecorView().setSystemUiVisibility(
-//        binding.getRoot().SYSTEM_UI_FLAG_HIDE_NAVIGATION|
-//            binding.getRoot().SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
-    ViewModelProvider viewModelProvider = new ViewModelProvider(this);
-    gameFieldViewModel = viewModelProvider.get(GameFieldViewModel.class);
-    //Log.i("GameActivity", "Initialized");
-    gameFieldViewModel
-        .getGameField()
-        .observe(this, (field) -> {
-          if (gameField != field) {
-            binding.gameView.setGameField(field);
-            gameField = field;
-          }
-          binding.gameView.invalidate();
-          binding.level.setText(String.valueOf(gameField.getLevel()));
-          binding.counter.setText(String.valueOf(gameField.getCounter()));
-          score = gameField.getCounter() * 50;
-          binding.scoreValueText.setText(String.valueOf(score));
-        });
-    gameFieldViewModel.getInProgress()
-        .observe(this, (inProgress) -> {
-          Log.d(getClass().getSimpleName(), "inProgress=" + inProgress);
-          if (Boolean.TRUE.equals(this.inProgress) && Boolean.FALSE.equals(inProgress)) {
-            addScores();
-          }
-          this.inProgress = inProgress;
-        });
-    setupUserViewModel(viewModelProvider, this);
-    setupScoreViewModel(viewModelProvider, this);
-
+  private void gameButtons() {
     binding.play.setOnClickListener((view) -> {
       gameFieldViewModel.run();
       binding.pause.setVisibility(View.VISIBLE);
@@ -152,10 +114,6 @@ public class GameActivity extends AppCompatActivity {
         //System.out.println(value);
       }
     });
-
-    //
-
-    //getScreenSize();
 
     binding.gravity.setBackgroundColor(Color.parseColor("#FFFFFF"));
     binding.gravity.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
@@ -202,29 +160,53 @@ public class GameActivity extends AppCompatActivity {
         gameFieldViewModel.setGravity(9.8);
       }
     });
-
-//    if(gameFieldViewModel.isGameOver()){
-//      AccountManager manager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
-//      Account[] list = manager.getAccounts();
-//      setupUserViewModel(this, list[0]);
-//      //setupScoreViewModel();
-//      //handleScores();
-//    }
   }
 
-//  private void getScreenSize() {
-//    Point size = new Point();
-//    WindowManager w = getWindowManager();
-//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-//      w.getDefaultDisplay().getSize(size);
-//      Measuredwidth = size.x;
-//      Measuredheight = size.y;
-//    } else {
-//      Display d = w.getDefaultDisplay();
-//      Measuredwidth = d.getWidth();
-//      Measuredheight = d.getHeight();
-//    }
-//  }
+  private void setup() {
+    binding.pause.setVisibility(View.INVISIBLE);
+    binding.moveUp.setEnabled(false);
+    binding.moveDown.setEnabled(false);
+    binding.shoot.setEnabled(false);
+    ViewModelProvider viewModelProvider = new ViewModelProvider(this);
+    gameFieldViewModel = viewModelProvider.get(GameFieldViewModel.class);
+    //Log.i("GameActivity", "Initialized");
+    gameFieldViewModel
+        .getGameField()
+        .observe(this, (field) -> {
+          if (gameField != field) {
+            binding.gameView.setGameField(field);
+            gameField = field;
+          }
+          int level = gameField.getLevel();
+          binding.gameView.invalidate();
+          binding.level.setText(String.valueOf(level));
+          binding.counter.setText(String.valueOf(gameField.getCounter()));
+          score = gameField.getCounter() * 50;
+          binding.scoreValueText.setText(String.valueOf(score));
+          Drawable b = switch ((level - 1) % 3 + 1) {
+            case 1 ->
+                ResourcesCompat.getDrawable(getResources(), R.drawable.play_background1, null);
+            case 2 -> ResourcesCompat.getDrawable(getResources(), R.drawable.img, null);
+            case 3 -> ResourcesCompat.getDrawable(getResources(), R.drawable.img_1, null);
+            default -> null;
+          };
+          if (b != null) {
+            binding.gameConstraint.setBackground(b);
+          }
+
+        });
+    gameFieldViewModel.getInProgress()
+        .observe(this, (inProgress) -> {
+          Log.d(getClass().getSimpleName(), "inProgress=" + inProgress);
+          if (Boolean.TRUE.equals(this.inProgress) && Boolean.FALSE.equals(inProgress)) {
+            addScores();
+          }
+          this.inProgress = inProgress;
+        });
+    setupUserViewModel(viewModelProvider, this);
+    setupScoreViewModel(viewModelProvider, this);
+  }
+
 
 
   private void setupUserViewModel(ViewModelProvider provider, LifecycleOwner owner) {
@@ -248,5 +230,6 @@ public class GameActivity extends AppCompatActivity {
     score.setPlayer_id(currentUser.getId());
     scoreViewModel.save(score, currentUser);
   }
+
 
 }

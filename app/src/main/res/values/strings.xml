@@ -53,6 +53,10 @@
   <string name="level">Level:</string>
   <string name="enemies">Enemies:</string>
   <string name="gravity">Gravity:</string>
+  <string name="score">Score:</string>
+  <string name="up">Up</string>
+  <string name="shoot">Shoot</string>
+  <string name="down">Down</string>
 
 
   <string-array name="gravity_array">

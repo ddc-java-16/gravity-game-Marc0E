@@ -33,7 +33,7 @@ public class UserScoresAdapter extends RecyclerView.Adapter<Holder> {
     this.scores = scores;
     inflater = LayoutInflater.from(context);
     dateFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT,FormatStyle.SHORT);
-    oddRowBackground = context.getColor(android.R.color.background_light);
+    oddRowBackground = context.getColor(R.color.background_odd);
     evenRowBackground = context.getColor(R.color.even_row_background);
     numberFormatter = NumberFormat.getIntegerInstance();
     zone = ZoneId.systemDefault();

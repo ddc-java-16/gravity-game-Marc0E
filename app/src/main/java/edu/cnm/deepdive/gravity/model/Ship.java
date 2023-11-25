@@ -43,7 +43,6 @@ public class Ship {
   private void computeShipBox() {
     shipBox = new Rect(positionX - SHIP_SIZE, positionY - SHIP_SIZE /2, positionX + SHIP_SIZE,
         positionY + SHIP_SIZE/2);
-    //Log.d(getClass().getSimpleName(), shipBox.toString());
   }
 
   public void moveUp() {
@@ -60,27 +59,21 @@ public class Ship {
     }
   }
 
-//  public boolean canMove(){
-//   return shipBox.bottom >= gameField.getBoundingBox().bottom && shipBox.height() <= gameField.getBoundingBox().top; // FIXME: 11/8/23 Maybe I'll need to use left and right instead of bottom and top.
-//  }
+
 
   public boolean intersects(Rect intersect) {
-    //return shipBox.centerX() == intersect.centerX() && shipBox.centerY() == intersect.centerY();
     return shipBox.intersect(intersect);
   }
 
   public Projectile fire() {
 
     computeTrajectory(velocity);
-    // FIXME: 11/18/23 Pass x and y of ship
     Projectile projectile = new Projectile(positionX, positionY, xVelocity, yVelocity, gravity, gameField);
-   // projectile.fire();
     return projectile;
-    //projectile.fire(shipBox.height(),xVelocity, yVelocity, gravity);
   }
 
   public boolean canFire(Rect project) {
-    return !project.isEmpty(); // FIXME: 11/8/23 What would be the best way to determine if ship can fire another projectile or not.
+    return !project.isEmpty();
   }
 
 

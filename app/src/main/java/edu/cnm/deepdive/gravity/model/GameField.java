@@ -38,22 +38,15 @@ public class GameField {
     this.level = 0;
     this.counter = 0;
     boundingBox = new Rect(0, 0, x, y);
-    ship = new Ship(this, y, 40);
+    ship = new Ship(this, 150, 80);
     enemiesDestroyed = new LinkedList<>();
     meteorDestroyed = new LinkedList<>();
     meteors = new LinkedList<>();
     enemies = new LinkedList<>();
     rng = new Random();
-    //addMeteor();
-    //addEnemies();
-    //addProjectile();
-    //score
   }
 
-  public int changeGravity() {
-    // TODO: 10/24/23 If ship and meteor have the same position than gravity will change
-    throw new UnsupportedOperationException();
-  }
+
 
   public Ship getShip() {
     return ship;
@@ -119,18 +112,16 @@ public class GameField {
     for (int i = 0; i < 3; i++) {
       addEnemies();
     }
-    //addShip();
     addMeteor();
-    //addProjectile();
 
   }
 
-  public void shipFire() {
-    ship.setVelocity(velocity); // FIXME: 11/9/23 Input from user.
-    ship.setAngle(angle);       // FIXME: 11/9/23 Input from user.
-    ship.setGravity(gravity);   // FIXME: 11/9/23 This shouldn't be here.
-    projectile = ship.fire();
-  }
+//  public void shipFire() {
+//    ship.setVelocity(velocity); // FIXME: 11/9/23 Input from user.
+//    ship.setAngle(angle);       // FIXME: 11/9/23 Input from user.
+//    ship.setGravity(gravity);   // FIXME: 11/9/23 This shouldn't be here.
+//    projectile = ship.fire();
+//  }
 
   public void update() {
     for (Meteor meteor : meteors) {
@@ -181,14 +172,6 @@ public class GameField {
     }
   }
 
-//  public void addShip() {
-//    // FIXME: 11/16/23 How to know the X position of the ship, change new Rect().
-//    ship = new Ship(this, boundingBox.height() / 2, boundingBox.right + 30);
-//  }
-
-//  public void addProjectile() {
-//    projectile = new Projectile(ship.getShipBox().right, ship.getShipBox().top / 2);
-//  }
 
   public void shipMoveUp() {
     ship.moveUp();
@@ -215,10 +198,6 @@ public class GameField {
 
     do {
       intersection = false;
-//      meteor.setyPosition(
-//          rng.nextInt());
-      // FIXME: 11/9/23 How many meteors I'll create on each level?
-
       for (Meteor m : meteors) {
         if (m.inside(meteor.getMeteorBox())) {
           intersection = true;

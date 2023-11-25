@@ -21,6 +21,7 @@
     <activity
       android:exported="false"
       android:screenOrientation="landscape"
+      android:parentActivityName=".controller.MainActivity"
       android:name=".controller.GameActivity"/>
     <activity
       android:exported="true"

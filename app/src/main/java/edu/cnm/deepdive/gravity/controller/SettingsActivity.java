@@ -19,7 +19,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreference;
 import edu.cnm.deepdive.gravity.R;
+import edu.cnm.deepdive.gravity.databinding.ActivityGameBinding;
 
 /**
  * Hosts an instance of {@link SettingsFragment} to present a settings screen without any additional
@@ -27,10 +29,12 @@ import edu.cnm.deepdive.gravity.R;
  */
 public class SettingsActivity extends AppCompatActivity {
 
+  private SwitchPreference switchPreference;
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_settings);
+
   }
 
   /**

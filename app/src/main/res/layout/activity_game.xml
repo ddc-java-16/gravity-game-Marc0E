@@ -29,7 +29,8 @@
     android:minHeight="40dp"
     android:background="@drawable/ic_play"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="ContentDescription"/>
 
   <ImageButton
     android:id="@+id/pause"
@@ -40,7 +41,8 @@
     android:layout_margin="@dimen/half_dynamic_spacing"
     android:background="@drawable/ic_pause"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="ContentDescription"/>
 
   <Button
     android:id="@+id/move_up"
@@ -52,14 +54,14 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toTopOf="@id/shoot"
-    android:text="Up"/>
+    android:text="@string/up"/>
 
   <Button
     android:id="@+id/shoot"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
-    android:text="Shoot"
+    android:text="@string/shoot"
     android:fontFamily="@font/sports"
     android:textColor="@color/text_color"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -76,7 +78,7 @@
     app:layout_constraintTop_toBottomOf="@id/shoot"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    android:text="Down"/>
+    android:text="@string/down"/>
 
   <ImageView
     android:layout_width="40dp"
@@ -84,7 +86,7 @@
     android:id="@+id/profile_photo"
     android:layout_marginEnd="20dp"
     android:background="@android:drawable/ic_menu_gallery"
-    app:layout_constraintEnd_toStartOf="@id/counter_text"
+    app:layout_constraintEnd_toStartOf="@id/score_text"
     app:layout_constraintTop_toTopOf="@id/play"/>
 
 <!--  <ImageView-->
@@ -136,8 +138,8 @@
     android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
     app:layout_constraintBottom_toBottomOf="@id/play"
-    app:layout_constraintStart_toEndOf="@id/move_up"
-    android:text="Score: "/>
+    app:layout_constraintEnd_toStartOf="@id/score_value_text"
+    android:text="@string/score"/>
 
   <TextView
     android:id="@+id/score_value_text"
@@ -147,7 +149,7 @@
     android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
     app:layout_constraintBottom_toBottomOf="@id/play"
-    app:layout_constraintStart_toEndOf="@id/score_text"
+    app:layout_constraintEnd_toStartOf="@id/counter_text"
     tools:text="150"
     />
 

@@ -3,20 +3,20 @@ package edu.cnm.deepdive.gravity.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.GridView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import edu.cnm.deepdive.gravity.R;
+import edu.cnm.deepdive.gravity.databinding.ActivityGameBinding;
 import edu.cnm.deepdive.gravity.model.Enemy;
 import edu.cnm.deepdive.gravity.model.GameField;
 import edu.cnm.deepdive.gravity.model.Meteor;
-import java.util.ListIterator;
 
 public class GameFieldView extends View {
 
@@ -66,37 +66,52 @@ public class GameFieldView extends View {
 
       // TODO: 11/20/23 Draw the ship on canvas.
       if (gameField.getShip() != null) {
-        destination.set((int) (gameField.getShip().getShipBox().left * horizontalScale),
-            (int) (gameField.getShip().getShipBox().top * verticalScale),
-            (int) (gameField.getShip().getShipBox().right * horizontalScale),
-            (int) (gameField.getShip().getShipBox().bottom * verticalScale));
+        Rect shipBox = gameField.getShip().getShipBox();
+        destination.set((int) (shipBox.left * horizontalScale),
+            (int) (shipBox.top * verticalScale),
+            (int) (shipBox.right * horizontalScale),
+            (int) (shipBox.bottom * verticalScale));
         shipImage.setBounds(destination);
         shipImage.draw(canvas);
+//        Paint outlinePaint = new Paint();
+//        outlinePaint.setStyle(Paint.Style.STROKE);
+//        outlinePaint.setStrokeWidth(5); 
+//        outlinePaint.setColor(Color.RED);
+//        canvas.drawRect(destination, outlinePaint);
       }
 
       if (gameField.getProjectile() != null) {
-        destination.set((int) (gameField.getProjectile().getProjectileBox().left * horizontalScale),
-            (int) (gameField.getProjectile().getProjectileBox().top * verticalScale),
-            (int) (gameField.getProjectile().getProjectileBox().right * horizontalScale),
-            (int) (gameField.getProjectile().getProjectileBox().bottom * verticalScale));
+        Rect projectileBox = gameField.getProjectile().getProjectileBox();
+        destination.set((int) (projectileBox.left * horizontalScale),
+            (int) (projectileBox.top * verticalScale),
+            (int) (projectileBox.right * horizontalScale),
+            (int) (projectileBox.bottom * verticalScale));
         projectileImage.setBounds(destination);
         projectileImage.draw(canvas);
       }
 
       for (Meteor meteor : gameField.getMeteors()) {
-        destination.set((int) (meteor.getMeteorBox().left * horizontalScale),
-            (int) (meteor.getMeteorBox().top * verticalScale),
-            (int) (meteor.getMeteorBox().right * horizontalScale),
-            (int) (meteor.getMeteorBox().bottom * verticalScale));
+        Rect meteorBox = meteor.getMeteorBox();
+        destination.set((int) (meteorBox.left * horizontalScale),
+            (int) (meteorBox.top * verticalScale),
+            (int) (meteorBox.right * horizontalScale),
+            (int) (meteorBox.bottom * verticalScale));
         meteorImage.setBounds(destination);
         meteorImage.draw(canvas);
+
+//        Paint outlinePaint = new Paint();
+//        outlinePaint.setStyle(Paint.Style.STROKE);
+//        outlinePaint.setStrokeWidth(5);
+//        outlinePaint.setColor(Color.RED);
+//        canvas.drawRect(destination, outlinePaint);
       }
 
       for (Enemy enemy : gameField.getEnemies()) {
-        destination.set((int) (enemy.getEnemyBox().left * horizontalScale),
-            (int) (enemy.getEnemyBox().top * verticalScale),
-            (int) (enemy.getEnemyBox().right * horizontalScale),
-            (int) (enemy.getEnemyBox().bottom * verticalScale));
+        Rect enemyBox = enemy.getEnemyBox();
+        destination.set((int) (enemyBox.left * horizontalScale),
+            (int) (enemyBox.top * verticalScale),
+            (int) (enemyBox.right * horizontalScale),
+            (int) (enemyBox.bottom * verticalScale));
         enemyImage.setBounds(destination);
         enemyImage.draw(canvas);
       }
@@ -115,11 +130,13 @@ public class GameFieldView extends View {
     this.gameField = gameField;
   }
 
+
   private void loadResources(Resources resources) {
     shipImage = ResourcesCompat.getDrawable(resources, R.drawable.ship, null);
-    meteorImage = ResourcesCompat.getDrawable(resources, R.drawable.meteor, null);
+    meteorImage = ResourcesCompat.getDrawable(resources, R.drawable.meteor2, null);
     enemyImage = ResourcesCompat.getDrawable(resources, R.drawable.enemy, null);
     projectileImage = ResourcesCompat.getDrawable(resources, R.drawable.projectile9, null);
-    // TODO: 11/20/23 Load the other drawables.
   }
+
+
 }

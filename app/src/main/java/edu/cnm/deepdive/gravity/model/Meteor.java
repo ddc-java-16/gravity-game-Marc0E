@@ -7,7 +7,7 @@ import java.security.SecureRandom;
 public class Meteor {
 
   private Rect meteorBox;
-  private final int METEOR_SIZE = 80;
+  private final int METEOR_SIZE = 20;
   private SecureRandom rng;
   GameField gameField;
   private double gravity;
@@ -33,16 +33,9 @@ public class Meteor {
     return meteorBox.intersect(meteor);
   }
 
-  public boolean isInBounds() {
-    return xPosition >= 0;
-  }
 
-  public void velocity() {
-
-  }
-
-  public void updatePosition(int increment) {//FIXME: 11/20/23 Is there a better way to do it?
-    xPosition -= increment; // FIXME: 11/21/23 Increment should be more than one at a time.
+  public void updatePosition(int increment) {
+    xPosition -= increment;
     computeMeteor(xPosition, yPosition);
   }
 

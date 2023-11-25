@@ -65,7 +65,6 @@ public class PlayingFieldRepository {
 
   private boolean tick(boolean running) {
     boolean result;
-    System.out.println("ticker");
     gameField.update();
     if (gameField.isGameOver()) {
       result = false;
