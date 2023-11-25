@@ -17,7 +17,7 @@ order: 40
 
 ## Known deficiencies
 {: menu="Deficiencies" }
-* Game Over Screen: Missing screen or option to play again once the game ends.
+* Game Over Screen: Missing explicit screen or option for restarting the game once it ends; currently returns users to the main screen.
 * Settings Functionality: Placeholder for future features; currently does not provide sound or profile customization options.
 * Enhancements for Settings: Future implementation required for sound and profile customization options.
 * Potential Improvements: Further refining of UI elements for better user interaction.

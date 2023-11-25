@@ -25,6 +25,7 @@
   <color name="disabled">#808080</color>
 
   <color name="text_color">#FFFFFF</color>
+<color name="text_color_black">#000000</color>
 
   <color name="background_odd">#1D5E07FA</color>
   <color name="even_row_background">@android:color/transparent</color>

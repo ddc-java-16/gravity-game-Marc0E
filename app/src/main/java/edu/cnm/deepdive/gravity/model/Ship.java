@@ -80,7 +80,7 @@ public class Ship {
   public void computeTrajectory(double velocity) {
     shipPosition = shipBox.height();
     xVelocity = (velocity * Math.cos(Math.toRadians(angle)));
-    yVelocity = (velocity * Math.sin(Math.toRadians(angle)));
+    yVelocity = - (velocity * Math.sin(Math.toRadians(angle)));
     //gravity = gameField.getMeteor().getGravity();
     totalFlyingTime =
         -yVelocity - (Math.sqrt(Math.pow(yVelocity, 2) - (4 * shipPosition * 0.5 * gravity))

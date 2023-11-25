@@ -10,11 +10,23 @@ order: 30
 ## Build instructions
 {: menu="Build" }
 
+    Clone/Download the Repository
+        Clone or download the project repository from the provided source.
+
+    Import Project into Android Studio/IntelliJ IDEA
+        Open Android Studio/IntelliJ IDEA.
+        Select "Open an Existing Project" and navigate to the downloaded repository.
+        Import the project into the IDE.
+
+    Execute the Build
+        Ensure the project configuration is set up correctly.
+        Resolve any dependencies and ensure required SDKs are installed.
+        Build and run the project to ensure all components are functional.
+
 
 ## User instructions
 {: menu="User" }
 
-Welcome to the App!
 Navigation Panel
 
     Play: Enter the game interface to control the ship, shoot projectiles, and track your scores and progress.

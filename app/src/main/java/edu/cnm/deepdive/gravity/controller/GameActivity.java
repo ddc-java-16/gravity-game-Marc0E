@@ -116,7 +116,7 @@ public class GameActivity extends AppCompatActivity {
     });
 
     binding.gravity.setBackgroundColor(Color.parseColor("#FFFFFF"));
-    binding.gravity.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
+    binding.gravity.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_item,
         getResources().getStringArray(R.array.gravity_array)));
     binding.gravity.setOnItemSelectedListener(new OnItemSelectedListener() {
       @Override
@@ -200,6 +200,7 @@ public class GameActivity extends AppCompatActivity {
           Log.d(getClass().getSimpleName(), "inProgress=" + inProgress);
           if (Boolean.TRUE.equals(this.inProgress) && Boolean.FALSE.equals(inProgress)) {
             addScores();
+            finish();
           }
           this.inProgress = inProgress;
         });
