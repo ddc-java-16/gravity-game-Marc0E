@@ -1,6 +1,7 @@
 edu.cnm.deepdive.gravity
 edu.cnm.deepdive.gravity.controller
 edu.cnm.deepdive.gravity.hilt
+edu.cnm.deepdive.gravity.model
 edu.cnm.deepdive.gravity.model.dao
 edu.cnm.deepdive.gravity.model.entity
 edu.cnm.deepdive.gravity.service
