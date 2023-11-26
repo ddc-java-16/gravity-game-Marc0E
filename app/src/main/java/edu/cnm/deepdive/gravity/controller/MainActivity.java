@@ -17,9 +17,12 @@ package edu.cnm.deepdive.gravity.controller;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
   private LoginViewModel loginViewModel;
   private UserViewModel userViewModel;
+  MediaPlayer mediaPlayer;
+  MediaPlayer mediaPlayer2;
   Button playButton;
   Button settingsButton;
   Button scoresButton;
@@ -60,32 +65,52 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    mediaPlayer = MediaPlayer.create(this, R.raw.main_menu);
+    mediaPlayer.start();
     setupNavigation();
     setupViewModels();
 
     playButton = findViewById(R.id.play);
     playButton.setOnClickListener((v) -> {
       Intent intent = new Intent(this, GameActivity.class);
+      mediaPlayer = MediaPlayer.create(this, R.raw.onclick);
+      mediaPlayer.start();
       startActivity(intent);
     });
 
     settingsButton = findViewById(R.id.settings);
     settingsButton.setOnClickListener((v) -> {
       Intent intent = new Intent(this, SettingsActivity.class);
+      mediaPlayer = MediaPlayer.create(this, R.raw.onclick);
+      mediaPlayer.start();
       startActivity(intent);
     });
 
     scoresButton = findViewById(R.id.scores);
     scoresButton.setOnClickListener((v) -> {
       Intent intent = new Intent(this, ScoresActivity.class);
+      mediaPlayer = MediaPlayer.create(this, R.raw.onclick);
+      mediaPlayer.start();
       startActivity(intent);
 
     });
 
     exitButton = findViewById(R.id.exit);
     exitButton.setOnClickListener((v) -> {
+      mediaPlayer = MediaPlayer.create(this, R.raw.onclick);
+      mediaPlayer.start();
       finish();
     });
+  }
+
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (mediaPlayer != null) {
+      mediaPlayer.release();
+      mediaPlayer = null;
+    }
   }
 
   @Override

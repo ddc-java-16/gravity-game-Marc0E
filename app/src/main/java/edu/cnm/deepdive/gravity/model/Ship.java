@@ -152,9 +152,9 @@ public class Ship {
 //    return positionX;
 //  }
 
-//  public int getPositionY() {
-//    return positionY;
-//  }
+  public int getPositionY() {
+    return positionY;
+  }
 
   /***
    * Retrieves the bounding box of the ship.

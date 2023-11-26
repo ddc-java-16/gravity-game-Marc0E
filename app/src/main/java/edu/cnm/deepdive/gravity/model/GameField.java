@@ -205,7 +205,7 @@ public class GameField {
         break;
       }
     }
-    if (rng.nextDouble() < BASED_METEOR_PROBABILITY * 1) {
+    if (rng.nextDouble() < BASED_METEOR_PROBABILITY * level/2) {
       addMeteor();
     }
     if (projectile != null) {

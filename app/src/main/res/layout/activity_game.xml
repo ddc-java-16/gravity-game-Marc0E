@@ -209,7 +209,7 @@
     android:layout_height="wrap_content"
     app:layout_constraintBottom_toTopOf="@id/velocity"
     app:layout_constraintStart_toStartOf="@id/velocity"
-    android:fontFamily="@font/font_family"
+    android:fontFamily="@font/sports"
     android:textColor="@color/text_color"
     android:text="@string/velocity"/>
 
@@ -236,7 +236,7 @@
     android:layout_height="wrap_content"
     app:layout_constraintBottom_toTopOf="@id/angle"
     app:layout_constraintStart_toStartOf="@id/angle"
-    android:fontFamily="@font/font_family"
+    android:fontFamily="@font/sports"
     android:textColor="@color/text_color"
     android:text="@string/angle"/>
 
@@ -265,7 +265,7 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="@id/gravity"
     app:layout_constraintEnd_toStartOf="@id/gravity"
-    android:fontFamily="@font/font_family"
+    android:fontFamily="@font/sports"
     android:textColor="@color/text_color"
     android:text="@string/gravity"/>
 

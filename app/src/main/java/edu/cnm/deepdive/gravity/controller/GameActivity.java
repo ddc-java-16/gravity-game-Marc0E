@@ -1,13 +1,9 @@
 package edu.cnm.deepdive.gravity.controller;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.app.Activity;
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,11 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.slider.Slider.OnChangeListener;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -44,6 +38,8 @@ public class GameActivity extends AppCompatActivity {
 
   GameField gameField;
   ImageView imageViewPhoto;
+  MediaPlayer mediaPlayer;
+  MediaPlayer mediaPlayer2;
   private GameFieldView gameFieldView;
   int background = 1;
   ImageView imageViewShip;
@@ -54,6 +50,7 @@ public class GameActivity extends AppCompatActivity {
   int Measuredheight = 0;
   Boolean inProgress;
   int score;
+  int counter = 1;
   GameFieldViewModel gameFieldViewModel;
   private ActivityGameBinding binding;
   private UserViewModel userViewModel;
@@ -61,13 +58,11 @@ public class GameActivity extends AppCompatActivity {
   private User currentUser;
 
 
-
   @Override
   public boolean onTouchEvent(MotionEvent event) {
     imageViewPhoto = findViewById(R.id.profile_photo);
     return super.onTouchEvent(event);
   }
-
 
 
   @Override
@@ -79,6 +74,19 @@ public class GameActivity extends AppCompatActivity {
     gameButtons();
   }
 
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (mediaPlayer != null) {
+      mediaPlayer.release();
+      mediaPlayer = null;
+    }
+    if (mediaPlayer2 != null) {
+      mediaPlayer2.release();
+      mediaPlayer2 = null;
+    }
+  }
+
   private void gameButtons() {
     binding.play.setOnClickListener((view) -> {
       gameFieldViewModel.run();
@@ -88,6 +96,8 @@ public class GameActivity extends AppCompatActivity {
       binding.moveDown.setEnabled(true);
       binding.shoot.setEnabled(true);
       binding.play.setVisibility(View.INVISIBLE);
+      mediaPlayer2 = MediaPlayer.create(this, R.raw.intro);
+      mediaPlayer2.start();
     });
     binding.pause.setOnClickListener((view) -> {
       binding.play.setVisibility(View.VISIBLE);
@@ -99,7 +109,11 @@ public class GameActivity extends AppCompatActivity {
     });
     binding.moveUp.setOnClickListener((view) -> gameFieldViewModel.shipMoveUp());
     binding.moveDown.setOnClickListener((view) -> gameFieldViewModel.shipMoveDown());
-    binding.shoot.setOnClickListener((view) -> gameFieldViewModel.shoot());
+    binding.shoot.setOnClickListener((view) -> {
+      gameFieldViewModel.shoot();
+      mediaPlayer = MediaPlayer.create(this, R.raw.shoot);
+      mediaPlayer.start();
+    });
     binding.velocity.addOnChangeListener(new OnChangeListener() {
       @Override
       public void onValueChange(@NonNull @NotNull Slider slider, float value, boolean fromUser) {
@@ -182,12 +196,17 @@ public class GameActivity extends AppCompatActivity {
           binding.level.setText(String.valueOf(level));
           binding.counter.setText(String.valueOf(gameField.getCounter()));
           score = gameField.getCounter() * 50;
+          if(this.counter == gameField.getCounter()){
+            mediaPlayer = MediaPlayer.create(this, R.raw.explosion2);
+            mediaPlayer.start();
+            this.counter++;
+          }
           binding.scoreValueText.setText(String.valueOf(score));
           Drawable b = switch ((level - 1) % 3 + 1) {
             case 1 ->
                 ResourcesCompat.getDrawable(getResources(), R.drawable.play_background1, null);
-            case 2 -> ResourcesCompat.getDrawable(getResources(), R.drawable.img, null);
-            case 3 -> ResourcesCompat.getDrawable(getResources(), R.drawable.img_1, null);
+            case 2 -> ResourcesCompat.getDrawable(getResources(), R.drawable.img_1, null);
+            case 3 -> ResourcesCompat.getDrawable(getResources(), R.drawable.img, null);
             default -> null;
           };
           if (b != null) {
@@ -207,7 +226,6 @@ public class GameActivity extends AppCompatActivity {
     setupUserViewModel(viewModelProvider, this);
     setupScoreViewModel(viewModelProvider, this);
   }
-
 
 
   private void setupUserViewModel(ViewModelProvider provider, LifecycleOwner owner) {
