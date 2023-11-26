@@ -1,7 +1,7 @@
-edu.cnm.deepdive.appstarter
-edu.cnm.deepdive.appstarter.controller
-edu.cnm.deepdive.appstarter.hilt
-edu.cnm.deepdive.appstarter.model.dao
-edu.cnm.deepdive.appstarter.model.entity
-edu.cnm.deepdive.appstarter.service
-edu.cnm.deepdive.appstarter.viewmodel
+edu.cnm.deepdive.gravity
+edu.cnm.deepdive.gravity.controller
+edu.cnm.deepdive.gravity.hilt
+edu.cnm.deepdive.gravity.model.dao
+edu.cnm.deepdive.gravity.model.entity
+edu.cnm.deepdive.gravity.service
+edu.cnm.deepdive.gravity.viewmodel
