@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import com.google.gson.annotations.Expose;
 import java.util.Objects;
 
-/***
+/**
  * Represents a projectile within the game.
  * Projectiles are objects fired from the player's ship to interact with game elements.
  */
@@ -30,7 +30,7 @@ public class Projectile {
   private boolean move;
   private static final String TO_STRING_FORMAT = "%1$s[key=%2$s, name=%3$s, move=%4$s]";
 
-  /***
+  /**
    * Retrieves the X-coordinate position of the projectile.
    * @return The X-coordinate position of the projectile.
    */
@@ -39,7 +39,7 @@ public class Projectile {
   }
 
 
-  /***
+  /**
    * Retrieves the Y-coordinate position of the projectile.
    * @return The Y-coordinate position of the projectile.
    */
@@ -47,7 +47,7 @@ public class Projectile {
     return positionY;
   }
 
-  /***
+  /**
    * Retrieves the bounding box of the projectile.
    * @return The Rect object representing the bounding box of the projectile.
    */
@@ -55,7 +55,7 @@ public class Projectile {
     return projectileBox;
   }
 
-  /***
+  /**
    * Constructs a Projectile object with specified parameters.
    * @param positionX   The initial X-coordinate position of the projectile.
    * @param positionY   The initial Y-coordinate position of the projectile.
@@ -90,7 +90,7 @@ public class Projectile {
     //Log.d(getClass().getSimpleName(), projectileBox.toString());
   }
 
-  /***
+  /**
    * Checks if the current projectile intersects with an enemy.
    * @param other The Rect object representing the bounding box of the enemies.
    * @return {@code true} if there is an intersection; {@code false} otherwise.
@@ -116,7 +116,7 @@ public class Projectile {
 //    }
 //  }
 
-  /***
+  /**
    * Updates the position of the projectile within the game field.
    * Handles the projectile's movement based on its velocity and gravity.
    */

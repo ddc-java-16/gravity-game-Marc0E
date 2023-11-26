@@ -4,7 +4,7 @@ import android.graphics.Rect;
 import android.util.Log;
 import java.security.SecureRandom;
 
-/***
+/**
  * Represents a meteor object within the game field.
  * Meteors are elements that pose a threat to the player's ship.
  */
@@ -19,7 +19,7 @@ public class Meteor {
   private int yPosition;
 
 
-  /***
+  /**
    * Constructs a meteor object within the game field.
    * @param gameField  The game field in which the meteor exists.
    * @param positionX  The X-coordinate position of the meteor.
@@ -39,7 +39,7 @@ public class Meteor {
     //Log.d(getClass().getSimpleName(), meteorBox.toString());
   }
 
-  /***
+  /**
    *
    * @param meteor Implementation details to check if the provided rectangle overlaps with this meteor's rectangle.
    * @return Return true if there is an overlap, false otherwise.
@@ -48,7 +48,7 @@ public class Meteor {
     return meteorBox.intersect(meteor);
   }
 
-  /***
+  /**
    * Updates the position of the object within the game field by the given increment.
    * @param increment The amount by which to increment the object's position.
    */
@@ -61,7 +61,7 @@ public class Meteor {
     return yPosition;
   }
 
-  /***
+  /**
    * Retrieves the bounding box of the meteor.
    * @return The Rect object representing the bounding box of the meteor.
    */

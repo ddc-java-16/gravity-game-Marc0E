@@ -14,7 +14,7 @@ public class Enemy {
   private int yPosition;
   private SecureRandom rng;
 
-  /***
+  /**
    * Constructs an enemy object within the game field.
    * @param gameField The game field in which the enemy exists.
    * @param positionY The Y-coordinate position of the enemy.
@@ -25,7 +25,7 @@ public class Enemy {
     this.enemyBox = new Rect(positionX - ENEMY_SIZE /2, positionY - ENEMY_SIZE/2 , positionX + ENEMY_SIZE /2 , positionY + ENEMY_SIZE );
   }
 
-  /***
+  /**
    *
    * @param enemy Implementation details to check if the provided rectangle overlaps with this enemy's rectangle.
    * @return Return true if there is an overlap, false otherwise.
@@ -41,7 +41,7 @@ public class Enemy {
 //  public void move() { // TODO: 10/24/23 Not sure if it'll move or not.
 //  }
 
-  /***
+  /**
    *
    * @return The bounding box (Rect) defining the position and size of this enemy within the game field.
    */

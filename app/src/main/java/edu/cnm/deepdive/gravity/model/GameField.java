@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 
-/***
+/**
  * Represents the game field where gameplay occurs.
  * Manages game elements such as the ship, enemies, and meteors.
  */
@@ -38,7 +38,7 @@ public class GameField {
   private List<Enemy> enemiesDestroyed;
   private List<Meteor> meteorDestroyed;
 
-  /***
+  /**
    * Constructs a GameField object with the specified dimensions.
    * @param x The width of the game field.
    * @param y The height of the game field.
@@ -56,7 +56,7 @@ public class GameField {
   }
 
 
-  /***
+  /**
    * Retrieves the ship object within the game field.
    * @return The Ship object representing the player's ship.
    */
@@ -67,7 +67,7 @@ public class GameField {
 //  public int getCollision() {
 //    return collision;
 //  }
-  /***
+  /**
    * Retrieves the projectile object within the game field.
    * @return The Projectile object.
    */
@@ -75,7 +75,7 @@ public class GameField {
     return projectile;
   }
 
-  /***
+  /**
    * Retrieves the bounding box of the object.
    * @return The Rect object representing the bounding box of the game field.
    */
@@ -83,7 +83,7 @@ public class GameField {
     return boundingBox;
   }
 
-  /***
+  /**
    * Retrieves the level.
    * @return int number of the currently level.
    */
@@ -91,7 +91,7 @@ public class GameField {
     return level;
   }
 
-  /***
+  /**
    * Retrieves the counter of enemies destroyed.
    * @return int number of enemies destroyed.
    */
@@ -99,7 +99,7 @@ public class GameField {
     return counter;
   }
 
-  /***
+  /**
    * Retrieves the gravity selected by user in the UI.
    * @return representation of gravity in the format of double.
    */
@@ -107,7 +107,7 @@ public class GameField {
     return gravity;
   }
 
-  /***
+  /**
    * Sets the gravitational force affecting game elements.
    * @param gravity The value representing the gravitational force.
    */
@@ -115,7 +115,7 @@ public class GameField {
     this.gravity = gravity;
   }
 
-  /***
+  /**
    * Retrieves the list of meteors present within the game field.
    * @return A List of Meteor objects representing the meteors in the game field.
    */
@@ -123,7 +123,7 @@ public class GameField {
     return meteors;
   }
 
-  /***
+  /**
    * Retrieves the list of enemies present within the game field.
    * @return A List of Enemy objects representing the enemies in the game field.
    */
@@ -139,7 +139,7 @@ public class GameField {
 //    return secondsPerTick;
 //  }
 
-  /***
+  /**
    * Sets the velocity of the projectile based on user selection.
    * @param velocity The value representing the velocity of the projectile.
    */
@@ -147,7 +147,7 @@ public class GameField {
     this.velocity = velocity;
   }
 
-  /***
+  /**
    * Sets the angle of the projectile based on user selection.
    * @param angle The value representing the angle of the projectile.
    */
@@ -155,7 +155,7 @@ public class GameField {
     this.angle = angle;
   }
 
-  /***
+  /**
    * Starts a game session at the specified level.
    * @param level The level at which to start the game session.
    */
@@ -179,7 +179,7 @@ public class GameField {
 //  }
 
 
-  /***
+  /**
    * Updates game elements, handles collisions, and manages game state.
    * - Updates the meteor list and enemy list.
    * - Checks if the enemy list is empty and adds more enemies to the game field.
@@ -236,7 +236,7 @@ public class GameField {
   }
 
 
-  /***
+  /**
    * Moves the ship upwards.
    * Invokes the ship's movement method to move upward within the game field.
    */
@@ -244,7 +244,7 @@ public class GameField {
     ship.moveUp();
   }
 
-  /***
+  /**
    * Moves the ship downwards.
    * Invokes the ship's movement method to move downward within the game field.
    */
@@ -252,7 +252,7 @@ public class GameField {
     ship.moveDown();
   }
 
-  /***
+  /**
    * Initiates the shooting action of the ship.
    * - Sets the gravity, angle, and velocity of the projectile fired by the ship.
    * - Fires the projectile from the ship.
@@ -265,7 +265,7 @@ public class GameField {
     projectile = ship.fire();
   }
 
-  /***
+  /**
    * Adds a meteor to the game field while preventing intersection with existing meteors.
    */
   public void addMeteor() {
@@ -289,8 +289,8 @@ public class GameField {
     meteors.add(meteor);
   }
 
-  /***
-   * Adds a enemies to the game field while preventing intersection with existing enemies.
+  /**
+   * Adds an enemy to the game field while preventing intersection with existing enemies.
    */
   public void addEnemies() {
     boolean intersection;
@@ -320,7 +320,7 @@ public class GameField {
 //  }
 
 
-  /***
+  /**
    * Updates the game level, enemy count, and object velocities based on gameplay progression.
    * Increases the level when the number of enemies destroyed reaches 3 times the current level.
    * Adjusts object velocities depending on the updated level.
@@ -335,7 +335,7 @@ public class GameField {
   }
 
 
-  /***
+  /**
    * Checks if the game is over based on specific conditions.
    * @return {@code true} if the game is over; {@code false} otherwise.
    * The game is considered over when the ship object is null and the level is greater than zero.

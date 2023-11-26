@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.Objects;
 
-/***
+/**
  * Represents the player's ship within the game.
  * Manages ship movement, shooting, and interaction with game elements.
  */
@@ -34,7 +34,7 @@ public class Ship {
   private double gravity;
 
 
-  /***
+  /**
    * Constructs a Ship object at a specified position within the game field.
    * @param gameField The game field in which the ship exists.
    * @param y         The Y-coordinate position of the ship.
@@ -77,7 +77,7 @@ public class Ship {
   }
 
 
-  /***
+  /**
    * Checks if the current object's bounding box intersects with another rectangle (meteor).
    * @param intersect The Rect object representing the meteor bounding rectangle.
    * @return {@code true} if there is an intersection; {@code false} otherwise.
@@ -86,7 +86,7 @@ public class Ship {
     return shipBox.intersect(intersect);
   }
 
-  /***
+  /**
    * Fires a projectile from the ship.
    * @return The fired projectile object.
    */
@@ -102,7 +102,7 @@ public class Ship {
 //  }
 
 
-  /***
+  /**
    * Computes the trajectory of the projectile based on the given velocity.
    * @param velocity The velocity of the projectile.
    */
@@ -120,7 +120,7 @@ public class Ship {
 //    return velocity;
 //  }
 
-  /***
+  /**
    * Sets the velocity value the ship will use for the projectile.
    * @param velocity The velocity value to be set.
    */
@@ -132,7 +132,7 @@ public class Ship {
 //    return angle;
 //  }
 
-  /***
+  /**
    * Sets the angle value the ship will use for the projectile.
    * @param angle The angle value to be set.
    */
@@ -140,7 +140,7 @@ public class Ship {
     this.angle = angle;
   }
 
-  /***
+  /**
    * Sets the gravity value the ship will use for the projectile.
    * @param gravity The gravity value to be set.
    */
@@ -156,7 +156,7 @@ public class Ship {
     return positionY;
   }
 
-  /***
+  /**
    * Retrieves the bounding box of the ship.
    * @return The Rect object representing the bounding box of the ship.
    */
