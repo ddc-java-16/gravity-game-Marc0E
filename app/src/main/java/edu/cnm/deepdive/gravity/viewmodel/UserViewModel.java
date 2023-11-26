@@ -17,6 +17,12 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import java.util.List;
 import javax.inject.Inject;
 
+/**
+ * Provides access (for a UI controller or data-bound view) to the {@link User} entity instance
+ * corresponding to the current signed-in user, a user specified by its unique identifier (primary
+ * key value), and the full collection of users who have signed in to the app. This access includes
+ * persistence operations on individual {@link User} entity instances.
+ */
 @HiltViewModel
 public class UserViewModel extends ViewModel implements DefaultLifecycleObserver {
 
@@ -40,6 +46,10 @@ public class UserViewModel extends ViewModel implements DefaultLifecycleObserver
     fetchCurrentUser();
   }
 
+  /**
+   * Returns {@link LiveData} containing the {@link User} entity instance for the current signed-in
+   * user.
+   */
   public LiveData<User> getCurrentUser() {
     return currentUser;
   }
@@ -48,9 +58,17 @@ public class UserViewModel extends ViewModel implements DefaultLifecycleObserver
     this.userId.setValue(userId);
   }
 
+  /**
+   * Returns {@link LiveData} containing the {@link User} entity instance specified in the most
+   * recent invocation of {@link #setUserId(long)}. If there are any
+   * {@link androidx.lifecycle.Observer observers} of the result returned by this method, the
+   * retrieval will be performed automatically on invocation of {@link #setUserId(long)}, and the
+   * observers will be invoked (asynchronously) with the result.
+   */
   public LiveData<User> getUser() {
     return user;
   }
+
 
   public LiveData<List<User>> getUsers() {
     return repository.getAll();
