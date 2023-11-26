@@ -40,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
   ImageView imageViewPhoto;
   MediaPlayer mediaPlayer;
   MediaPlayer mediaPlayer2;
-  private GameFieldView gameFieldView;
+  MediaPlayer mediaPlayer3;
   int background = 1;
   ImageView imageViewShip;
   TextView levelView;
@@ -70,6 +70,7 @@ public class GameActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     binding = ActivityGameBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
+    mediaPlayer3 = MediaPlayer.create(this, R.raw.explosion2);
     setup();
     gameButtons();
   }
@@ -85,6 +86,11 @@ public class GameActivity extends AppCompatActivity {
       mediaPlayer2.release();
       mediaPlayer2 = null;
     }
+    if (mediaPlayer3 != null) {
+      mediaPlayer3.release();
+      mediaPlayer3 = null;
+    }
+
   }
 
   private void gameButtons() {
@@ -107,7 +113,9 @@ public class GameActivity extends AppCompatActivity {
       binding.pause.setVisibility(View.INVISIBLE);
       gameFieldViewModel.paused();
     });
-    binding.moveUp.setOnClickListener((view) -> gameFieldViewModel.shipMoveUp());
+    binding.moveUp.setOnClickListener((view) -> {
+      gameFieldViewModel.shipMoveUp();
+    });
     binding.moveDown.setOnClickListener((view) -> gameFieldViewModel.shipMoveDown());
     binding.shoot.setOnClickListener((view) -> {
       gameFieldViewModel.shoot();
@@ -218,6 +226,9 @@ public class GameActivity extends AppCompatActivity {
         .observe(this, (inProgress) -> {
           Log.d(getClass().getSimpleName(), "inProgress=" + inProgress);
           if (Boolean.TRUE.equals(this.inProgress) && Boolean.FALSE.equals(inProgress)) {
+            Drawable b = ResourcesCompat.getDrawable(getResources(), R.drawable.play_background1, null);
+            binding.gameConstraint.setBackground(b);
+            mediaPlayer3.start();
             addScores();
             finish();
           }

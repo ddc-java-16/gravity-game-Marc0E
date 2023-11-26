@@ -59,7 +59,7 @@ public class Ship {
    * upward direction.
    */
   public void moveUp() {
-    if (positionY - 1 - SHIP_SIZE / 2 > gameField.getBoundingBox().top) {
+    if (positionY  - SHIP_SIZE > gameField.getBoundingBox().top - 5) {
       positionY -= 10;
       computeShipBox();
     }
@@ -70,7 +70,7 @@ public class Ship {
    * downward direction.
    */
   public void moveDown() {
-    if ((positionY + 1 - SHIP_SIZE / 2 < gameField.getBoundingBox().bottom)) {
+    if (positionY - SHIP_SIZE / 2 < gameField.getBoundingBox().bottom - SHIP_SIZE - 5) {
       positionY += 10;
       computeShipBox();
     }

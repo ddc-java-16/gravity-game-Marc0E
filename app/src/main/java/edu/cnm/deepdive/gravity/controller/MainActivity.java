@@ -31,6 +31,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.gravity.R;
+import edu.cnm.deepdive.gravity.model.GameField;
 import edu.cnm.deepdive.gravity.model.entity.Score;
 import edu.cnm.deepdive.gravity.viewmodel.LoginViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.PreferencesViewModel;
@@ -53,9 +54,8 @@ import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
 public class MainActivity extends AppCompatActivity {
 
   private LoginViewModel loginViewModel;
-  private UserViewModel userViewModel;
   MediaPlayer mediaPlayer;
-  MediaPlayer mediaPlayer2;
+  GameField gameField;
   Button playButton;
   Button settingsButton;
   Button scoresButton;

@@ -91,6 +91,7 @@ public class GameField {
     return level;
   }
 
+
   /**
    * Retrieves the counter of enemies destroyed.
    * @return int number of enemies destroyed.
@@ -201,7 +202,7 @@ public class GameField {
         collision++;
         ship = null;
         meteorDestroyed.add(meteor);
-        iterator.remove();
+          iterator.remove();
         break;
       }
     }
@@ -213,7 +214,7 @@ public class GameField {
 
       if (projectile.getPositionY() >= boundingBox.bottom
           || projectile.getPositionX() >= boundingBox.right) {
-        projectile = null;// TODO: 11/13/23 Remove the projectile.
+        projectile = null;
       } else {
         for (ListIterator<Enemy> iterator = enemies.listIterator(); iterator.hasNext(); ) {
           Enemy enemy = iterator.next();
@@ -273,7 +274,7 @@ public class GameField {
     Meteor meteor = new Meteor(this,
         boundingBox.right - 20,
         boundingBox.top + rng.nextInt(
-            boundingBox.height())); // FIXME: 11/13/23 I think it should be boundingBox.bottom.
+            boundingBox.height()));
 
     do {
       intersection = false;
