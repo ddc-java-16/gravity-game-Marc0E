@@ -77,10 +77,13 @@ Compatibility Testing:
 * Tested on Pixel 6a API 31 emulator and Pixel 7 API 33 emulator for Android versions and hardware compatibility.
 Minimum SDK Requirement:
 * Requires a minimum SDK version of 28 for optimal performance and functionality.
+
 Landscape Orientation Requirement:
 * The game exclusively supports landscape orientation for an immersive gameplay experience.
+
 Technology Stack:
 * Implementation utilizing ReactiveX for efficient data handling.
 * Integrated Google Sign-In functionality.
+
 Internet Dependency:
 * The app relies on internet access for Google Sign-In functionality; without it, the app's core features will not be accessible.
