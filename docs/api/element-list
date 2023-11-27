@@ -1,8 +1,12 @@
 edu.cnm.deepdive.gravity
+edu.cnm.deepdive.gravity.adapter
 edu.cnm.deepdive.gravity.controller
+edu.cnm.deepdive.gravity.databinding
 edu.cnm.deepdive.gravity.hilt
 edu.cnm.deepdive.gravity.model
 edu.cnm.deepdive.gravity.model.dao
 edu.cnm.deepdive.gravity.model.entity
+edu.cnm.deepdive.gravity.model.pojo
 edu.cnm.deepdive.gravity.service
+edu.cnm.deepdive.gravity.view
 edu.cnm.deepdive.gravity.viewmodel
