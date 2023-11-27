@@ -38,9 +38,10 @@ Play Screen
 
 * Game Interface: Engage in gameplay, control your ship, and shoot projectiles, destroy enemies and avoid meteors.
 * Control Buttons: Use buttons to move the ship and shoot projectiles.
-* Projectile Configuration: Adjust velocity and angle via spinners.
+* Projectile Configuration: Adjust velocity and angle via sliders.
 * Play/Pause Control: Manage the game state with the play/pause button.
 * Game Statistics: Keep track of destroyed enemies and your scores.
+* To progress to the next level, the user is tasked with defeating a number of adversaries equal to three times the current level.
 
 High Scores Screen
 

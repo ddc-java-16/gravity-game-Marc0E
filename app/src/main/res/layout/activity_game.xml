@@ -84,8 +84,9 @@
     android:layout_width="40dp"
     android:layout_height="40dp"
     android:id="@+id/profile_photo"
-    android:layout_marginEnd="20dp"
     android:background="@android:drawable/ic_menu_gallery"
+    app:layout_constraintHorizontal_chainStyle="packed"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/score_text"
     app:layout_constraintTop_toTopOf="@id/play"/>
 
@@ -137,6 +138,7 @@
     android:textColor="@color/text_color"
     android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintStart_toEndOf="@id/profile_photo"
     app:layout_constraintBottom_toBottomOf="@id/play"
     app:layout_constraintEnd_toStartOf="@id/score_value_text"
     android:text="@string/score"/>
@@ -148,6 +150,7 @@
     android:textColor="@color/text_color"
     android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintStart_toEndOf="@id/score_text"
     app:layout_constraintBottom_toBottomOf="@id/play"
     app:layout_constraintEnd_toStartOf="@id/counter_text"
     tools:text="150"
@@ -161,6 +164,7 @@
     android:tooltipText="Counter"
     android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintStart_toEndOf="@id/score_value_text"
     app:layout_constraintBottom_toBottomOf="@id/play"
     app:layout_constraintEnd_toStartOf="@id/counter"
     android:text="@string/enemies"/>
@@ -174,6 +178,7 @@
     android:tooltipText="Counter"
     android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintStart_toEndOf="@id/counter_text"
     app:layout_constraintEnd_toStartOf="@id/level_text"
     app:layout_constraintBottom_toBottomOf="@id/play"
     tools:text="5"/>
@@ -186,6 +191,7 @@
     android:text="@string/level"
     android:fontFamily="@font/sports"
     android:layout_margin="@dimen/half_dynamic_spacing"
+    app:layout_constraintStart_toEndOf="@id/counter"
     app:layout_constraintBottom_toBottomOf="@id/play"
     app:layout_constraintEnd_toStartOf="@id/level"/>
 
@@ -199,6 +205,7 @@
     android:layout_marginEnd="30dp"
     android:tooltipText="Counter"
     android:fontFamily="@font/sports"
+    app:layout_constraintStart_toEndOf="@id/level_text"
     app:layout_constraintEnd_toStartOf="@id/play"
     app:layout_constraintBottom_toBottomOf="@id/play"
     tools:text="1"/>
