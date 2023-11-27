@@ -115,7 +115,7 @@ dependencies {
     implementation(libs.room.rx.java)
 
     // Gson (Google JSON parser) library
-    implementation(libs.gson)
+    //implementation(libs.gson)
 
     // Google Sign-in library
     implementation(libs.play.auth)
