@@ -6,9 +6,9 @@ This is a project template for all phases&mdash;from proposal to final delivery&
 
 ## Credits, copyrights, and license information
 
-Written by Nicholas Bennett and Todd Nordquist.
+Written by Marco Estrada.
 
-&copy; 2022 CNM Ingenuity, Inc.
+&copy; 2023 CNM Ingenuity, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
