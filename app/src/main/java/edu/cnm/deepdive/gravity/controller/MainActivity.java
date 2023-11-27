@@ -33,17 +33,14 @@ import edu.cnm.deepdive.gravity.viewmodel.LoginViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.PreferencesViewModel;
 
 /**
- * Serves as a basic container activity&mdash;that is, it presents no UI elements of its own (apart
- * from an options menu), but hosts a {@link NavHostFragment} for presentation of one or more
- * {@link androidx.fragment.app.Fragment} instances, associated with a navigation graph.
- * <p>In addition to the navigation host role, this activity demonstrates the
- * handling of:</p>
- * <ul><li><p>user sign-out (initiated by selection of an options menu item), with automatic
- * navigation back to {@link LoginActivity} on completion of the sign-out;</p></li>
- * <li><p>user-initiated navigation to {@link SettingsActivity};</p></li>
- * <li><p>updates of UI {@link android.view.View} widget properties based on preference values
- * (obtained from {@link PreferencesViewModel});</p></li>
- * <li><p>key events in the permissions request flow.</p></li></ul>
+ * Represents the main activity of the application, providing the main user interface.
+ * This activity contains UI elements and functionality to navigate to different parts
+ * of the application, such as starting the game, accessing settings, viewing scores,
+ * and exiting the application.
+ * It initializes UI components and sets up click listeners to handle user interactions,
+ * navigating to different activities based on button clicks.
+ * Additionally, it uses a MediaPlayer to handle audio playback for button clicks and
+ * background music when the activity is created.
  */
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {

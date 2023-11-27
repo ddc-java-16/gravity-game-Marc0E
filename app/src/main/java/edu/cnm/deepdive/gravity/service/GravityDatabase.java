@@ -15,6 +15,10 @@ import edu.cnm.deepdive.gravity.model.pojo.UserScore;
 import edu.cnm.deepdive.gravity.service.GravityDatabase.Converters;
 import java.time.Instant;
 
+/**
+ * Defines a connection to a local Room/SQLite database, All database reads/writes are performed
+ * using data-access object (DAO) instances obtained from the singleton instance of this class.
+ */
 
 @Database(
     entities = {User.class, Score.class},

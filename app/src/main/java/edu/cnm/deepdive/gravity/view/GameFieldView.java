@@ -15,6 +15,16 @@ import edu.cnm.deepdive.gravity.model.Enemy;
 import edu.cnm.deepdive.gravity.model.GameField;
 import edu.cnm.deepdive.gravity.model.Meteor;
 
+/**
+ * Represents a custom view, GameFieldView, which extends Android's View class.
+ * This class encapsulates the visual representation and behavior of a game field
+ * within an Android application.
+ * GameFieldView serves as a graphical component, handling the rendering and
+ * interaction logic for the game field, displaying game elements and responding
+ * to user input events.
+ * Note: This class extends the Android View class, providing the foundational
+ * functionality for rendering and interacting with the user interface.
+ */
 public class GameFieldView extends View {
 
   private final Rect destination = new Rect();

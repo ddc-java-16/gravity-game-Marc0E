@@ -15,6 +15,16 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import javax.inject.Inject;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Annotation used in conjunction with Hilt, a dependency injection library for Android.
+ * Indicates that this class, GameFieldViewModel, is a ViewModel and should be managed
+ * by Hilt's dependency injection mechanism.
+ * Extends the Android ViewModel class and implements DefaultLifecycleObserver, which
+ * allows for observation and handling of the Android lifecycle events.
+ * Hilt, upon encountering this annotation, will take charge of creating and managing
+ * instances of this ViewModel, simplifying the process of injecting dependencies and
+ * ensuring proper lifecycle handling within an Android app.
+ */
 @HiltViewModel
 public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObserver {
 

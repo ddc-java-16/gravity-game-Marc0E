@@ -6,10 +6,14 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import edu.cnm.deepdive.gravity.model.entity.Score;
+import edu.cnm.deepdive.gravity.model.entity.User;
 import edu.cnm.deepdive.gravity.model.pojo.UserScore;
 import io.reactivex.rxjava3.core.Single;
 import java.util.List;
 
+/**
+ * Provides CRUD operations on {@link Score} entity instances. {@code INSERT}
+ */
 @Dao
 public interface ScoreDao {
 

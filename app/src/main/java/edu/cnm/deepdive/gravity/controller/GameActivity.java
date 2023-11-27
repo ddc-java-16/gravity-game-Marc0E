@@ -32,6 +32,15 @@ import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
 import java.time.Instant;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Represents the GameActivity within the application, where the gameplay occurs.
+ * This activity extends AppCompatActivity, providing compatibility with older versions
+ * of Android.
+ * It sets up the initial state of the game.
+ * Upon creation, this activity initializes the game environment, such as setting up
+ * the layout, initializing MediaPlayer for sound effects, and configuring game-specific
+ * functionalities.
+ */
 @AndroidEntryPoint
 public class GameActivity extends AppCompatActivity {
 

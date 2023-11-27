@@ -12,6 +12,10 @@ import edu.cnm.deepdive.gravity.model.dao.UserDao;
 import edu.cnm.deepdive.gravity.service.GravityDatabase;
 import javax.inject.Singleton;
 
+/**
+ * Uses Dagger {@link Provides @Provides}-annotated methods to satisfy dependencies on concrete
+ * implementations of {@link GravityDatabase} and {@link UserDao}.
+ */
 @InstallIn(SingletonComponent.class)
 @Module
 public class DatabaseModule {

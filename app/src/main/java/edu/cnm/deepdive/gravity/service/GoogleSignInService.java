@@ -22,6 +22,13 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/**
+ * Provides ReactiveX-integrated Google Sign In client flows for signing in, refreshing the bearer
+ * token, and signing out. This class is implemented as a singleton, and the implementation is
+ * thread-safe; however to minimize the risk of concurrency issues in the underlying Google Sign In
+ * client library, this class should be consumed by a single viewmodel (e.g.
+ * {@link edu.cnm.deepdive.gravity.viewmodel.LoginViewModel}).
+ */
 @Singleton
 public class GoogleSignInService {
 

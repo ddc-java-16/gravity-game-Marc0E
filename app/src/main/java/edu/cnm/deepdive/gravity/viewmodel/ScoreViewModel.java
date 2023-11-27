@@ -19,6 +19,11 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import java.util.List;
 import javax.inject.Inject;
 
+/**
+ * Provides access (for a UI controller or data-bound view) to the {@link Score} entity instance
+ * corresponding to the current signed-in user, a user specified by its unique identifier (primary
+ * key value)
+ */
 @HiltViewModel
 public class ScoreViewModel extends ViewModel implements DefaultLifecycleObserver {
 

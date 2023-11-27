@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.gravity.adapter.UserScoresAdapter;
+import edu.cnm.deepdive.gravity.controller.SettingsActivity.SettingsFragment;
 import edu.cnm.deepdive.gravity.databinding.ActivityScoresBinding;
 import edu.cnm.deepdive.gravity.viewmodel.ScoreViewModel;
 
+/**
+ * Present a scores screen without any additional
+ * UI elements.
+ */
 @AndroidEntryPoint
 public class ScoresActivity extends AppCompatActivity {
 

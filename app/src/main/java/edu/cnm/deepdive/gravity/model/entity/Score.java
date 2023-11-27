@@ -8,6 +8,10 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import java.time.Instant;
 
+/**
+ * Encapsulates the data elements maintained for a signed-in user in the app's Room/SQLite-based
+ * persistent data store.
+ */
 @Entity(
     tableName = "score",
     foreignKeys = {

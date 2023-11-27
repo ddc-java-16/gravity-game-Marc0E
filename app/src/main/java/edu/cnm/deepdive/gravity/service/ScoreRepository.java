@@ -10,6 +10,15 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/**
+ * Represents a ScoreRepository class responsible for managing score data
+ * within the application.
+ * The ScoreRepository serves as a centralized source for handling score-related
+ * operations, such as score retrieval, storage.
+ * As a singleton, this class promotes the use of a single shared instance, allowing
+ * consistent and efficient access to score-related functionalities across various
+ * components or modules within the application.
+ */
 @Singleton
 public class ScoreRepository {
 

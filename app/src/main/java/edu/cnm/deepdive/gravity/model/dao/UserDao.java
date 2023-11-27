@@ -12,7 +12,9 @@ import io.reactivex.rxjava3.core.Single;
 import java.util.Collection;
 import java.util.List;
 
-
+/**
+ * Provides CRUD operations on {@link User} entity instances. {@code INSERT}
+ */
 @Dao
 public interface UserDao {
 

@@ -11,7 +11,19 @@ import java.util.List;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
+/**
+ * Represents a UserRepository class responsible for handling user data operations
+ * within the application.
+ * Annotated with @Singleton, this class designates itself as a singleton component,
+ * ensuring that only a single instance of UserRepository exists throughout the
+ * application lifecycle.
+ * The UserRepository serves as a centralized source for managing user data retrieval,
+ * storage, and manipulation. It encapsulates methods and logic related to user
+ * authentication, data fetching, caching, and modification.
+ * As a singleton, this class promotes a single shared instance across various parts
+ * of the application, facilitating efficient data access and management while
+ * maintaining consistency.
+ */
 @Singleton
 public class UserRepository {
 
