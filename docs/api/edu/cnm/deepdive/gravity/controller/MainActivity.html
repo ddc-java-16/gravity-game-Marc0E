@@ -95,19 +95,16 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="https://developer.android.com/reference/android/content/ComponentCallbacks.html" title="class or interface in android.content" class="external-link">ComponentCallbacks</a></code>, <code><a href="https://developer.android.com/reference/android/content/ComponentCallbacks2.html" title="class or interface in android.content" class="external-link">ComponentCallbacks2</a></code>, <code><a href="https://developer.android.com/reference/android/view/KeyEvent.Callback.html" title="class or interface in android.view" class="external-link">KeyEvent.Callback</a></code>, <code><a href="https://developer.android.com/reference/android/view/LayoutInflater.Factory.html" title="class or interface in android.view" class="external-link">LayoutInflater.Factory</a></code>, <code><a href="https://developer.android.com/reference/android/view/LayoutInflater.Factory2.html" title="class or interface in android.view" class="external-link">LayoutInflater.Factory2</a></code>, <code><a href="https://developer.android.com/reference/android/view/View.OnCreateContextMenuListener.html" title="class or interface in android.view" class="external-link">View.OnCreateContextMenuListener</a></code>, <code><a href="https://developer.android.com/reference/android/view/Window.Callback.html" title="class or interface in android.view" class="external-link">Window.Callback</a></code>, <code>androidx.activity.contextaware.ContextAware</code>, <code><a href="https://developer.android.com/reference/androidx/activity/FullyDrawnReporterOwner.html" title="class or interface in androidx.activity" class="external-link">FullyDrawnReporterOwner</a></code>, <code><a href="https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcherOwner.html" title="class or interface in androidx.activity" class="external-link">OnBackPressedDispatcherOwner</a></code>, <code>androidx.activity.result.ActivityResultCaller</code>, <code>androidx.activity.result.ActivityResultRegistryOwner</code>, <code><a href="https://developer.android.com/reference/androidx/appcompat/app/ActionBarDrawerToggle.DelegateProvider.html" title="class or interface in androidx.appcompat.app" class="external-link">ActionBarDrawerToggle.DelegateProvider</a></code>, <code><a href="https://developer.android.com/reference/androidx/appcompat/app/AppCompatCallback.html" title="class or interface in androidx.appcompat.app" class="external-link">AppCompatCallback</a></code>, <code><a href="https://developer.android.com/reference/androidx/core/app/ActivityCompat.OnRequestPermissionsResultCallback.html" title="class or interface in androidx.core.app" class="external-link">ActivityCompat.OnRequestPermissionsResultCallback</a></code>, <code><a href="https://developer.android.com/reference/androidx/core/app/ActivityCompat.RequestPermissionsRequestCodeValidator.html" title="class or interface in androidx.core.app" class="external-link">ActivityCompat.RequestPermissionsRequestCodeValidator</a></code>, <code><a href="https://developer.android.com/reference/androidx/core/app/OnMultiWindowModeChangedProvider.html" title="class or interface in androidx.core.app" class="external-link">OnMultiWindowModeChangedProvider</a></code>, <code><a href="https://developer.android.com/reference/androidx/core/app/OnNewIntentProvider.html" title="class or interface in androidx.core.app" class="external-link">OnNewIntentProvider</a></code>, <code><a href="https://developer.android.com/reference/androidx/core/app/OnPictureInPictureModeChangedProvider.html" title="class or interface in androidx.core.app" class="external-link">OnPictureInPictureModeChangedProvider</a></code>, <code><a href="https://developer.android.com/reference/androidx/core/app/TaskStackBuilder.SupportParentable.html" title="class or interface in androidx.core.app" class="external-link">TaskStackBuilder.SupportParentable</a></code>, <code><a href="https://developer.android.com/reference/androidx/core/content/OnConfigurationChangedProvider.html" title="class or interface in androidx.core.content" class="external-link">OnConfigurationChangedProvider</a></code>, <code><a href="https://developer.android.com/reference/androidx/core/content/OnTrimMemoryProvider.html" title="class or interface in androidx.core.content" class="external-link">OnTrimMemoryProvider</a></code>, <code><a href="https://developer.android.com/reference/androidx/core/view/KeyEventDispatcher.Component.html" title="class or interface in androidx.core.view" class="external-link">KeyEventDispatcher.Component</a></code>, <code><a href="https://developer.android.com/reference/androidx/core/view/MenuHost.html" title="class or interface in androidx.core.view" class="external-link">MenuHost</a></code>, <code><a href="https://developer.android.com/reference/androidx/lifecycle/HasDefaultViewModelProviderFactory.html" title="class or interface in androidx.lifecycle" class="external-link">HasDefaultViewModelProviderFactory</a></code>, <code><a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html" title="class or interface in androidx.lifecycle" class="external-link">LifecycleOwner</a></code>, <code><a href="https://developer.android.com/reference/androidx/lifecycle/ViewModelStoreOwner.html" title="class or interface in androidx.lifecycle" class="external-link">ViewModelStoreOwner</a></code>, <code><a href="https://developer.android.com/reference/androidx/savedstate/SavedStateRegistryOwner.html" title="class or interface in androidx.savedstate" class="external-link">SavedStateRegistryOwner</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-48">MainActivity</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-45">MainActivity</a></span>
 <span class="extends-implements">extends <a href="https://developer.android.com/reference/androidx/appcompat/app/AppCompatActivity.html" title="class or interface in androidx.appcompat.app" class="external-link">AppCompatActivity</a></span></div>
-<div class="block">Serves as a basic container activity&mdash;that is, it presents no UI elements of its own (apart
- from an options menu), but hosts a <a href="https://developer.android.com/reference/androidx/navigation/fragment/NavHostFragment.html" title="class or interface in androidx.navigation.fragment" class="external-link"><code>NavHostFragment</code></a> for presentation of one or more
- <a href="https://developer.android.com/reference/androidx/fragment/app/Fragment.html" title="class or interface in androidx.fragment.app" class="external-link"><code>Fragment</code></a> instances, associated with a navigation graph.
- <p>In addition to the navigation host role, this activity demonstrates the
- handling of:</p>
- <ul><li><p>user sign-out (initiated by selection of an options menu item), with automatic
- navigation back to <a href="LoginActivity.html" title="class in edu.cnm.deepdive.gravity.controller"><code>LoginActivity</code></a> on completion of the sign-out;</p></li>
- <li><p>user-initiated navigation to <a href="SettingsActivity.html" title="class in edu.cnm.deepdive.gravity.controller"><code>SettingsActivity</code></a>;</p></li>
- <li><p>updates of UI <a href="https://developer.android.com/reference/android/view/View.html" title="class or interface in android.view" class="external-link"><code>View</code></a> widget properties based on preference values
- (obtained from <a href="../viewmodel/PreferencesViewModel.html" title="class in edu.cnm.deepdive.gravity.viewmodel"><code>PreferencesViewModel</code></a>);</p></li>
- <li><p>key events in the permissions request flow.</p></li></ul></div>
+<div class="block">Represents the main activity of the application, providing the main user interface.
+ This activity contains UI elements and functionality to navigate to different parts
+ of the application, such as starting the game, accessing settings, viewing scores,
+ and exiting the application.
+ It initializes UI components and sets up click listeners to handle user interactions,
+ navigating to different activities based on button clicks.
+ Additionally, it uses a MediaPlayer to handle audio playback for button clicks and
+ background music when the activity is created.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -227,7 +224,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;()">
 <h3>MainActivity</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-49">MainActivity</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-46">MainActivity</a></span>()</div>
 </section>
 </li>
 </ul>
@@ -241,7 +238,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="onCreate(android.os.Bundle)">
 <h3>onCreate</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-59">onCreate</a></span><wbr><span class="parameters">(<a href="https://developer.android.com/reference/android/os/Bundle.html" title="class or interface in android.os" class="external-link">Bundle</a>&nbsp;savedInstanceState)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-56">onCreate</a></span><wbr><span class="parameters">(<a href="https://developer.android.com/reference/android/os/Bundle.html" title="class or interface in android.os" class="external-link">Bundle</a>&nbsp;savedInstanceState)</span></div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://developer.android.com/reference/androidx/fragment/app/FragmentActivity.html#onCreate-android.os.Bundle-" title="class or interface in androidx.fragment.app" class="external-link">onCreate</a></code>&nbsp;in class&nbsp;<code><a href="https://developer.android.com/reference/androidx/fragment/app/FragmentActivity.html" title="class or interface in androidx.fragment.app" class="external-link">FragmentActivity</a></code></dd>
@@ -251,7 +248,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="onDestroy()">
 <h3>onDestroy</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-102">onDestroy</a></span>()</div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-99">onDestroy</a></span>()</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://developer.android.com/reference/androidx/appcompat/app/AppCompatActivity.html#onDestroy--" title="class or interface in androidx.appcompat.app" class="external-link">onDestroy</a></code>&nbsp;in class&nbsp;<code><a href="https://developer.android.com/reference/androidx/appcompat/app/AppCompatActivity.html" title="class or interface in androidx.appcompat.app" class="external-link">AppCompatActivity</a></code></dd>
@@ -261,7 +258,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="onCreateOptionsMenu(android.view.Menu)">
 <h3>onCreateOptionsMenu</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-111">onCreateOptionsMenu</a></span><wbr><span class="parameters">(<a href="https://developer.android.com/reference/android/view/Menu.html" title="class or interface in android.view" class="external-link">Menu</a>&nbsp;menu)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-108">onCreateOptionsMenu</a></span><wbr><span class="parameters">(<a href="https://developer.android.com/reference/android/view/Menu.html" title="class or interface in android.view" class="external-link">Menu</a>&nbsp;menu)</span></div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://developer.android.com/reference/android/app/Activity.html#onCreateOptionsMenu-android.view.Menu-" title="class or interface in android.app" class="external-link">onCreateOptionsMenu</a></code>&nbsp;in class&nbsp;<code><a href="https://developer.android.com/reference/android/app/Activity.html" title="class or interface in android.app" class="external-link">Activity</a></code></dd>
@@ -271,7 +268,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="onOptionsItemSelected(android.view.MenuItem)">
 <h3>onOptionsItemSelected</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-118">onOptionsItemSelected</a></span><wbr><span class="parameters">(<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html" title="class or interface in androidx.annotation" class="external-link">@NonNull</a>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-115">onOptionsItemSelected</a></span><wbr><span class="parameters">(<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html" title="class or interface in androidx.annotation" class="external-link">@NonNull</a>
  <a href="https://developer.android.com/reference/android/view/MenuItem.html" title="class or interface in android.view" class="external-link">MenuItem</a>&nbsp;item)</span></div>
 <dl class="notes">
 <dt>Overrides:</dt>
@@ -282,7 +279,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="onSupportNavigateUp()">
 <h3>onSupportNavigateUp</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-133">onSupportNavigateUp</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/controller/MainActivity.html#line-130">onSupportNavigateUp</a></span>()</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://developer.android.com/reference/androidx/appcompat/app/AppCompatActivity.html#onSupportNavigateUp--" title="class or interface in androidx.appcompat.app" class="external-link">onSupportNavigateUp</a></code>&nbsp;in class&nbsp;<code><a href="https://developer.android.com/reference/androidx/appcompat/app/AppCompatActivity.html" title="class or interface in androidx.appcompat.app" class="external-link">AppCompatActivity</a></code></dd>

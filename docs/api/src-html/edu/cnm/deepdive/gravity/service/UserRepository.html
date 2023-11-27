@@ -24,99 +24,111 @@
 <span class="source-line-no">011</span><span id="line-11">import java.util.Objects;</span>
 <span class="source-line-no">012</span><span id="line-12">import javax.inject.Inject;</span>
 <span class="source-line-no">013</span><span id="line-13">import javax.inject.Singleton;</span>
-<span class="source-line-no">014</span><span id="line-14"></span>
-<span class="source-line-no">015</span><span id="line-15">@Singleton</span>
-<span class="source-line-no">016</span><span id="line-16">public class UserRepository {</span>
-<span class="source-line-no">017</span><span id="line-17"></span>
-<span class="source-line-no">018</span><span id="line-18">  private final UserDao userDao;</span>
-<span class="source-line-no">019</span><span id="line-19">  private final GoogleSignInService signInService;</span>
-<span class="source-line-no">020</span><span id="line-20"></span>
-<span class="source-line-no">021</span><span id="line-21">  @Inject</span>
-<span class="source-line-no">022</span><span id="line-22">  UserRepository(UserDao userDao, GoogleSignInService signInService) {</span>
-<span class="source-line-no">023</span><span id="line-23">    this.userDao = userDao;</span>
-<span class="source-line-no">024</span><span id="line-24">    this.signInService = signInService;</span>
-<span class="source-line-no">025</span><span id="line-25">  }</span>
-<span class="source-line-no">026</span><span id="line-26"></span>
-<span class="source-line-no">027</span><span id="line-27">  public Single&lt;User&gt; getCurrent() {</span>
-<span class="source-line-no">028</span><span id="line-28">    return getOrCreate().subscribeOn(Schedulers.io());</span>
-<span class="source-line-no">029</span><span id="line-29">  }</span>
-<span class="source-line-no">030</span><span id="line-30"></span>
-<span class="source-line-no">031</span><span id="line-31">  public LiveData&lt;User&gt; get(long id) {</span>
-<span class="source-line-no">032</span><span id="line-32">    return userDao.select(id);</span>
-<span class="source-line-no">033</span><span id="line-33">  }</span>
-<span class="source-line-no">034</span><span id="line-34"></span>
-<span class="source-line-no">035</span><span id="line-35">  public LiveData&lt;List&lt;User&gt;&gt; getAll() {</span>
-<span class="source-line-no">036</span><span id="line-36">    return userDao.select();</span>
+<span class="source-line-no">014</span><span id="line-14">/**</span>
+<span class="source-line-no">015</span><span id="line-15"> * Represents a UserRepository class responsible for handling user data operations</span>
+<span class="source-line-no">016</span><span id="line-16"> * within the application.</span>
+<span class="source-line-no">017</span><span id="line-17"> * Annotated with @Singleton, this class designates itself as a singleton component,</span>
+<span class="source-line-no">018</span><span id="line-18"> * ensuring that only a single instance of UserRepository exists throughout the</span>
+<span class="source-line-no">019</span><span id="line-19"> * application lifecycle.</span>
+<span class="source-line-no">020</span><span id="line-20"> * The UserRepository serves as a centralized source for managing user data retrieval,</span>
+<span class="source-line-no">021</span><span id="line-21"> * storage, and manipulation. It encapsulates methods and logic related to user</span>
+<span class="source-line-no">022</span><span id="line-22"> * authentication, data fetching, caching, and modification.</span>
+<span class="source-line-no">023</span><span id="line-23"> * As a singleton, this class promotes a single shared instance across various parts</span>
+<span class="source-line-no">024</span><span id="line-24"> * of the application, facilitating efficient data access and management while</span>
+<span class="source-line-no">025</span><span id="line-25"> * maintaining consistency.</span>
+<span class="source-line-no">026</span><span id="line-26"> */</span>
+<span class="source-line-no">027</span><span id="line-27">@Singleton</span>
+<span class="source-line-no">028</span><span id="line-28">public class UserRepository {</span>
+<span class="source-line-no">029</span><span id="line-29"></span>
+<span class="source-line-no">030</span><span id="line-30">  private final UserDao userDao;</span>
+<span class="source-line-no">031</span><span id="line-31">  private final GoogleSignInService signInService;</span>
+<span class="source-line-no">032</span><span id="line-32"></span>
+<span class="source-line-no">033</span><span id="line-33">  @Inject</span>
+<span class="source-line-no">034</span><span id="line-34">  UserRepository(UserDao userDao, GoogleSignInService signInService) {</span>
+<span class="source-line-no">035</span><span id="line-35">    this.userDao = userDao;</span>
+<span class="source-line-no">036</span><span id="line-36">    this.signInService = signInService;</span>
 <span class="source-line-no">037</span><span id="line-37">  }</span>
 <span class="source-line-no">038</span><span id="line-38"></span>
-<span class="source-line-no">039</span><span id="line-39">  public Single&lt;User&gt; save(User user) {</span>
-<span class="source-line-no">040</span><span id="line-40">    return (</span>
-<span class="source-line-no">041</span><span id="line-41">        (user.getId() == 0)</span>
-<span class="source-line-no">042</span><span id="line-42">            ? insert(user)</span>
-<span class="source-line-no">043</span><span id="line-43">            : update(user)</span>
-<span class="source-line-no">044</span><span id="line-44">    )</span>
-<span class="source-line-no">045</span><span id="line-45">        .subscribeOn(Schedulers.io());</span>
-<span class="source-line-no">046</span><span id="line-46">  }</span>
-<span class="source-line-no">047</span><span id="line-47"></span>
-<span class="source-line-no">048</span><span id="line-48">  public Completable delete(User user) {</span>
-<span class="source-line-no">049</span><span id="line-49">    return (</span>
-<span class="source-line-no">050</span><span id="line-50">        (user.getId() == 0)</span>
-<span class="source-line-no">051</span><span id="line-51">            ? Completable.complete()</span>
-<span class="source-line-no">052</span><span id="line-52">            : checkSafeDelete(user)</span>
-<span class="source-line-no">053</span><span id="line-53">                .flatMap(userDao::delete)</span>
-<span class="source-line-no">054</span><span id="line-54">                .ignoreElement()</span>
-<span class="source-line-no">055</span><span id="line-55">    )</span>
-<span class="source-line-no">056</span><span id="line-56">        .subscribeOn(Schedulers.io());</span>
-<span class="source-line-no">057</span><span id="line-57">  }</span>
-<span class="source-line-no">058</span><span id="line-58"></span>
-<span class="source-line-no">059</span><span id="line-59">  private Single&lt;User&gt; getOrCreate() {</span>
-<span class="source-line-no">060</span><span id="line-60">    return signInService</span>
-<span class="source-line-no">061</span><span id="line-61">        .refresh()</span>
-<span class="source-line-no">062</span><span id="line-62">        .flatMap((account) -&gt; userDao.select(account.getId())</span>
-<span class="source-line-no">063</span><span id="line-63">            .switchIfEmpty(</span>
-<span class="source-line-no">064</span><span id="line-64">                Single</span>
-<span class="source-line-no">065</span><span id="line-65">                    .fromSupplier(() -&gt; {</span>
-<span class="source-line-no">066</span><span id="line-66">                      User user = new User();</span>
-<span class="source-line-no">067</span><span id="line-67">                      user.setOauthKey(Objects.requireNonNull(account.getId()));</span>
-<span class="source-line-no">068</span><span id="line-68">                      user.setDisplayName(Objects.requireNonNull(account.getDisplayName()));</span>
-<span class="source-line-no">069</span><span id="line-69">                      user.setUserPhoto(</span>
-<span class="source-line-no">070</span><span id="line-70">                          (account.getPhotoUrl() != null) ? account.getPhotoUrl().toString()</span>
-<span class="source-line-no">071</span><span id="line-71">                              : null);</span>
-<span class="source-line-no">072</span><span id="line-72">                      return user;</span>
-<span class="source-line-no">073</span><span id="line-73">                    })</span>
-<span class="source-line-no">074</span><span id="line-74">                    .flatMap(this::insert)</span>
-<span class="source-line-no">075</span><span id="line-75">            )</span>
-<span class="source-line-no">076</span><span id="line-76">        );</span>
-<span class="source-line-no">077</span><span id="line-77">  }</span>
-<span class="source-line-no">078</span><span id="line-78"></span>
-<span class="source-line-no">079</span><span id="line-79">  private Single&lt;User&gt; insert(User user) {</span>
-<span class="source-line-no">080</span><span id="line-80">    user.setCreated(Instant.now());</span>
-<span class="source-line-no">081</span><span id="line-81">    return userDao</span>
-<span class="source-line-no">082</span><span id="line-82">        .insert(user)</span>
-<span class="source-line-no">083</span><span id="line-83">        .map((id) -&gt; {</span>
-<span class="source-line-no">084</span><span id="line-84">          user.setId(id);</span>
-<span class="source-line-no">085</span><span id="line-85">          return user;</span>
-<span class="source-line-no">086</span><span id="line-86">        });</span>
-<span class="source-line-no">087</span><span id="line-87">  }</span>
-<span class="source-line-no">088</span><span id="line-88"></span>
-<span class="source-line-no">089</span><span id="line-89"></span>
-<span class="source-line-no">090</span><span id="line-90">  private Single&lt;User&gt; update(User user) {</span>
-<span class="source-line-no">091</span><span id="line-91">    return userDao</span>
-<span class="source-line-no">092</span><span id="line-92">        .update(user)</span>
-<span class="source-line-no">093</span><span id="line-93">        .map((count) -&gt; user);</span>
-<span class="source-line-no">094</span><span id="line-94">  }</span>
-<span class="source-line-no">095</span><span id="line-95"></span>
-<span class="source-line-no">096</span><span id="line-96">  private Single&lt;User&gt; checkSafeDelete(User user) {</span>
-<span class="source-line-no">097</span><span id="line-97">    return getOrCreate()</span>
-<span class="source-line-no">098</span><span id="line-98">        .map((u) -&gt; {</span>
-<span class="source-line-no">099</span><span id="line-99">          if (u.equals(user)) {</span>
-<span class="source-line-no">100</span><span id="line-100">            throw new IllegalStateException("");</span>
-<span class="source-line-no">101</span><span id="line-101">          }</span>
-<span class="source-line-no">102</span><span id="line-102">          return u;</span>
-<span class="source-line-no">103</span><span id="line-103">        });</span>
-<span class="source-line-no">104</span><span id="line-104">  }</span>
-<span class="source-line-no">105</span><span id="line-105"></span>
-<span class="source-line-no">106</span><span id="line-106">}</span>
+<span class="source-line-no">039</span><span id="line-39">  public Single&lt;User&gt; getCurrent() {</span>
+<span class="source-line-no">040</span><span id="line-40">    return getOrCreate().subscribeOn(Schedulers.io());</span>
+<span class="source-line-no">041</span><span id="line-41">  }</span>
+<span class="source-line-no">042</span><span id="line-42"></span>
+<span class="source-line-no">043</span><span id="line-43">  public LiveData&lt;User&gt; get(long id) {</span>
+<span class="source-line-no">044</span><span id="line-44">    return userDao.select(id);</span>
+<span class="source-line-no">045</span><span id="line-45">  }</span>
+<span class="source-line-no">046</span><span id="line-46"></span>
+<span class="source-line-no">047</span><span id="line-47">  public LiveData&lt;List&lt;User&gt;&gt; getAll() {</span>
+<span class="source-line-no">048</span><span id="line-48">    return userDao.select();</span>
+<span class="source-line-no">049</span><span id="line-49">  }</span>
+<span class="source-line-no">050</span><span id="line-50"></span>
+<span class="source-line-no">051</span><span id="line-51">  public Single&lt;User&gt; save(User user) {</span>
+<span class="source-line-no">052</span><span id="line-52">    return (</span>
+<span class="source-line-no">053</span><span id="line-53">        (user.getId() == 0)</span>
+<span class="source-line-no">054</span><span id="line-54">            ? insert(user)</span>
+<span class="source-line-no">055</span><span id="line-55">            : update(user)</span>
+<span class="source-line-no">056</span><span id="line-56">    )</span>
+<span class="source-line-no">057</span><span id="line-57">        .subscribeOn(Schedulers.io());</span>
+<span class="source-line-no">058</span><span id="line-58">  }</span>
+<span class="source-line-no">059</span><span id="line-59"></span>
+<span class="source-line-no">060</span><span id="line-60">  public Completable delete(User user) {</span>
+<span class="source-line-no">061</span><span id="line-61">    return (</span>
+<span class="source-line-no">062</span><span id="line-62">        (user.getId() == 0)</span>
+<span class="source-line-no">063</span><span id="line-63">            ? Completable.complete()</span>
+<span class="source-line-no">064</span><span id="line-64">            : checkSafeDelete(user)</span>
+<span class="source-line-no">065</span><span id="line-65">                .flatMap(userDao::delete)</span>
+<span class="source-line-no">066</span><span id="line-66">                .ignoreElement()</span>
+<span class="source-line-no">067</span><span id="line-67">    )</span>
+<span class="source-line-no">068</span><span id="line-68">        .subscribeOn(Schedulers.io());</span>
+<span class="source-line-no">069</span><span id="line-69">  }</span>
+<span class="source-line-no">070</span><span id="line-70"></span>
+<span class="source-line-no">071</span><span id="line-71">  private Single&lt;User&gt; getOrCreate() {</span>
+<span class="source-line-no">072</span><span id="line-72">    return signInService</span>
+<span class="source-line-no">073</span><span id="line-73">        .refresh()</span>
+<span class="source-line-no">074</span><span id="line-74">        .flatMap((account) -&gt; userDao.select(account.getId())</span>
+<span class="source-line-no">075</span><span id="line-75">            .switchIfEmpty(</span>
+<span class="source-line-no">076</span><span id="line-76">                Single</span>
+<span class="source-line-no">077</span><span id="line-77">                    .fromSupplier(() -&gt; {</span>
+<span class="source-line-no">078</span><span id="line-78">                      User user = new User();</span>
+<span class="source-line-no">079</span><span id="line-79">                      user.setOauthKey(Objects.requireNonNull(account.getId()));</span>
+<span class="source-line-no">080</span><span id="line-80">                      user.setDisplayName(Objects.requireNonNull(account.getDisplayName()));</span>
+<span class="source-line-no">081</span><span id="line-81">                      user.setUserPhoto(</span>
+<span class="source-line-no">082</span><span id="line-82">                          (account.getPhotoUrl() != null) ? account.getPhotoUrl().toString()</span>
+<span class="source-line-no">083</span><span id="line-83">                              : null);</span>
+<span class="source-line-no">084</span><span id="line-84">                      return user;</span>
+<span class="source-line-no">085</span><span id="line-85">                    })</span>
+<span class="source-line-no">086</span><span id="line-86">                    .flatMap(this::insert)</span>
+<span class="source-line-no">087</span><span id="line-87">            )</span>
+<span class="source-line-no">088</span><span id="line-88">        );</span>
+<span class="source-line-no">089</span><span id="line-89">  }</span>
+<span class="source-line-no">090</span><span id="line-90"></span>
+<span class="source-line-no">091</span><span id="line-91">  private Single&lt;User&gt; insert(User user) {</span>
+<span class="source-line-no">092</span><span id="line-92">    user.setCreated(Instant.now());</span>
+<span class="source-line-no">093</span><span id="line-93">    return userDao</span>
+<span class="source-line-no">094</span><span id="line-94">        .insert(user)</span>
+<span class="source-line-no">095</span><span id="line-95">        .map((id) -&gt; {</span>
+<span class="source-line-no">096</span><span id="line-96">          user.setId(id);</span>
+<span class="source-line-no">097</span><span id="line-97">          return user;</span>
+<span class="source-line-no">098</span><span id="line-98">        });</span>
+<span class="source-line-no">099</span><span id="line-99">  }</span>
+<span class="source-line-no">100</span><span id="line-100"></span>
+<span class="source-line-no">101</span><span id="line-101"></span>
+<span class="source-line-no">102</span><span id="line-102">  private Single&lt;User&gt; update(User user) {</span>
+<span class="source-line-no">103</span><span id="line-103">    return userDao</span>
+<span class="source-line-no">104</span><span id="line-104">        .update(user)</span>
+<span class="source-line-no">105</span><span id="line-105">        .map((count) -&gt; user);</span>
+<span class="source-line-no">106</span><span id="line-106">  }</span>
+<span class="source-line-no">107</span><span id="line-107"></span>
+<span class="source-line-no">108</span><span id="line-108">  private Single&lt;User&gt; checkSafeDelete(User user) {</span>
+<span class="source-line-no">109</span><span id="line-109">    return getOrCreate()</span>
+<span class="source-line-no">110</span><span id="line-110">        .map((u) -&gt; {</span>
+<span class="source-line-no">111</span><span id="line-111">          if (u.equals(user)) {</span>
+<span class="source-line-no">112</span><span id="line-112">            throw new IllegalStateException("");</span>
+<span class="source-line-no">113</span><span id="line-113">          }</span>
+<span class="source-line-no">114</span><span id="line-114">          return u;</span>
+<span class="source-line-no">115</span><span id="line-115">        });</span>
+<span class="source-line-no">116</span><span id="line-116">  }</span>
+<span class="source-line-no">117</span><span id="line-117"></span>
+<span class="source-line-no">118</span><span id="line-118">}</span>
 
 
 

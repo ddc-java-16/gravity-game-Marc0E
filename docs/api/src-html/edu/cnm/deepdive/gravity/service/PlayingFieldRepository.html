@@ -28,164 +28,165 @@
 <span class="source-line-no">015</span><span id="line-15">import javax.inject.Inject;</span>
 <span class="source-line-no">016</span><span id="line-16">import javax.inject.Singleton;</span>
 <span class="source-line-no">017</span><span id="line-17"></span>
-<span class="source-line-no">018</span><span id="line-18">@Singleton</span>
-<span class="source-line-no">019</span><span id="line-19">public class PlayingFieldRepository {</span>
-<span class="source-line-no">020</span><span id="line-20"></span>
-<span class="source-line-no">021</span><span id="line-21">  private final Scheduler moveShip;</span>
-<span class="source-line-no">022</span><span id="line-22">  private final Scheduler moveMeteors;</span>
-<span class="source-line-no">023</span><span id="line-23">  private final Scheduler projectile;</span>
-<span class="source-line-no">024</span><span id="line-24">  private final Scheduler refresh;</span>
-<span class="source-line-no">025</span><span id="line-25">  private final MutableLiveData&lt;GameField&gt; liveGameField;</span>
-<span class="source-line-no">026</span><span id="line-26">  public double setVelocity;</span>
-<span class="source-line-no">027</span><span id="line-27">  public int setAngle;</span>
-<span class="source-line-no">028</span><span id="line-28">  boolean gameOver = false;</span>
-<span class="source-line-no">029</span><span id="line-29">  private GameField gameField;</span>
-<span class="source-line-no">030</span><span id="line-30">  private Ship ship;</span>
-<span class="source-line-no">031</span><span id="line-31">  private Subject&lt;Boolean&gt; ticker;</span>
-<span class="source-line-no">032</span><span id="line-32"></span>
-<span class="source-line-no">033</span><span id="line-33">  @Inject</span>
-<span class="source-line-no">034</span><span id="line-34">  public PlayingFieldRepository(@ApplicationContext Context context) {</span>
-<span class="source-line-no">035</span><span id="line-35">    moveShip = Schedulers.single();</span>
-<span class="source-line-no">036</span><span id="line-36">    moveMeteors = Schedulers.single();</span>
-<span class="source-line-no">037</span><span id="line-37">    projectile = Schedulers.single();</span>
-<span class="source-line-no">038</span><span id="line-38">    refresh = Schedulers.single();</span>
-<span class="source-line-no">039</span><span id="line-39">    liveGameField = new MutableLiveData&lt;&gt;();</span>
-<span class="source-line-no">040</span><span id="line-40"></span>
+<span class="source-line-no">018</span><span id="line-18"></span>
+<span class="source-line-no">019</span><span id="line-19">@Singleton</span>
+<span class="source-line-no">020</span><span id="line-20">public class PlayingFieldRepository {</span>
+<span class="source-line-no">021</span><span id="line-21"></span>
+<span class="source-line-no">022</span><span id="line-22">  private final Scheduler moveShip;</span>
+<span class="source-line-no">023</span><span id="line-23">  private final Scheduler moveMeteors;</span>
+<span class="source-line-no">024</span><span id="line-24">  private final Scheduler projectile;</span>
+<span class="source-line-no">025</span><span id="line-25">  private final Scheduler refresh;</span>
+<span class="source-line-no">026</span><span id="line-26">  private final MutableLiveData&lt;GameField&gt; liveGameField;</span>
+<span class="source-line-no">027</span><span id="line-27">  public double setVelocity;</span>
+<span class="source-line-no">028</span><span id="line-28">  public int setAngle;</span>
+<span class="source-line-no">029</span><span id="line-29">  boolean gameOver = false;</span>
+<span class="source-line-no">030</span><span id="line-30">  private GameField gameField;</span>
+<span class="source-line-no">031</span><span id="line-31">  private Ship ship;</span>
+<span class="source-line-no">032</span><span id="line-32">  private Subject&lt;Boolean&gt; ticker;</span>
+<span class="source-line-no">033</span><span id="line-33"></span>
+<span class="source-line-no">034</span><span id="line-34">  @Inject</span>
+<span class="source-line-no">035</span><span id="line-35">  public PlayingFieldRepository(@ApplicationContext Context context) {</span>
+<span class="source-line-no">036</span><span id="line-36">    moveShip = Schedulers.single();</span>
+<span class="source-line-no">037</span><span id="line-37">    moveMeteors = Schedulers.single();</span>
+<span class="source-line-no">038</span><span id="line-38">    projectile = Schedulers.single();</span>
+<span class="source-line-no">039</span><span id="line-39">    refresh = Schedulers.single();</span>
+<span class="source-line-no">040</span><span id="line-40">    liveGameField = new MutableLiveData&lt;&gt;();</span>
 <span class="source-line-no">041</span><span id="line-41"></span>
-<span class="source-line-no">042</span><span id="line-42">  }</span>
-<span class="source-line-no">043</span><span id="line-43"></span>
-<span class="source-line-no">044</span><span id="line-44">  public Observable&lt;Boolean&gt; run() {</span>
-<span class="source-line-no">045</span><span id="line-45">    clearTicker();</span>
-<span class="source-line-no">046</span><span id="line-46">    if (gameField.getLevel() == 0) {</span>
-<span class="source-line-no">047</span><span id="line-47">      gameField.start(1);</span>
-<span class="source-line-no">048</span><span id="line-48">    } // TODO: 11/16/23 Check to see if the game has ended.</span>
-<span class="source-line-no">049</span><span id="line-49">    ticker = BehaviorSubject.createDefault(true);</span>
-<span class="source-line-no">050</span><span id="line-50">    return ticker</span>
-<span class="source-line-no">051</span><span id="line-51">        .doAfterTerminate(() -&gt; ticker = null)</span>
-<span class="source-line-no">052</span><span id="line-52">        .filter(Boolean.TRUE::equals)</span>
-<span class="source-line-no">053</span><span id="line-53">        .delay(100, TimeUnit.MILLISECONDS)</span>
-<span class="source-line-no">054</span><span id="line-54">        .observeOn(refresh)</span>
-<span class="source-line-no">055</span><span id="line-55">        .map(this::tick);</span>
-<span class="source-line-no">056</span><span id="line-56">  }</span>
-<span class="source-line-no">057</span><span id="line-57"></span>
+<span class="source-line-no">042</span><span id="line-42"></span>
+<span class="source-line-no">043</span><span id="line-43">  }</span>
+<span class="source-line-no">044</span><span id="line-44"></span>
+<span class="source-line-no">045</span><span id="line-45">  public Observable&lt;Boolean&gt; run() {</span>
+<span class="source-line-no">046</span><span id="line-46">    clearTicker();</span>
+<span class="source-line-no">047</span><span id="line-47">    if (gameField.getLevel() == 0) {</span>
+<span class="source-line-no">048</span><span id="line-48">      gameField.start(1);</span>
+<span class="source-line-no">049</span><span id="line-49">    } // TODO: 11/16/23 Check to see if the game has ended.</span>
+<span class="source-line-no">050</span><span id="line-50">    ticker = BehaviorSubject.createDefault(true);</span>
+<span class="source-line-no">051</span><span id="line-51">    return ticker</span>
+<span class="source-line-no">052</span><span id="line-52">        .doAfterTerminate(() -&gt; ticker = null)</span>
+<span class="source-line-no">053</span><span id="line-53">        .filter(Boolean.TRUE::equals)</span>
+<span class="source-line-no">054</span><span id="line-54">        .delay(100, TimeUnit.MILLISECONDS)</span>
+<span class="source-line-no">055</span><span id="line-55">        .observeOn(refresh)</span>
+<span class="source-line-no">056</span><span id="line-56">        .map(this::tick);</span>
+<span class="source-line-no">057</span><span id="line-57">  }</span>
 <span class="source-line-no">058</span><span id="line-58"></span>
-<span class="source-line-no">059</span><span id="line-59">  private boolean tick(boolean running) {</span>
-<span class="source-line-no">060</span><span id="line-60">    boolean result;</span>
-<span class="source-line-no">061</span><span id="line-61">    gameField.update();</span>
-<span class="source-line-no">062</span><span id="line-62">    if (gameField.isGameOver()) {</span>
-<span class="source-line-no">063</span><span id="line-63">      result = false;</span>
-<span class="source-line-no">064</span><span id="line-64">      gameOver = true;</span>
-<span class="source-line-no">065</span><span id="line-65">    } else if (ticker != null &amp;&amp; !ticker.hasComplete()) {</span>
-<span class="source-line-no">066</span><span id="line-66">      ticker.onNext(true);</span>
-<span class="source-line-no">067</span><span id="line-67">      result = true;</span>
-<span class="source-line-no">068</span><span id="line-68">    } else {</span>
-<span class="source-line-no">069</span><span id="line-69">      result = true;</span>
-<span class="source-line-no">070</span><span id="line-70">    }</span>
-<span class="source-line-no">071</span><span id="line-71">    liveGameField.postValue(gameField);</span>
-<span class="source-line-no">072</span><span id="line-72">    return result;</span>
-<span class="source-line-no">073</span><span id="line-73">  }</span>
-<span class="source-line-no">074</span><span id="line-74"></span>
-<span class="source-line-no">075</span><span id="line-75">  public void pause() {</span>
-<span class="source-line-no">076</span><span id="line-76">    clearTicker();</span>
-<span class="source-line-no">077</span><span id="line-77">  }</span>
-<span class="source-line-no">078</span><span id="line-78"></span>
-<span class="source-line-no">079</span><span id="line-79">  public void create() {</span>
-<span class="source-line-no">080</span><span id="line-80">    gameField = new GameField(500, 300);</span>
-<span class="source-line-no">081</span><span id="line-81">    liveGameField.postValue(gameField);</span>
-<span class="source-line-no">082</span><span id="line-82">    // TODO: 11/18/23 Create ship.</span>
-<span class="source-line-no">083</span><span id="line-83"></span>
-<span class="source-line-no">084</span><span id="line-84">  }</span>
-<span class="source-line-no">085</span><span id="line-85"></span>
-<span class="source-line-no">086</span><span id="line-86">  public GameField getGameField() {</span>
-<span class="source-line-no">087</span><span id="line-87">    return gameField;</span>
-<span class="source-line-no">088</span><span id="line-88">  }</span>
-<span class="source-line-no">089</span><span id="line-89"></span>
-<span class="source-line-no">090</span><span id="line-90">  private void clearTicker() {</span>
-<span class="source-line-no">091</span><span id="line-91">    if (ticker != null &amp;&amp; !ticker.hasComplete()) {</span>
-<span class="source-line-no">092</span><span id="line-92">      ticker.onComplete();</span>
-<span class="source-line-no">093</span><span id="line-93">    }</span>
-<span class="source-line-no">094</span><span id="line-94">  }</span>
-<span class="source-line-no">095</span><span id="line-95"></span>
-<span class="source-line-no">096</span><span id="line-96">  public boolean isGameOver() {</span>
-<span class="source-line-no">097</span><span id="line-97">    return gameOver;</span>
-<span class="source-line-no">098</span><span id="line-98">  }</span>
-<span class="source-line-no">099</span><span id="line-99"></span>
-<span class="source-line-no">100</span><span id="line-100">  public void setGravity(double gravity) {</span>
-<span class="source-line-no">101</span><span id="line-101">    gameField.setGravity(gravity);</span>
-<span class="source-line-no">102</span><span id="line-102">  }</span>
-<span class="source-line-no">103</span><span id="line-103"></span>
-<span class="source-line-no">104</span><span id="line-104">  public void setVelocity(double velocity) {</span>
-<span class="source-line-no">105</span><span id="line-105">    gameField.setVelocity(velocity);</span>
-<span class="source-line-no">106</span><span id="line-106">  }</span>
-<span class="source-line-no">107</span><span id="line-107"></span>
-<span class="source-line-no">108</span><span id="line-108">  public void setAngle(int angle) {</span>
-<span class="source-line-no">109</span><span id="line-109">    gameField.setAngle(angle);</span>
-<span class="source-line-no">110</span><span id="line-110">  }</span>
-<span class="source-line-no">111</span><span id="line-111"></span>
-<span class="source-line-no">112</span><span id="line-112">  public void shipMoveUp() {</span>
-<span class="source-line-no">113</span><span id="line-113">    gameField.shipMoveUp();</span>
-<span class="source-line-no">114</span><span id="line-114">    liveGameField.postValue(gameField);</span>
-<span class="source-line-no">115</span><span id="line-115">  }</span>
-<span class="source-line-no">116</span><span id="line-116"></span>
-<span class="source-line-no">117</span><span id="line-117">  public void shipMoveDown() {</span>
-<span class="source-line-no">118</span><span id="line-118">    gameField.shipMoveDown();</span>
-<span class="source-line-no">119</span><span id="line-119">    liveGameField.postValue(gameField);</span>
-<span class="source-line-no">120</span><span id="line-120">  }</span>
-<span class="source-line-no">121</span><span id="line-121"></span>
-<span class="source-line-no">122</span><span id="line-122">  public void shoot() {</span>
-<span class="source-line-no">123</span><span id="line-123">    gameField.shoot();</span>
-<span class="source-line-no">124</span><span id="line-124">    liveGameField.postValue(gameField);</span>
-<span class="source-line-no">125</span><span id="line-125">  }</span>
-<span class="source-line-no">126</span><span id="line-126"></span>
-<span class="source-line-no">127</span><span id="line-127">  public LiveData&lt;GameField&gt; getLiveGameField() {</span>
-<span class="source-line-no">128</span><span id="line-128">    return liveGameField;</span>
-<span class="source-line-no">129</span><span id="line-129">  }</span>
-<span class="source-line-no">130</span><span id="line-130"></span>
-<span class="source-line-no">131</span><span id="line-131">  //  public void stop() {</span>
-<span class="source-line-no">132</span><span id="line-132">//</span>
-<span class="source-line-no">133</span><span id="line-133">//  }</span>
-<span class="source-line-no">134</span><span id="line-134"></span>
-<span class="source-line-no">135</span><span id="line-135">  public void timekeeper() {</span>
-<span class="source-line-no">136</span><span id="line-136">    // TODO: 11/1/23 Timer in charge of movement of objects.</span>
-<span class="source-line-no">137</span><span id="line-137">  }</span>
-<span class="source-line-no">138</span><span id="line-138"></span>
-<span class="source-line-no">139</span><span id="line-139">  public void updateShip() {</span>
-<span class="source-line-no">140</span><span id="line-140">    // TODO: 11/1/23 Add two helper methods to move ship up/down.</span>
-<span class="source-line-no">141</span><span id="line-141"></span>
-<span class="source-line-no">142</span><span id="line-142">  }</span>
-<span class="source-line-no">143</span><span id="line-143"></span>
+<span class="source-line-no">059</span><span id="line-59"></span>
+<span class="source-line-no">060</span><span id="line-60">  private boolean tick(boolean running) {</span>
+<span class="source-line-no">061</span><span id="line-61">    boolean result;</span>
+<span class="source-line-no">062</span><span id="line-62">    gameField.update();</span>
+<span class="source-line-no">063</span><span id="line-63">    if (gameField.isGameOver()) {</span>
+<span class="source-line-no">064</span><span id="line-64">      result = false;</span>
+<span class="source-line-no">065</span><span id="line-65">      gameOver = true;</span>
+<span class="source-line-no">066</span><span id="line-66">    } else if (ticker != null &amp;&amp; !ticker.hasComplete()) {</span>
+<span class="source-line-no">067</span><span id="line-67">      ticker.onNext(true);</span>
+<span class="source-line-no">068</span><span id="line-68">      result = true;</span>
+<span class="source-line-no">069</span><span id="line-69">    } else {</span>
+<span class="source-line-no">070</span><span id="line-70">      result = true;</span>
+<span class="source-line-no">071</span><span id="line-71">    }</span>
+<span class="source-line-no">072</span><span id="line-72">    liveGameField.postValue(gameField);</span>
+<span class="source-line-no">073</span><span id="line-73">    return result;</span>
+<span class="source-line-no">074</span><span id="line-74">  }</span>
+<span class="source-line-no">075</span><span id="line-75"></span>
+<span class="source-line-no">076</span><span id="line-76">  public void pause() {</span>
+<span class="source-line-no">077</span><span id="line-77">    clearTicker();</span>
+<span class="source-line-no">078</span><span id="line-78">  }</span>
+<span class="source-line-no">079</span><span id="line-79"></span>
+<span class="source-line-no">080</span><span id="line-80">  public void create() {</span>
+<span class="source-line-no">081</span><span id="line-81">    gameField = new GameField(500, 300);</span>
+<span class="source-line-no">082</span><span id="line-82">    liveGameField.postValue(gameField);</span>
+<span class="source-line-no">083</span><span id="line-83">    // TODO: 11/18/23 Create ship.</span>
+<span class="source-line-no">084</span><span id="line-84"></span>
+<span class="source-line-no">085</span><span id="line-85">  }</span>
+<span class="source-line-no">086</span><span id="line-86"></span>
+<span class="source-line-no">087</span><span id="line-87">  public GameField getGameField() {</span>
+<span class="source-line-no">088</span><span id="line-88">    return gameField;</span>
+<span class="source-line-no">089</span><span id="line-89">  }</span>
+<span class="source-line-no">090</span><span id="line-90"></span>
+<span class="source-line-no">091</span><span id="line-91">  private void clearTicker() {</span>
+<span class="source-line-no">092</span><span id="line-92">    if (ticker != null &amp;&amp; !ticker.hasComplete()) {</span>
+<span class="source-line-no">093</span><span id="line-93">      ticker.onComplete();</span>
+<span class="source-line-no">094</span><span id="line-94">    }</span>
+<span class="source-line-no">095</span><span id="line-95">  }</span>
+<span class="source-line-no">096</span><span id="line-96"></span>
+<span class="source-line-no">097</span><span id="line-97">  public boolean isGameOver() {</span>
+<span class="source-line-no">098</span><span id="line-98">    return gameOver;</span>
+<span class="source-line-no">099</span><span id="line-99">  }</span>
+<span class="source-line-no">100</span><span id="line-100"></span>
+<span class="source-line-no">101</span><span id="line-101">  public void setGravity(double gravity) {</span>
+<span class="source-line-no">102</span><span id="line-102">    gameField.setGravity(gravity);</span>
+<span class="source-line-no">103</span><span id="line-103">  }</span>
+<span class="source-line-no">104</span><span id="line-104"></span>
+<span class="source-line-no">105</span><span id="line-105">  public void setVelocity(double velocity) {</span>
+<span class="source-line-no">106</span><span id="line-106">    gameField.setVelocity(velocity);</span>
+<span class="source-line-no">107</span><span id="line-107">  }</span>
+<span class="source-line-no">108</span><span id="line-108"></span>
+<span class="source-line-no">109</span><span id="line-109">  public void setAngle(int angle) {</span>
+<span class="source-line-no">110</span><span id="line-110">    gameField.setAngle(angle);</span>
+<span class="source-line-no">111</span><span id="line-111">  }</span>
+<span class="source-line-no">112</span><span id="line-112"></span>
+<span class="source-line-no">113</span><span id="line-113">  public void shipMoveUp() {</span>
+<span class="source-line-no">114</span><span id="line-114">    gameField.shipMoveUp();</span>
+<span class="source-line-no">115</span><span id="line-115">    liveGameField.postValue(gameField);</span>
+<span class="source-line-no">116</span><span id="line-116">  }</span>
+<span class="source-line-no">117</span><span id="line-117"></span>
+<span class="source-line-no">118</span><span id="line-118">  public void shipMoveDown() {</span>
+<span class="source-line-no">119</span><span id="line-119">    gameField.shipMoveDown();</span>
+<span class="source-line-no">120</span><span id="line-120">    liveGameField.postValue(gameField);</span>
+<span class="source-line-no">121</span><span id="line-121">  }</span>
+<span class="source-line-no">122</span><span id="line-122"></span>
+<span class="source-line-no">123</span><span id="line-123">  public void shoot() {</span>
+<span class="source-line-no">124</span><span id="line-124">    gameField.shoot();</span>
+<span class="source-line-no">125</span><span id="line-125">    liveGameField.postValue(gameField);</span>
+<span class="source-line-no">126</span><span id="line-126">  }</span>
+<span class="source-line-no">127</span><span id="line-127"></span>
+<span class="source-line-no">128</span><span id="line-128">  public LiveData&lt;GameField&gt; getLiveGameField() {</span>
+<span class="source-line-no">129</span><span id="line-129">    return liveGameField;</span>
+<span class="source-line-no">130</span><span id="line-130">  }</span>
+<span class="source-line-no">131</span><span id="line-131"></span>
+<span class="source-line-no">132</span><span id="line-132">  //  public void stop() {</span>
+<span class="source-line-no">133</span><span id="line-133">//</span>
+<span class="source-line-no">134</span><span id="line-134">//  }</span>
+<span class="source-line-no">135</span><span id="line-135"></span>
+<span class="source-line-no">136</span><span id="line-136">  public void timekeeper() {</span>
+<span class="source-line-no">137</span><span id="line-137">    // TODO: 11/1/23 Timer in charge of movement of objects.</span>
+<span class="source-line-no">138</span><span id="line-138">  }</span>
+<span class="source-line-no">139</span><span id="line-139"></span>
+<span class="source-line-no">140</span><span id="line-140">  public void updateShip() {</span>
+<span class="source-line-no">141</span><span id="line-141">    // TODO: 11/1/23 Add two helper methods to move ship up/down.</span>
+<span class="source-line-no">142</span><span id="line-142"></span>
+<span class="source-line-no">143</span><span id="line-143">  }</span>
 <span class="source-line-no">144</span><span id="line-144"></span>
-<span class="source-line-no">145</span><span id="line-145">  public void updateProjectile() {</span>
-<span class="source-line-no">146</span><span id="line-146">    // TODO: 11/1/23 Based on the velocity and angle selected the projectile will move.</span>
-<span class="source-line-no">147</span><span id="line-147"></span>
-<span class="source-line-no">148</span><span id="line-148">  }</span>
-<span class="source-line-no">149</span><span id="line-149"></span>
-<span class="source-line-no">150</span><span id="line-150">  public void gravityChanger() {</span>
-<span class="source-line-no">151</span><span id="line-151">    // TODO: 11/1/23 Create at least 3 different type of meteor (each one will have a different gravity)</span>
-<span class="source-line-no">152</span><span id="line-152">    //  that won't damage the ship but if the ship crashes with them the gravity the ship is using to shot projectile will change.</span>
-<span class="source-line-no">153</span><span id="line-153">    //  These gravityChangers are going to be generated randomly just like meteors.</span>
-<span class="source-line-no">154</span><span id="line-154">  }</span>
-<span class="source-line-no">155</span><span id="line-155"></span>
-<span class="source-line-no">156</span><span id="line-156">  public void updateMeteor() {</span>
-<span class="source-line-no">157</span><span id="line-157">// TODO: 11/1/23 Based on the width of the screen and size of ship meteor will generate a random number</span>
-<span class="source-line-no">158</span><span id="line-158">//  of meteors (from 1 to ((width/ship.size) - ship.size - gravityChanger.count)) moving from right to left leaving space for</span>
-<span class="source-line-no">159</span><span id="line-159">//  the ship to move between them.</span>
-<span class="source-line-no">160</span><span id="line-160">  }</span>
-<span class="source-line-no">161</span><span id="line-161"></span>
-<span class="source-line-no">162</span><span id="line-162">  public void enemy() {</span>
-<span class="source-line-no">163</span><span id="line-163">    // TODO: 11/1/23 Display enemies in different positions of the screen.</span>
-<span class="source-line-no">164</span><span id="line-164">  }</span>
-<span class="source-line-no">165</span><span id="line-165"></span>
-<span class="source-line-no">166</span><span id="line-166">  public void enemyIntersection() {</span>
-<span class="source-line-no">167</span><span id="line-167"></span>
-<span class="source-line-no">168</span><span id="line-168">  }</span>
-<span class="source-line-no">169</span><span id="line-169"></span>
-<span class="source-line-no">170</span><span id="line-170">  public void shipIntersection() {</span>
-<span class="source-line-no">171</span><span id="line-171"></span>
-<span class="source-line-no">172</span><span id="line-172">  }</span>
-<span class="source-line-no">173</span><span id="line-173"></span>
+<span class="source-line-no">145</span><span id="line-145"></span>
+<span class="source-line-no">146</span><span id="line-146">  public void updateProjectile() {</span>
+<span class="source-line-no">147</span><span id="line-147">    // TODO: 11/1/23 Based on the velocity and angle selected the projectile will move.</span>
+<span class="source-line-no">148</span><span id="line-148"></span>
+<span class="source-line-no">149</span><span id="line-149">  }</span>
+<span class="source-line-no">150</span><span id="line-150"></span>
+<span class="source-line-no">151</span><span id="line-151">  public void gravityChanger() {</span>
+<span class="source-line-no">152</span><span id="line-152">    // TODO: 11/1/23 Create at least 3 different type of meteor (each one will have a different gravity)</span>
+<span class="source-line-no">153</span><span id="line-153">    //  that won't damage the ship but if the ship crashes with them the gravity the ship is using to shot projectile will change.</span>
+<span class="source-line-no">154</span><span id="line-154">    //  These gravityChangers are going to be generated randomly just like meteors.</span>
+<span class="source-line-no">155</span><span id="line-155">  }</span>
+<span class="source-line-no">156</span><span id="line-156"></span>
+<span class="source-line-no">157</span><span id="line-157">  public void updateMeteor() {</span>
+<span class="source-line-no">158</span><span id="line-158">// TODO: 11/1/23 Based on the width of the screen and size of ship meteor will generate a random number</span>
+<span class="source-line-no">159</span><span id="line-159">//  of meteors (from 1 to ((width/ship.size) - ship.size - gravityChanger.count)) moving from right to left leaving space for</span>
+<span class="source-line-no">160</span><span id="line-160">//  the ship to move between them.</span>
+<span class="source-line-no">161</span><span id="line-161">  }</span>
+<span class="source-line-no">162</span><span id="line-162"></span>
+<span class="source-line-no">163</span><span id="line-163">  public void enemy() {</span>
+<span class="source-line-no">164</span><span id="line-164">    // TODO: 11/1/23 Display enemies in different positions of the screen.</span>
+<span class="source-line-no">165</span><span id="line-165">  }</span>
+<span class="source-line-no">166</span><span id="line-166"></span>
+<span class="source-line-no">167</span><span id="line-167">  public void enemyIntersection() {</span>
+<span class="source-line-no">168</span><span id="line-168"></span>
+<span class="source-line-no">169</span><span id="line-169">  }</span>
+<span class="source-line-no">170</span><span id="line-170"></span>
+<span class="source-line-no">171</span><span id="line-171">  public void shipIntersection() {</span>
+<span class="source-line-no">172</span><span id="line-172"></span>
+<span class="source-line-no">173</span><span id="line-173">  }</span>
 <span class="source-line-no">174</span><span id="line-174"></span>
-<span class="source-line-no">175</span><span id="line-175">}</span>
+<span class="source-line-no">175</span><span id="line-175"></span>
+<span class="source-line-no">176</span><span id="line-176">}</span>
 
 
 

@@ -18,28 +18,33 @@
 <span class="source-line-no">005</span><span id="line-5">import androidx.lifecycle.ViewModelProvider;</span>
 <span class="source-line-no">006</span><span id="line-6">import dagger.hilt.android.AndroidEntryPoint;</span>
 <span class="source-line-no">007</span><span id="line-7">import edu.cnm.deepdive.gravity.adapter.UserScoresAdapter;</span>
-<span class="source-line-no">008</span><span id="line-8">import edu.cnm.deepdive.gravity.databinding.ActivityScoresBinding;</span>
-<span class="source-line-no">009</span><span id="line-9">import edu.cnm.deepdive.gravity.viewmodel.ScoreViewModel;</span>
-<span class="source-line-no">010</span><span id="line-10"></span>
-<span class="source-line-no">011</span><span id="line-11">@AndroidEntryPoint</span>
-<span class="source-line-no">012</span><span id="line-12">public class ScoresActivity extends AppCompatActivity {</span>
-<span class="source-line-no">013</span><span id="line-13"></span>
-<span class="source-line-no">014</span><span id="line-14">  private ActivityScoresBinding binding;</span>
-<span class="source-line-no">015</span><span id="line-15">  private ScoreViewModel scoreViewModel;</span>
-<span class="source-line-no">016</span><span id="line-16"></span>
-<span class="source-line-no">017</span><span id="line-17"></span>
-<span class="source-line-no">018</span><span id="line-18">  @Override</span>
-<span class="source-line-no">019</span><span id="line-19">  protected void onCreate(Bundle savedInstanceState) {</span>
-<span class="source-line-no">020</span><span id="line-20">    super.onCreate(savedInstanceState);</span>
-<span class="source-line-no">021</span><span id="line-21">    binding = ActivityScoresBinding.inflate(getLayoutInflater());</span>
-<span class="source-line-no">022</span><span id="line-22">    setContentView(binding.getRoot());</span>
-<span class="source-line-no">023</span><span id="line-23"></span>
-<span class="source-line-no">024</span><span id="line-24">    scoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);</span>
-<span class="source-line-no">025</span><span id="line-25">    scoreViewModel.getAllScores().observe(this, (scores) -&gt;</span>
-<span class="source-line-no">026</span><span id="line-26">        binding.scores.setAdapter(new UserScoresAdapter(this, scores)));</span>
-<span class="source-line-no">027</span><span id="line-27">  }</span>
+<span class="source-line-no">008</span><span id="line-8">import edu.cnm.deepdive.gravity.controller.SettingsActivity.SettingsFragment;</span>
+<span class="source-line-no">009</span><span id="line-9">import edu.cnm.deepdive.gravity.databinding.ActivityScoresBinding;</span>
+<span class="source-line-no">010</span><span id="line-10">import edu.cnm.deepdive.gravity.viewmodel.ScoreViewModel;</span>
+<span class="source-line-no">011</span><span id="line-11"></span>
+<span class="source-line-no">012</span><span id="line-12">/**</span>
+<span class="source-line-no">013</span><span id="line-13"> * Present a scores screen without any additional</span>
+<span class="source-line-no">014</span><span id="line-14"> * UI elements.</span>
+<span class="source-line-no">015</span><span id="line-15"> */</span>
+<span class="source-line-no">016</span><span id="line-16">@AndroidEntryPoint</span>
+<span class="source-line-no">017</span><span id="line-17">public class ScoresActivity extends AppCompatActivity {</span>
+<span class="source-line-no">018</span><span id="line-18"></span>
+<span class="source-line-no">019</span><span id="line-19">  private ActivityScoresBinding binding;</span>
+<span class="source-line-no">020</span><span id="line-20">  private ScoreViewModel scoreViewModel;</span>
+<span class="source-line-no">021</span><span id="line-21"></span>
+<span class="source-line-no">022</span><span id="line-22"></span>
+<span class="source-line-no">023</span><span id="line-23">  @Override</span>
+<span class="source-line-no">024</span><span id="line-24">  protected void onCreate(Bundle savedInstanceState) {</span>
+<span class="source-line-no">025</span><span id="line-25">    super.onCreate(savedInstanceState);</span>
+<span class="source-line-no">026</span><span id="line-26">    binding = ActivityScoresBinding.inflate(getLayoutInflater());</span>
+<span class="source-line-no">027</span><span id="line-27">    setContentView(binding.getRoot());</span>
 <span class="source-line-no">028</span><span id="line-28"></span>
-<span class="source-line-no">029</span><span id="line-29">}</span>
+<span class="source-line-no">029</span><span id="line-29">    scoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);</span>
+<span class="source-line-no">030</span><span id="line-30">    scoreViewModel.getAllScores().observe(this, (scores) -&gt;</span>
+<span class="source-line-no">031</span><span id="line-31">        binding.scores.setAdapter(new UserScoresAdapter(this, scores)));</span>
+<span class="source-line-no">032</span><span id="line-32">  }</span>
+<span class="source-line-no">033</span><span id="line-33"></span>
+<span class="source-line-no">034</span><span id="line-34">}</span>
 
 
 

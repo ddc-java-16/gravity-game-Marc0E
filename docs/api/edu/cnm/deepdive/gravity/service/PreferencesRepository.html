@@ -80,7 +80,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="annotations">@Singleton
-</span><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/PreferencesRepository.html#line-13">PreferencesRepository</a></span>
+</span><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/PreferencesRepository.html#line-16">PreferencesRepository</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="https://developer.android.com/reference/android/content/SharedPreferences.OnSharedPreferenceChangeListener.html" title="class or interface in android.content" class="external-link">SharedPreferences.OnSharedPreferenceChangeListener</a></span></div>
 </section>
@@ -100,7 +100,10 @@ implements <a href="https://developer.android.com/reference/android/content/Shar
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(java.lang.String,T)" class="member-name-link">get</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key,
  T&nbsp;defaultValue)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Utility method to allow pass-trhough read access to the underlying <a href="https://developer.android.com/reference/android/content/SharedPreferences.html" title="class or interface in android.content" class="external-link"><code>SharedPreferences</code></a>,
+ by key.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://developer.android.com/reference/android/content/SharedPreferences.html" title="class or interface in android.content" class="external-link">SharedPreferences</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPreferences()" class="member-name-link">getPreferences</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -128,20 +131,32 @@ implements <a href="https://developer.android.com/reference/android/content/Shar
 <li>
 <section class="detail" id="getPreferences()">
 <h3>getPreferences</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://developer.android.com/reference/android/content/SharedPreferences.html" title="class or interface in android.content" class="external-link">SharedPreferences</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/PreferencesRepository.html#line-26">getPreferences</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://developer.android.com/reference/android/content/SharedPreferences.html" title="class or interface in android.content" class="external-link">SharedPreferences</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/PreferencesRepository.html#line-29">getPreferences</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="get(java.lang.String,T)">
 <h3 id="get(java.lang.String,java.lang.Object)">get</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/PreferencesRepository.html#line-30">get</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/PreferencesRepository.html#line-43">get</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key,
  T&nbsp;defaultValue)</span></div>
+<div class="block">Utility method to allow pass-trhough read access to the underlying <a href="https://developer.android.com/reference/android/content/SharedPreferences.html" title="class or interface in android.content" class="external-link"><code>SharedPreferences</code></a>,
+ by key. The compiler will infer the type parameter <code>T</code> by examining the
+ <code>defaultValue</code> and the reference type of the assignment target (if any); if the inferred
+ type is not one supported as a Shared</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - </dd>
+<dt>Parameters:</dt>
+<dd><code>key</code> - </dd>
+<dd><code>defaultValue</code> - </dd>
+<dt>Returns:</dt>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String)">
 <h3>onSharedPreferenceChanged</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/PreferencesRepository.html#line-36">onSharedPreferenceChanged</a></span><wbr><span class="parameters">(<a href="https://developer.android.com/reference/android/content/SharedPreferences.html" title="class or interface in android.content" class="external-link">SharedPreferences</a>&nbsp;preferences,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/PreferencesRepository.html#line-49">onSharedPreferenceChanged</a></span><wbr><span class="parameters">(<a href="https://developer.android.com/reference/android/content/SharedPreferences.html" title="class or interface in android.content" class="external-link">SharedPreferences</a>&nbsp;preferences,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;ignoredKey)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>

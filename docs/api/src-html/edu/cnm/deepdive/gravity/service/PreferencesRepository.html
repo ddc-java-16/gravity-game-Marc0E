@@ -18,39 +18,52 @@
 <span class="source-line-no">005</span><span id="line-5">import android.content.SharedPreferences.OnSharedPreferenceChangeListener;</span>
 <span class="source-line-no">006</span><span id="line-6">import androidx.lifecycle.LiveData;</span>
 <span class="source-line-no">007</span><span id="line-7">import androidx.lifecycle.MutableLiveData;</span>
-<span class="source-line-no">008</span><span id="line-8">import androidx.preference.PreferenceManager;</span>
-<span class="source-line-no">009</span><span id="line-9">import dagger.hilt.android.qualifiers.ApplicationContext;</span>
-<span class="source-line-no">010</span><span id="line-10">import javax.inject.Inject;</span>
-<span class="source-line-no">011</span><span id="line-11">import javax.inject.Singleton;</span>
-<span class="source-line-no">012</span><span id="line-12"></span>
-<span class="source-line-no">013</span><span id="line-13">@Singleton</span>
-<span class="source-line-no">014</span><span id="line-14">public class PreferencesRepository implements OnSharedPreferenceChangeListener {</span>
+<span class="source-line-no">008</span><span id="line-8">import androidx.lifecycle.Transformations;</span>
+<span class="source-line-no">009</span><span id="line-9">import androidx.preference.PreferenceManager;</span>
+<span class="source-line-no">010</span><span id="line-10">import dagger.hilt.android.qualifiers.ApplicationContext;</span>
+<span class="source-line-no">011</span><span id="line-11">import javax.inject.Inject;</span>
+<span class="source-line-no">012</span><span id="line-12">import javax.inject.Singleton;</span>
+<span class="source-line-no">013</span><span id="line-13">import kotlin.jvm.functions.Function1;</span>
+<span class="source-line-no">014</span><span id="line-14"></span>
 <span class="source-line-no">015</span><span id="line-15"></span>
-<span class="source-line-no">016</span><span id="line-16">  private final MutableLiveData&lt;SharedPreferences&gt; preferences;</span>
-<span class="source-line-no">017</span><span id="line-17">  private final SharedPreferences prefs;</span>
+<span class="source-line-no">016</span><span id="line-16">@Singleton</span>
+<span class="source-line-no">017</span><span id="line-17">public class PreferencesRepository implements OnSharedPreferenceChangeListener {</span>
 <span class="source-line-no">018</span><span id="line-18"></span>
-<span class="source-line-no">019</span><span id="line-19">  @Inject</span>
-<span class="source-line-no">020</span><span id="line-20">  PreferencesRepository(@ApplicationContext Context context) {</span>
-<span class="source-line-no">021</span><span id="line-21">    prefs = PreferenceManager.getDefaultSharedPreferences(context);</span>
-<span class="source-line-no">022</span><span id="line-22">    preferences = new MutableLiveData&lt;&gt;(prefs);</span>
-<span class="source-line-no">023</span><span id="line-23">    prefs.registerOnSharedPreferenceChangeListener((prefs, key) -&gt; preferences.postValue(prefs));</span>
-<span class="source-line-no">024</span><span id="line-24">  }</span>
-<span class="source-line-no">025</span><span id="line-25"></span>
-<span class="source-line-no">026</span><span id="line-26">  public LiveData&lt;SharedPreferences&gt; getPreferences() {</span>
-<span class="source-line-no">027</span><span id="line-27">    return preferences;</span>
-<span class="source-line-no">028</span><span id="line-28">  }</span>
-<span class="source-line-no">029</span><span id="line-29"></span>
-<span class="source-line-no">030</span><span id="line-30">  public &lt;T&gt; T get(String key, T defaultValue) {</span>
-<span class="source-line-no">031</span><span id="line-31">    //noinspection unchecked</span>
-<span class="source-line-no">032</span><span id="line-32">    T result = (T) prefs.getAll().get(key);</span>
-<span class="source-line-no">033</span><span id="line-33">    return (result != null) ? result : defaultValue;</span>
-<span class="source-line-no">034</span><span id="line-34">  }</span>
-<span class="source-line-no">035</span><span id="line-35"></span>
-<span class="source-line-no">036</span><span id="line-36">  @Override</span>
-<span class="source-line-no">037</span><span id="line-37">  public void onSharedPreferenceChanged(SharedPreferences preferences, String ignoredKey) {</span>
-<span class="source-line-no">038</span><span id="line-38">    this.preferences.postValue(preferences);</span>
-<span class="source-line-no">039</span><span id="line-39">  }</span>
-<span class="source-line-no">040</span><span id="line-40">}</span>
+<span class="source-line-no">019</span><span id="line-19">  private final MutableLiveData&lt;SharedPreferences&gt; preferences;</span>
+<span class="source-line-no">020</span><span id="line-20">  private final SharedPreferences prefs;</span>
+<span class="source-line-no">021</span><span id="line-21"></span>
+<span class="source-line-no">022</span><span id="line-22">  @Inject</span>
+<span class="source-line-no">023</span><span id="line-23">  PreferencesRepository(@ApplicationContext Context context) {</span>
+<span class="source-line-no">024</span><span id="line-24">    prefs = PreferenceManager.getDefaultSharedPreferences(context);</span>
+<span class="source-line-no">025</span><span id="line-25">    preferences = new MutableLiveData&lt;&gt;(prefs);</span>
+<span class="source-line-no">026</span><span id="line-26">    prefs.registerOnSharedPreferenceChangeListener((prefs, key) -&gt; preferences.postValue(prefs));</span>
+<span class="source-line-no">027</span><span id="line-27">  }</span>
+<span class="source-line-no">028</span><span id="line-28"></span>
+<span class="source-line-no">029</span><span id="line-29">  public LiveData&lt;SharedPreferences&gt; getPreferences() {</span>
+<span class="source-line-no">030</span><span id="line-30">    return preferences;</span>
+<span class="source-line-no">031</span><span id="line-31">  }</span>
+<span class="source-line-no">032</span><span id="line-32"></span>
+<span class="source-line-no">033</span><span id="line-33">  /***</span>
+<span class="source-line-no">034</span><span id="line-34">   * Utility method to allow pass-trhough read access to the underlying {@link SharedPreferences},</span>
+<span class="source-line-no">035</span><span id="line-35">   * by key. The compiler will infer the type parameter {@code T} by examining the</span>
+<span class="source-line-no">036</span><span id="line-36">   * {@code defaultValue} and the reference type of the assignment target (if any); if the inferred</span>
+<span class="source-line-no">037</span><span id="line-37">   * type is not one supported as a Shared</span>
+<span class="source-line-no">038</span><span id="line-38">   * @param key</span>
+<span class="source-line-no">039</span><span id="line-39">   * @param defaultValue</span>
+<span class="source-line-no">040</span><span id="line-40">   * @return</span>
+<span class="source-line-no">041</span><span id="line-41">   * @param &lt;T&gt;</span>
+<span class="source-line-no">042</span><span id="line-42">   */</span>
+<span class="source-line-no">043</span><span id="line-43">  public &lt;T&gt; T get(String key, T defaultValue) {</span>
+<span class="source-line-no">044</span><span id="line-44">    //noinspection unchecked</span>
+<span class="source-line-no">045</span><span id="line-45">    T result = (T) prefs.getAll().get(key);</span>
+<span class="source-line-no">046</span><span id="line-46">    return (result != null) ? result : defaultValue;</span>
+<span class="source-line-no">047</span><span id="line-47">  }</span>
+<span class="source-line-no">048</span><span id="line-48"></span>
+<span class="source-line-no">049</span><span id="line-49">  @Override</span>
+<span class="source-line-no">050</span><span id="line-50">  public void onSharedPreferenceChanged(SharedPreferences preferences, String ignoredKey) {</span>
+<span class="source-line-no">051</span><span id="line-51">    this.preferences.postValue(preferences);</span>
+<span class="source-line-no">052</span><span id="line-52">  }</span>
+<span class="source-line-no">053</span><span id="line-53">}</span>
 
 
 

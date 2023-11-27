@@ -76,8 +76,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="annotations">@Singleton
-</span><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-25">GoogleSignInService</a></span>
+</span><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-32">GoogleSignInService</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Provides ReactiveX-integrated Google Sign In client flows for signing in, refreshing the bearer
+ token, and signing out. This class is implemented as a singleton, and the implementation is
+ thread-safe; however to minimize the risk of concurrency issues in the underlying Google Sign In
+ client library, this class should be consumed by a single viewmodel (e.g.
+ <a href="../viewmodel/LoginViewModel.html" title="class in edu.cnm.deepdive.gravity.viewmodel"><code>LoginViewModel</code></a>).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -127,31 +132,31 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="refresh()">
 <h3>refresh</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="https://developer.android.com/reference/com/google/android/gms/auth/api/signin/GoogleSignInAccount.html" title="class or interface in com.google.android.gms.auth.api.signin" class="external-link">GoogleSignInAccount</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-49">refresh</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="https://developer.android.com/reference/com/google/android/gms/auth/api/signin/GoogleSignInAccount.html" title="class or interface in com.google.android.gms.auth.api.signin" class="external-link">GoogleSignInAccount</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-56">refresh</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="refreshBearerToken()">
 <h3>refreshBearerToken</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-60">refreshBearerToken</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-67">refreshBearerToken</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="startSignIn(androidx.activity.result.ActivityResultLauncher)">
 <h3>startSignIn</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-65">startSignIn</a></span><wbr><span class="parameters">(androidx.activity.result.ActivityResultLauncher&lt;<a href="https://developer.android.com/reference/android/content/Intent.html" title="class or interface in android.content" class="external-link">Intent</a>&gt;&nbsp;launcher)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-72">startSignIn</a></span><wbr><span class="parameters">(androidx.activity.result.ActivityResultLauncher&lt;<a href="https://developer.android.com/reference/android/content/Intent.html" title="class or interface in android.content" class="external-link">Intent</a>&gt;&nbsp;launcher)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="completeSignIn(androidx.activity.result.ActivityResult)">
 <h3>completeSignIn</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="https://developer.android.com/reference/com/google/android/gms/auth/api/signin/GoogleSignInAccount.html" title="class or interface in com.google.android.gms.auth.api.signin" class="external-link">GoogleSignInAccount</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-69">completeSignIn</a></span><wbr><span class="parameters">(androidx.activity.result.ActivityResult&nbsp;result)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="https://developer.android.com/reference/com/google/android/gms/auth/api/signin/GoogleSignInAccount.html" title="class or interface in com.google.android.gms.auth.api.signin" class="external-link">GoogleSignInAccount</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-76">completeSignIn</a></span><wbr><span class="parameters">(androidx.activity.result.ActivityResult&nbsp;result)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="signOut()">
 <h3>signOut</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Completable.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Completable</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-84">signOut</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Completable.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Completable</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/service/GoogleSignInService.html#line-91">signOut</a></span>()</div>
 </section>
 </li>
 </ul>

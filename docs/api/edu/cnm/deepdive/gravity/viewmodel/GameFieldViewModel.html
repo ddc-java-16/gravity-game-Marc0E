@@ -81,9 +81,17 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html" title="class or interface in androidx.lifecycle" class="external-link">DefaultLifecycleObserver</a></code>, <code><a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleObserver.html" title="class or interface in androidx.lifecycle" class="external-link">LifecycleObserver</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-18">GameFieldViewModel</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-28">GameFieldViewModel</a></span>
 <span class="extends-implements">extends <a href="https://developer.android.com/reference/androidx/lifecycle/ViewModel.html" title="class or interface in androidx.lifecycle" class="external-link">ViewModel</a>
 implements <a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html" title="class or interface in androidx.lifecycle" class="external-link">DefaultLifecycleObserver</a></span></div>
+<div class="block">Annotation used in conjunction with Hilt, a dependency injection library for Android.
+ Indicates that this class, GameFieldViewModel, is a ViewModel and should be managed
+ by Hilt's dependency injection mechanism.
+ Extends the Android ViewModel class and implements DefaultLifecycleObserver, which
+ allows for observation and handling of the Android lifecycle events.
+ Hilt, upon encountering this annotation, will take charge of creating and managing
+ instances of this ViewModel, simplifying the process of injecting dependencies and
+ ensuring proper lifecycle handling within an Android app.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -172,49 +180,49 @@ implements <a href="https://developer.android.com/reference/androidx/lifecycle/D
 <li>
 <section class="detail" id="create()">
 <h3>create</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-42">create</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-52">create</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="run()">
 <h3>run</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-46">run</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-56">run</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="paused()">
 <h3>paused</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-59">paused</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-69">paused</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getGameField()">
 <h3>getGameField</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="../model/GameField.html" title="class in edu.cnm.deepdive.gravity.model">GameField</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-63">getGameField</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="../model/GameField.html" title="class in edu.cnm.deepdive.gravity.model">GameField</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-73">getGameField</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getRunning()">
 <h3>getRunning</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-67">getRunning</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-77">getRunning</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getInProgress()">
 <h3>getInProgress</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-71">getInProgress</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-81">getInProgress</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getThrowable()">
 <h3>getThrowable</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-75">getThrowable</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-85">getThrowable</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="onPause(androidx.lifecycle.LifecycleOwner)">
 <h3>onPause</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-79">onPause</a></span><wbr><span class="parameters">(@NotNull
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-89">onPause</a></span><wbr><span class="parameters">(@NotNull
  <a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html" title="class or interface in androidx.lifecycle" class="external-link">LifecycleOwner</a>&nbsp;owner)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
@@ -225,7 +233,7 @@ implements <a href="https://developer.android.com/reference/androidx/lifecycle/D
 <li>
 <section class="detail" id="onStop(androidx.lifecycle.LifecycleOwner)">
 <h3>onStop</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-85">onStop</a></span><wbr><span class="parameters">(@NotNull
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-95">onStop</a></span><wbr><span class="parameters">(@NotNull
  <a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html" title="class or interface in androidx.lifecycle" class="external-link">LifecycleOwner</a>&nbsp;owner)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
@@ -236,43 +244,43 @@ implements <a href="https://developer.android.com/reference/androidx/lifecycle/D
 <li>
 <section class="detail" id="isGameOver()">
 <h3>isGameOver</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-97">isGameOver</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-107">isGameOver</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="setGravity(double)">
 <h3>setGravity</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-101">setGravity</a></span><wbr><span class="parameters">(double&nbsp;gravity)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-111">setGravity</a></span><wbr><span class="parameters">(double&nbsp;gravity)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="setVelocity(double)">
 <h3>setVelocity</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-105">setVelocity</a></span><wbr><span class="parameters">(double&nbsp;velocity)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-115">setVelocity</a></span><wbr><span class="parameters">(double&nbsp;velocity)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="setAngle(int)">
 <h3>setAngle</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-109">setAngle</a></span><wbr><span class="parameters">(int&nbsp;angle)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-119">setAngle</a></span><wbr><span class="parameters">(int&nbsp;angle)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="shipMoveUp()">
 <h3>shipMoveUp</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-113">shipMoveUp</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-123">shipMoveUp</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="shipMoveDown()">
 <h3>shipMoveDown</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-117">shipMoveDown</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-127">shipMoveDown</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="shoot()">
 <h3>shoot</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-121">shoot</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/GameFieldViewModel.html#line-131">shoot</a></span>()</div>
 </section>
 </li>
 </ul>

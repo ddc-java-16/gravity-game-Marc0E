@@ -81,9 +81,12 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html" title="class or interface in androidx.lifecycle" class="external-link">DefaultLifecycleObserver</a></code>, <code><a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleObserver.html" title="class or interface in androidx.lifecycle" class="external-link">LifecycleObserver</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-22">ScoreViewModel</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-27">ScoreViewModel</a></span>
 <span class="extends-implements">extends <a href="https://developer.android.com/reference/androidx/lifecycle/ViewModel.html" title="class or interface in androidx.lifecycle" class="external-link">ViewModel</a>
 implements <a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html" title="class or interface in androidx.lifecycle" class="external-link">DefaultLifecycleObserver</a></span></div>
+<div class="block">Provides access (for a UI controller or data-bound view) to the <a href="../model/entity/Score.html" title="class in edu.cnm.deepdive.gravity.model.entity"><code>Score</code></a> entity instance
+ corresponding to the current signed-in user, a user specified by its unique identifier (primary
+ key value)</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -146,44 +149,44 @@ implements <a href="https://developer.android.com/reference/androidx/lifecycle/D
 <li>
 <section class="detail" id="getAllScores()">
 <h3>getAllScores</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/pojo/UserScore.html" title="class in edu.cnm.deepdive.gravity.model.pojo">UserScore</a>&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-40">getAllScores</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/pojo/UserScore.html" title="class in edu.cnm.deepdive.gravity.model.pojo">UserScore</a>&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-45">getAllScores</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getUserScores(edu.cnm.deepdive.gravity.model.entity.User)">
 <h3>getUserScores</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/entity/Score.html" title="class in edu.cnm.deepdive.gravity.model.entity">Score</a>&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-44">getUserScores</a></span><wbr><span class="parameters">(<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.gravity.model.entity">User</a>&nbsp;user)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/entity/Score.html" title="class in edu.cnm.deepdive.gravity.model.entity">Score</a>&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-49">getUserScores</a></span><wbr><span class="parameters">(<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.gravity.model.entity">User</a>&nbsp;user)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="getScoreId()">
 <h3>getScoreId</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/MutableLiveData.html" title="class or interface in androidx.lifecycle" class="external-link">MutableLiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-48">getScoreId</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/MutableLiveData.html" title="class or interface in androidx.lifecycle" class="external-link">MutableLiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-53">getScoreId</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getScore()">
 <h3>getScore</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="../model/entity/Score.html" title="class in edu.cnm.deepdive.gravity.model.entity">Score</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-52">getScore</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="../model/entity/Score.html" title="class in edu.cnm.deepdive.gravity.model.entity">Score</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-57">getScore</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getThrowable()">
 <h3>getThrowable</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/MutableLiveData.html" title="class or interface in androidx.lifecycle" class="external-link">MutableLiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-56">getThrowable</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/MutableLiveData.html" title="class or interface in androidx.lifecycle" class="external-link">MutableLiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-61">getThrowable</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="save(edu.cnm.deepdive.gravity.model.entity.Score,edu.cnm.deepdive.gravity.model.entity.User)">
 <h3>save</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-60">save</a></span><wbr><span class="parameters">(<a href="../model/entity/Score.html" title="class in edu.cnm.deepdive.gravity.model.entity">Score</a>&nbsp;score,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-65">save</a></span><wbr><span class="parameters">(<a href="../model/entity/Score.html" title="class in edu.cnm.deepdive.gravity.model.entity">Score</a>&nbsp;score,
  <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.gravity.model.entity">User</a>&nbsp;user)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="onStop(androidx.lifecycle.LifecycleOwner)">
 <h3>onStop</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-73">onStop</a></span><wbr><span class="parameters">(<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html" title="class or interface in androidx.annotation" class="external-link">@NonNull</a>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/gravity/viewmodel/ScoreViewModel.html#line-78">onStop</a></span><wbr><span class="parameters">(<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html" title="class or interface in androidx.annotation" class="external-link">@NonNull</a>
  <a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html" title="class or interface in androidx.lifecycle" class="external-link">LifecycleOwner</a>&nbsp;owner)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>

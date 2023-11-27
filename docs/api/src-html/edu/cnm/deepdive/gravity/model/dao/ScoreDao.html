@@ -19,30 +19,34 @@
 <span class="source-line-no">006</span><span id="line-6">import androidx.room.Insert;</span>
 <span class="source-line-no">007</span><span id="line-7">import androidx.room.Query;</span>
 <span class="source-line-no">008</span><span id="line-8">import edu.cnm.deepdive.gravity.model.entity.Score;</span>
-<span class="source-line-no">009</span><span id="line-9">import edu.cnm.deepdive.gravity.model.pojo.UserScore;</span>
-<span class="source-line-no">010</span><span id="line-10">import io.reactivex.rxjava3.core.Single;</span>
-<span class="source-line-no">011</span><span id="line-11">import java.util.List;</span>
-<span class="source-line-no">012</span><span id="line-12"></span>
-<span class="source-line-no">013</span><span id="line-13">@Dao</span>
-<span class="source-line-no">014</span><span id="line-14">public interface ScoreDao {</span>
-<span class="source-line-no">015</span><span id="line-15"></span>
-<span class="source-line-no">016</span><span id="line-16">  @Insert</span>
-<span class="source-line-no">017</span><span id="line-17">  Single&lt;Long&gt; insert(Score score);</span>
-<span class="source-line-no">018</span><span id="line-18"></span>
-<span class="source-line-no">019</span><span id="line-19">  @Delete</span>
-<span class="source-line-no">020</span><span id="line-20">  Single&lt;Integer&gt; delete(Score score);</span>
-<span class="source-line-no">021</span><span id="line-21"></span>
-<span class="source-line-no">022</span><span id="line-22">  @Query("SELECT * FROM score WHERE score_id = :id")</span>
-<span class="source-line-no">023</span><span id="line-23">  LiveData&lt;Score&gt; select(long id);</span>
-<span class="source-line-no">024</span><span id="line-24"></span>
-<span class="source-line-no">025</span><span id="line-25">  @Query("SELECT * FROM score WHERE player_id = :playerId ORDER BY value DESC")</span>
-<span class="source-line-no">026</span><span id="line-26">  LiveData&lt;List&lt;Score&gt;&gt; selectByPlayerId(long playerId);</span>
-<span class="source-line-no">027</span><span id="line-27"></span>
-<span class="source-line-no">028</span><span id="line-28">  @Query("SELECT s.player_id, u.display_name, u.display_nick_name, s.value, s.created "</span>
-<span class="source-line-no">029</span><span id="line-29">      + "FROM user AS u JOIN score AS s ON u.user_id = s.player_id "</span>
-<span class="source-line-no">030</span><span id="line-30">      + "ORDER BY value DESC")</span>
-<span class="source-line-no">031</span><span id="line-31">  LiveData&lt;List&lt;UserScore&gt;&gt; selectUserScores();</span>
-<span class="source-line-no">032</span><span id="line-32">}</span>
+<span class="source-line-no">009</span><span id="line-9">import edu.cnm.deepdive.gravity.model.entity.User;</span>
+<span class="source-line-no">010</span><span id="line-10">import edu.cnm.deepdive.gravity.model.pojo.UserScore;</span>
+<span class="source-line-no">011</span><span id="line-11">import io.reactivex.rxjava3.core.Single;</span>
+<span class="source-line-no">012</span><span id="line-12">import java.util.List;</span>
+<span class="source-line-no">013</span><span id="line-13"></span>
+<span class="source-line-no">014</span><span id="line-14">/**</span>
+<span class="source-line-no">015</span><span id="line-15"> * Provides CRUD operations on {@link Score} entity instances. {@code INSERT}</span>
+<span class="source-line-no">016</span><span id="line-16"> */</span>
+<span class="source-line-no">017</span><span id="line-17">@Dao</span>
+<span class="source-line-no">018</span><span id="line-18">public interface ScoreDao {</span>
+<span class="source-line-no">019</span><span id="line-19"></span>
+<span class="source-line-no">020</span><span id="line-20">  @Insert</span>
+<span class="source-line-no">021</span><span id="line-21">  Single&lt;Long&gt; insert(Score score);</span>
+<span class="source-line-no">022</span><span id="line-22"></span>
+<span class="source-line-no">023</span><span id="line-23">  @Delete</span>
+<span class="source-line-no">024</span><span id="line-24">  Single&lt;Integer&gt; delete(Score score);</span>
+<span class="source-line-no">025</span><span id="line-25"></span>
+<span class="source-line-no">026</span><span id="line-26">  @Query("SELECT * FROM score WHERE score_id = :id")</span>
+<span class="source-line-no">027</span><span id="line-27">  LiveData&lt;Score&gt; select(long id);</span>
+<span class="source-line-no">028</span><span id="line-28"></span>
+<span class="source-line-no">029</span><span id="line-29">  @Query("SELECT * FROM score WHERE player_id = :playerId ORDER BY value DESC")</span>
+<span class="source-line-no">030</span><span id="line-30">  LiveData&lt;List&lt;Score&gt;&gt; selectByPlayerId(long playerId);</span>
+<span class="source-line-no">031</span><span id="line-31"></span>
+<span class="source-line-no">032</span><span id="line-32">  @Query("SELECT s.player_id, u.display_name, u.display_nick_name, s.value, s.created "</span>
+<span class="source-line-no">033</span><span id="line-33">      + "FROM user AS u JOIN score AS s ON u.user_id = s.player_id "</span>
+<span class="source-line-no">034</span><span id="line-34">      + "ORDER BY value DESC")</span>
+<span class="source-line-no">035</span><span id="line-35">  LiveData&lt;List&lt;UserScore&gt;&gt; selectUserScores();</span>
+<span class="source-line-no">036</span><span id="line-36">}</span>
 
 
 
