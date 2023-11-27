@@ -18,6 +18,7 @@ order: 40
 ## Known deficiencies
 {: menu="Deficiencies" }
 * Game Over Screen: Missing explicit screen or option for restarting the game once it ends; currently returns users to the main screen.
+* Presentation: Lack of personalized touch; missing feature to incorporate user photos alongside score displays for a more engaging and personalized experience.
 * Settings Functionality: Placeholder for future features; currently does not provide sound or profile customization options.
 * Enhancements for Settings: Future implementation required for sound and profile customization options.
 * Potential Improvements: Further refining of UI elements for better user interaction.
