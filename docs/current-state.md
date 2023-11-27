@@ -25,4 +25,4 @@ order: 40
 
 ## Test environments used
 {: menu="Environments" }
-* Internal Testing: Conducted within development environments to verify functionality, used Pixel 6a API 31 emulator.
+* Internal Testing: Conducted within development environments to verify functionality, used Pixel 6a API 31 and Pixel 7 API 33 emulators.

@@ -70,3 +70,13 @@ ensures an engaging and entertaining experience.
 * Projectiles can destroy meteors.
 
 [//]: # (If you can identify functional elements of the software that you think might not be achievable in the scope of the project, but which would nonetheless add significant value if you were able to include them, list them here. For now, we recommend listing them in order of complexity/amount of work, from the least to the most.)
+
+## Technical requirements & dependencies:
+{: menu="Technical requirements" }
+Compatibility Testing:
+* Tested on Pixel 6a API 31 emulator and Pixel 7 API 33 emulator for Android versions and hardware compatibility.
+Technology Stack:
+* Implementation utilizing ReactiveX for efficient data handling.
+* Integrated Google Sign-In functionality.
+Internet Dependency:
+* The app relies on internet access for Google Sign-In functionality; without it, the app's core features will not be accessible.
