@@ -3,8 +3,6 @@ package edu.cnm.deepdive.gravity.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -13,20 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import edu.cnm.deepdive.gravity.R;
-import edu.cnm.deepdive.gravity.databinding.ActivityGameBinding;
 import edu.cnm.deepdive.gravity.model.Enemy;
 import edu.cnm.deepdive.gravity.model.GameField;
 import edu.cnm.deepdive.gravity.model.Meteor;
 
 public class GameFieldView extends View {
 
+  private final Rect destination = new Rect();
+  int test = 0;
   private GameField gameField;
   private Drawable shipImage;
   private Drawable meteorImage;
   private Drawable projectileImage;
   private Drawable enemyImage;
-  int test = 0;
-  private final Rect destination = new Rect();
 
 
   public GameFieldView(Context context) {

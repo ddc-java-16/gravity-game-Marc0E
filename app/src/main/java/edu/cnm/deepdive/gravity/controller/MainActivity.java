@@ -15,14 +15,11 @@
  */
 package edu.cnm.deepdive.gravity.controller;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,10 +29,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.gravity.R;
 import edu.cnm.deepdive.gravity.model.GameField;
-import edu.cnm.deepdive.gravity.model.entity.Score;
 import edu.cnm.deepdive.gravity.viewmodel.LoginViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.PreferencesViewModel;
-import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
 
 /**
  * Serves as a basic container activity&mdash;that is, it presents no UI elements of its own (apart
@@ -53,13 +48,13 @@ import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
-  private LoginViewModel loginViewModel;
   MediaPlayer mediaPlayer;
   GameField gameField;
   Button playButton;
   Button settingsButton;
   Button scoresButton;
   Button exitButton;
+  private LoginViewModel loginViewModel;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

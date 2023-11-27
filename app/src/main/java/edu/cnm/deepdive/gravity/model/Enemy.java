@@ -8,26 +8,28 @@ import java.security.SecureRandom;
  */
 public class Enemy {
 
-  private Rect enemyBox;
   private static final int ENEMY_SIZE = 40;
+  private Rect enemyBox;
   private GameField gameField;
   private int yPosition;
   private SecureRandom rng;
 
   /**
    * Constructs an enemy object within the game field.
+   *
    * @param gameField The game field in which the enemy exists.
    * @param positionY The Y-coordinate position of the enemy.
    * @param positionX The X-coordinate position of the enemy.
    */
   public Enemy(GameField gameField, int positionY, int positionX) {
     this.gameField = gameField;
-    this.enemyBox = new Rect(positionX - ENEMY_SIZE /2, positionY - ENEMY_SIZE/2 , positionX + ENEMY_SIZE /2 , positionY + ENEMY_SIZE );
+    this.enemyBox = new Rect(positionX - ENEMY_SIZE / 2, positionY - ENEMY_SIZE / 2,
+        positionX + ENEMY_SIZE / 2, positionY + ENEMY_SIZE);
   }
 
   /**
-   *
-   * @param enemy Implementation details to check if the provided rectangle overlaps with this enemy's rectangle.
+   * @param enemy Implementation details to check if the provided rectangle overlaps with this
+   *              enemy's rectangle.
    * @return Return true if there is an overlap, false otherwise.
    */
   public boolean inside(Rect enemy) {
@@ -42,8 +44,8 @@ public class Enemy {
 //  }
 
   /**
-   *
-   * @return The bounding box (Rect) defining the position and size of this enemy within the game field.
+   * @return The bounding box (Rect) defining the position and size of this enemy within the game
+   * field.
    */
   public Rect getEnemyBox() {
     return enemyBox;

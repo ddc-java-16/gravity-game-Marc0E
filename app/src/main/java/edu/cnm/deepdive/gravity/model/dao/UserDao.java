@@ -6,10 +6,9 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-import edu.cnm.deepdive.gravity.model.pojo.UserScore;
+import edu.cnm.deepdive.gravity.model.entity.User;
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
-import edu.cnm.deepdive.gravity.model.entity.User;
 import java.util.Collection;
 import java.util.List;
 

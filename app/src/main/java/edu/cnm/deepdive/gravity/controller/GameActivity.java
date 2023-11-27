@@ -26,7 +26,6 @@ import edu.cnm.deepdive.gravity.databinding.ActivityGameBinding;
 import edu.cnm.deepdive.gravity.model.GameField;
 import edu.cnm.deepdive.gravity.model.entity.Score;
 import edu.cnm.deepdive.gravity.model.entity.User;
-import edu.cnm.deepdive.gravity.view.GameFieldView;
 import edu.cnm.deepdive.gravity.viewmodel.GameFieldViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.ScoreViewModel;
 import edu.cnm.deepdive.gravity.viewmodel.UserViewModel;
@@ -204,7 +203,7 @@ public class GameActivity extends AppCompatActivity {
           binding.level.setText(String.valueOf(level));
           binding.counter.setText(String.valueOf(gameField.getCounter()));
           score = gameField.getCounter() * 50;
-          if(this.counter == gameField.getCounter()){
+          if (this.counter == gameField.getCounter()) {
             mediaPlayer = MediaPlayer.create(this, R.raw.explosion2);
             mediaPlayer.start();
             this.counter++;
@@ -226,7 +225,8 @@ public class GameActivity extends AppCompatActivity {
         .observe(this, (inProgress) -> {
           Log.d(getClass().getSimpleName(), "inProgress=" + inProgress);
           if (Boolean.TRUE.equals(this.inProgress) && Boolean.FALSE.equals(inProgress)) {
-            Drawable b = ResourcesCompat.getDrawable(getResources(), R.drawable.play_background1, null);
+            Drawable b = ResourcesCompat.getDrawable(getResources(), R.drawable.play_background1,
+                null);
             binding.gameConstraint.setBackground(b);
             mediaPlayer3.start();
             addScores();

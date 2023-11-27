@@ -1,39 +1,33 @@
 package edu.cnm.deepdive.gravity.service;
 
 import android.content.Context;
-import android.graphics.Rect;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import edu.cnm.deepdive.gravity.model.GameField;
 import edu.cnm.deepdive.gravity.model.Ship;
-import edu.cnm.deepdive.gravity.model.entity.Score;
-import edu.cnm.deepdive.gravity.viewmodel.ScoreViewModel;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Scheduler;
-import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import io.reactivex.rxjava3.subjects.Subject;
-import java.time.Instant;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Predicate;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
 public class PlayingFieldRepository {
 
-  public double setVelocity;
-  public int setAngle;
-  boolean gameOver = false ;
-  private GameField gameField;
-  private Ship ship;
   private final Scheduler moveShip;
   private final Scheduler moveMeteors;
   private final Scheduler projectile;
   private final Scheduler refresh;
   private final MutableLiveData<GameField> liveGameField;
+  public double setVelocity;
+  public int setAngle;
+  boolean gameOver = false;
+  private GameField gameField;
+  private Ship ship;
   private Subject<Boolean> ticker;
 
   @Inject
@@ -43,7 +37,6 @@ public class PlayingFieldRepository {
     projectile = Schedulers.single();
     refresh = Schedulers.single();
     liveGameField = new MutableLiveData<>();
-
 
 
   }
@@ -103,6 +96,7 @@ public class PlayingFieldRepository {
   public boolean isGameOver() {
     return gameOver;
   }
+
   public void setGravity(double gravity) {
     gameField.setGravity(gravity);
   }
@@ -111,7 +105,7 @@ public class PlayingFieldRepository {
     gameField.setVelocity(velocity);
   }
 
-  public void setAngle(int angle){
+  public void setAngle(int angle) {
     gameField.setAngle(angle);
   }
 

@@ -7,8 +7,8 @@ import androidx.annotation.Nullable;
 import java.util.Objects;
 
 /**
- * Represents the player's ship within the game.
- * Manages ship movement, shooting, and interaction with game elements.
+ * Represents the player's ship within the game. Manages ship movement, shooting, and interaction
+ * with game elements.
  */
 public class Ship {
 
@@ -36,6 +36,7 @@ public class Ship {
 
   /**
    * Constructs a Ship object at a specified position within the game field.
+   *
    * @param gameField The game field in which the ship exists.
    * @param y         The Y-coordinate position of the ship.
    * @param x         The X-coordinate position of the ship.
@@ -59,7 +60,7 @@ public class Ship {
    * upward direction.
    */
   public void moveUp() {
-    if (positionY  - SHIP_SIZE > gameField.getBoundingBox().top - 5) {
+    if (positionY - SHIP_SIZE > gameField.getBoundingBox().top - 5) {
       positionY -= 10;
       computeShipBox();
     }
@@ -79,6 +80,7 @@ public class Ship {
 
   /**
    * Checks if the current object's bounding box intersects with another rectangle (meteor).
+   *
    * @param intersect The Rect object representing the meteor bounding rectangle.
    * @return {@code true} if there is an intersection; {@code false} otherwise.
    */
@@ -88,6 +90,7 @@ public class Ship {
 
   /**
    * Fires a projectile from the ship.
+   *
    * @return The fired projectile object.
    */
   public Projectile fire() {
@@ -104,6 +107,7 @@ public class Ship {
 
   /**
    * Computes the trajectory of the projectile based on the given velocity.
+   *
    * @param velocity The velocity of the projectile.
    */
   public void computeTrajectory(double velocity) {
@@ -122,6 +126,7 @@ public class Ship {
 
   /**
    * Sets the velocity value the ship will use for the projectile.
+   *
    * @param velocity The velocity value to be set.
    */
   public void setVelocity(double velocity) {
@@ -134,6 +139,7 @@ public class Ship {
 
   /**
    * Sets the angle value the ship will use for the projectile.
+   *
    * @param angle The angle value to be set.
    */
   public void setAngle(double angle) {
@@ -142,6 +148,7 @@ public class Ship {
 
   /**
    * Sets the gravity value the ship will use for the projectile.
+   *
    * @param gravity The gravity value to be set.
    */
   public void setGravity(double gravity) {
@@ -158,6 +165,7 @@ public class Ship {
 
   /**
    * Retrieves the bounding box of the ship.
+   *
    * @return The Rect object representing the bounding box of the ship.
    */
   public Rect getShipBox() {

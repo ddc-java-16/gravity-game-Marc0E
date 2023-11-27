@@ -25,14 +25,14 @@ public class UserScoresAdapter extends RecyclerView.Adapter<Holder> {
   private final DateTimeFormatter dateFormatter;
   private final ZoneId zone;
   @ColorInt
-  private final int  oddRowBackground;
+  private final int oddRowBackground;
   @ColorInt
-  private final int  evenRowBackground;
+  private final int evenRowBackground;
 
   public UserScoresAdapter(Context context, List<UserScore> scores) {
     this.scores = scores;
     inflater = LayoutInflater.from(context);
-    dateFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT,FormatStyle.SHORT);
+    dateFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT, FormatStyle.SHORT);
     oddRowBackground = context.getColor(R.color.background_odd);
     evenRowBackground = context.getColor(R.color.even_row_background);
     numberFormatter = NumberFormat.getIntegerInstance();
@@ -55,9 +55,10 @@ public class UserScoresAdapter extends RecyclerView.Adapter<Holder> {
     return scores.size();
   }
 
-  public  class Holder extends RecyclerView.ViewHolder {
+  public class Holder extends RecyclerView.ViewHolder {
 
     private final ItemUserScoreBinding binding;
+
     private Holder(@NonNull ItemUserScoreBinding binding) {
       super(binding.getRoot());
       this.binding = binding;
@@ -65,11 +66,13 @@ public class UserScoresAdapter extends RecyclerView.Adapter<Holder> {
 
     private void bind(int position) {
       UserScore score = scores.get(position);
-      binding.ranking.setText(String.valueOf(position+1));
+      binding.ranking.setText(String.valueOf(position + 1));
       binding.displayName.setText(score.getDisplay_name());
       binding.score.setText(numberFormatter.format(score.getValue()));
-      binding.created.setText(LocalDateTime.ofInstant(score.getCreated(),zone).format(dateFormatter));
-      binding.getRoot().setBackgroundColor((position % 2 ==0) ? evenRowBackground : oddRowBackground);
+      binding.created.setText(
+          LocalDateTime.ofInstant(score.getCreated(), zone).format(dateFormatter));
+      binding.getRoot()
+          .setBackgroundColor((position % 2 == 0) ? evenRowBackground : oddRowBackground);
     }
 
   }

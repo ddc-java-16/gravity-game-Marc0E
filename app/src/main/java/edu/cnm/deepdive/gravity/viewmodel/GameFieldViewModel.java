@@ -12,7 +12,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 import edu.cnm.deepdive.gravity.model.GameField;
 import edu.cnm.deepdive.gravity.service.PlayingFieldRepository;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import java.sql.Struct;
 import javax.inject.Inject;
 import org.jetbrains.annotations.NotNull;
 
@@ -95,9 +94,10 @@ public class GameFieldViewModel extends ViewModel implements DefaultLifecycleObs
   }
 
 
-  public boolean isGameOver(){
+  public boolean isGameOver() {
     return playingFieldRepository.isGameOver();
   }
+
   public void setGravity(double gravity) {
     playingFieldRepository.setGravity(gravity);
   }

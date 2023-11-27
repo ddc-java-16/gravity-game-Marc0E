@@ -2,69 +2,43 @@ package edu.cnm.deepdive.gravity.model;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.gson.annotations.Expose;
 import java.util.Objects;
 
 /**
- * Represents a projectile within the game.
- * Projectiles are objects fired from the player's ship to interact with game elements.
+ * Represents a projectile within the game. Projectiles are objects fired from the player's ship to
+ * interact with game elements.
  */
 public class Projectile {
 
   private static final int PROJECTILE_SIZE = 20;
+  private static final String TO_STRING_FORMAT = "%1$s[key=%2$s, name=%3$s, move=%4$s]";
+  private final String key = null;
+  int shipPosition;
+  double xVelocity;
+  double yVelocity;
+  double gravity;
   private GameField gameField;
   private Rect projectileBox;
   private double flyingTime;
   private int positionX;
   private int positionY;
-  int shipPosition;
-  double xVelocity;
-  double yVelocity;
-  double gravity;
-
-  private final String key = null;
   private String name;
   private boolean move;
-  private static final String TO_STRING_FORMAT = "%1$s[key=%2$s, name=%3$s, move=%4$s]";
-
-  /**
-   * Retrieves the X-coordinate position of the projectile.
-   * @return The X-coordinate position of the projectile.
-   */
-  public int getPositionX() {
-    return positionX;
-  }
-
-
-  /**
-   * Retrieves the Y-coordinate position of the projectile.
-   * @return The Y-coordinate position of the projectile.
-   */
-  public int getPositionY() {
-    return positionY;
-  }
-
-  /**
-   * Retrieves the bounding box of the projectile.
-   * @return The Rect object representing the bounding box of the projectile.
-   */
-  public Rect getProjectileBox() {
-    return projectileBox;
-  }
 
   /**
    * Constructs a Projectile object with specified parameters.
-   * @param positionX   The initial X-coordinate position of the projectile.
-   * @param positionY   The initial Y-coordinate position of the projectile.
-   * @param xVelocity   The initial velocity in the X direction.
-   * @param yVelocity   The initial velocity in the Y direction.
-   * @param gravity     The gravitational force affecting the projectile's movement.
-   * @param gameField   The game field in which the projectile exists.
+   *
+   * @param positionX The initial X-coordinate position of the projectile.
+   * @param positionY The initial Y-coordinate position of the projectile.
+   * @param xVelocity The initial velocity in the X direction.
+   * @param yVelocity The initial velocity in the Y direction.
+   * @param gravity   The gravitational force affecting the projectile's movement.
+   * @param gameField The game field in which the projectile exists.
    */
-  public Projectile(int positionX, int positionY, double xVelocity, double yVelocity, double gravity, GameField gameField) {
+  public Projectile(int positionX, int positionY, double xVelocity, double yVelocity,
+      double gravity, GameField gameField) {
     // TODO: 11/13/23 xposition, yposition, gameFiled, xvelocity and yvelocity.
     this.xVelocity = xVelocity;
     this.yVelocity = yVelocity;
@@ -78,6 +52,33 @@ public class Projectile {
 
   }
 
+  /**
+   * Retrieves the X-coordinate position of the projectile.
+   *
+   * @return The X-coordinate position of the projectile.
+   */
+  public int getPositionX() {
+    return positionX;
+  }
+
+  /**
+   * Retrieves the Y-coordinate position of the projectile.
+   *
+   * @return The Y-coordinate position of the projectile.
+   */
+  public int getPositionY() {
+    return positionY;
+  }
+
+  /**
+   * Retrieves the bounding box of the projectile.
+   *
+   * @return The Rect object representing the bounding box of the projectile.
+   */
+  public Rect getProjectileBox() {
+    return projectileBox;
+  }
+
 //  public Projectile(int positionX, int positionY) {
 //    this.positionX = positionX;
 //    this.positionY = positionY;
@@ -85,13 +86,14 @@ public class Projectile {
 //  }
 
   private void computeProjectileBox() {
-    projectileBox = new Rect(positionX - PROJECTILE_SIZE / 2, positionY - PROJECTILE_SIZE  / 2,
+    projectileBox = new Rect(positionX - PROJECTILE_SIZE / 2, positionY - PROJECTILE_SIZE / 2,
         positionX + PROJECTILE_SIZE / 2, positionY + PROJECTILE_SIZE / 2);
     //Log.d(getClass().getSimpleName(), projectileBox.toString());
   }
 
   /**
    * Checks if the current projectile intersects with an enemy.
+   *
    * @param other The Rect object representing the bounding box of the enemies.
    * @return {@code true} if there is an intersection; {@code false} otherwise.
    */
@@ -117,8 +119,8 @@ public class Projectile {
 //  }
 
   /**
-   * Updates the position of the projectile within the game field.
-   * Handles the projectile's movement based on its velocity and gravity.
+   * Updates the position of the projectile within the game field. Handles the projectile's movement
+   * based on its velocity and gravity.
    */
   public void updatePosition() {
 //    positionX += (int) (xVelocity * flyingTime);
@@ -128,7 +130,7 @@ public class Projectile {
 
     positionX += xVelocity;
     positionY += yVelocity;
-    yVelocity += (gameField.getGravity())/10;
+    yVelocity += (gameField.getGravity()) / 10;
     computeProjectileBox();
 //    positionX += xVelocity;
 //    positionY += yVelocity;
